@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>硬盘容量换算器</title>
+        <link rel="icon" type="image/png" href="favicon.ico">
+        <link rel="stylesheet" href="hdcalc.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>硬盘容量换算器</h1>
+
+            <!-- 输入区域 -->
+            <div class="input-group">
+                <input type="number" id="inputValue" step="any" required
+                    placeholder="输入产品标称容量">
+                <select id="unit" class="unit">
+                    <option value="1000000">MB</option>
+                    <option value="1000000000">GB</option>
+                    <option value="1000000000000" selected>TB</option>
+                </select>
+                <button id="calculateBtn">换算</button>
+            </div>
+
+            <!-- 结果展示区域 -->
+            <div class="result-container">
+                <h2>在计算机系统中显示的实际容量</h2>
+                <div class="result-list">
+                    <div class="result-item">
+                        <span class="label">MB</span>
+                        <span class="value" id="resultMB">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">GB</span>
+                        <span class="value" id="resultGB">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">TB</span>
+                        <span class="value" id="resultTB">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文字说明区域 -->
+            <div class="explanation">
+                <h3 onclick="toggleExplanation(this)">
+                    <span>为什么硬盘标称容量与实际容量不一样？</span>
+                    <span class="arrow">▶</span>
+                </h3>
+                <div class="explanation-content">
+                    <p>硬盘厂商和计算机系统使用不同的计算标准，导致标称容量与实际可用容量存在差异，以产品标称500G的硬盘为例：</p>
+
+                    <div class="formula">
+                        <strong>厂商计算方式 (十进制):</strong><br>
+                        1GB = 1000MB, 1MB = 1000KB, 1KB = 1000Byte<br>
+                        500GB = 500 × 1000 × 1000 × 1000 = 500,000,000,000Byte
+                    </div>
+
+                    <div class="formula">
+                        <strong>计算机系统计算方式 (二进制):</strong><br>
+                        1GB = 1024MB, 1MB = 1024KB, 1KB = 1024Byte<br>
+                        实际容量 = 500,000,000,000 ÷ (1024 × 1024 × 1024) ≈ 465.66GB
+                    </div>
+
+                    <p>这种差异是正常的技术现象，并非质量问题。厂商使用十进制便于生产计算，而计算机使用二进制更适合数据处理。</p>
+
+                    <div class="formula">
+                        <strong>⚠️ 补充知识点：</strong><br>
+                        Byte：字节，简写 <strong>B</strong>，计算机存储和数据处理的基础单位<br>
+                        Bit：比特、位，简写 <strong>b</strong>，数据的最小单位，表示二进制的一位（0 或
+                        1）<br>
+                        1 Byte(B) = 8 Bit(b)<br>
+                        <br>
+                        举个🌰：<br>
+                        网络带宽常用 Mbps（兆比特/秒）<br>
+                        下载速度常用 MB/s（兆字节/秒）<br>
+                        （1 MB/s = 8 Mbps）
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div style="display: inline-block;">
+                <div class="footer-nav-dot">
+                    <a href="/">主页</a>
+                    <a href="/123/">网址导航</a>
+                    <a href="/creative/">创意工坊</a>
+                </div>
+                <div style="border-top: 1px solid #999; margin: 10px auto;"></div>
+            </div>
+            <div class="footer-copyright">
+                <span>© 2025 <a href="https://liuzhangbin.com/">Liuzh</a></span>
+                <span>Powered by KFC</span>
+            </div>
+        </footer>
+
+        <script>
+        // 获取计算按钮
+        const calculateBtn = document.getElementById("calculateBtn");
+
+        // 绑定点击事件
+        calculateBtn.addEventListener('click', function () {
+            calculate();
+        });
+
+        // 绑定回车键事件
+        document.getElementById("inputValue").addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                calculate();
+            }
+        });
+
+        function calculate() {
+            // 获取输入值
+            const inputElement = document.getElementById("inputValue");
+            const bytesPerUnit = parseInt(document.getElementById("unit").value);
+            const inputValue = parseFloat(inputElement.value);
+
+            // 验证输入
+            if (isNaN(inputValue)) {
+                alert("请输入有效的数字");
+                inputElement.focus();
+                return;
+            }
+
+            // 计算总字节数
+            const totalBytes = inputValue * bytesPerUnit;
+
+            // 计算各单位的换算结果
+            const resultMB = totalBytes / Math.pow(1024, 2);
+            const resultGB = totalBytes / Math.pow(1024, 3);
+            const resultTB = totalBytes / Math.pow(1024, 4);
+
+            // 显示结果（保留2位小数，并添加单位）
+            document.getElementById("resultMB").textContent = `${resultMB.toFixed(2)} MB`;
+            document.getElementById("resultGB").textContent = `${resultGB.toFixed(2)} GB`;
+            document.getElementById("resultTB").textContent = `${resultTB.toFixed(2)} TB`;
+        }
+
+        // 折叠面板逻辑
+        function toggleExplanation(element) {
+            const explanation = element.parentElement;
+            explanation.classList.toggle("active");
+        }
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,777 @@
+:root {
+  /* --- 定义通用变量或默认主题变量 --- */
+  --accent-color:         #10b981;                     /* 主要强调色 (如按钮、链接) */
+  --accent-color-dark:    #0f9d6d;                     /* 主要强调色 (深色模式/悬停) */
+  --error-color-fg:       #f44336;                     /* 错误状态前景色 (文本/图标) */
+  --success-color-fg:     var(--accent-color);           /* 成功状态前景色 */
+  --info-color-fg:        #8fa5ff;                     /* 信息状态前景色 */
+  --warning-color-fg:     #ff9800;                     /* 警告状态前景色 (已调整) */
+
+  --shadow-sm:            0 2px 4px rgba(0, 0, 0, 0.1);     /* 小阴影 */
+  --shadow-md:            0 4px 10px rgba(0, 0, 0, 0.15);   /* 中等阴影 */
+  --border-radius-md:     8px;                                /* 中等圆角半径 */
+  --border-radius-lg:     12px;                               /* 大圆角半径 */
+
+  /* 中文字体栈 (优先使用系统UI字体) */
+  --font-sans-chinese: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+      "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+
+  /* 西文字体栈 (常用无衬线字体) */
+  --font-sans-base: "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
+
+  /* 等宽代码字体栈 (用于代码、输入框等) */
+  --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", "Roboto Mono", "Inconsolata", "Ubuntu Mono", "Courier New", "JetBrains Mono";
+}
+
+/* --- 深色主题变量 --- */
+[data-theme="dark"] {
+  --bg-page:                  #1a1c20;                      /* 页面背景色 */
+  --bg-content:               #24262b;                      /* 内容区域背景色 (卡片、主区域) */
+  --bg-element:               #2c2e33;                      /* 元素背景色 (输入框、悬停) */
+  --text-primary:             #e0e0e0;                      /* 主要文字颜色 */
+  --text-secondary:           #adb5bd;                      /* 次要文字颜色 (标签、辅助信息) */
+  --text-muted:               #6c757d;                      /* 静音文字颜色 (占位符、禁用状态) */
+  --border-color:             #3a3d42;                      /* 主要边框颜色 */
+  --border-color-light:       #4e5257;                      /* 较浅边框颜色 */
+  --shadow-color-base:        rgba(0, 0, 0, 0.5);           /* 阴影基础颜色 */
+  --error-bg:                 rgba(244, 67, 54, 0.15);      /* 错误信息背景色 (调整了透明度) */
+  --success-bg:               rgba(16, 185, 129, 0.15);     /* 成功信息背景色 */
+  --info-bg:                  rgba(143, 165, 255, 0.15);    /* 信息提示背景色 */
+  --warning-bg:               rgba(255, 152, 0, 0.15);      /* 警告信息背景色 */
+  --btn-primary-text:         #1a1c20;                      /* 主按钮文字颜色 */
+  --btn-secondary-hover-bg:   var(--bg-element);         /* 次要按钮悬停背景色 */
+  --btn-utility-text:         var(--text-secondary);     /* 工具按钮文字颜色 */
+  --btn-utility-border:       var(--border-color);       /* 工具按钮边框颜色 */
+  --btn-utility-hover-bg:     var(--bg-element);         /* 工具按钮悬停背景色 */
+  --btn-utility-hover-border: var(--text-secondary);     /* 工具按钮悬停边框颜色 */
+  --btn-utility-hover-text:   var(--text-primary);       /* 工具按钮悬停文字颜色 */
+  --shadow-md-themed:         0 4px 15px var(--shadow-color-base); /* 根据主题调整的中等阴影 */
+}
+
+/* --- 浅色主题变量 --- */
+[data-theme="light"] {
+  --bg-page:                  #f0f0f0;                      /* 页面背景色 */
+  --bg-content:               #ffffff;                      /* 内容区域背景色 */
+  --bg-element:               #f8f9fa;                      /* 元素背景色 */
+  --text-primary:             #212529;                      /* 主要文字颜色 */
+  --text-secondary:           #495057;                      /* 次要文字颜色 */
+  --text-muted:               #6c757d;                      /* 静音文字颜色 */
+  --border-color:             #dee2e6;                      /* 主要边框颜色 */
+  --border-color-light:       #ced4da;                      /* 较浅边框颜色 */
+  --shadow-color-base:        rgba(0, 0, 0, 0.1);           /* 阴影基础颜色 */
+  --error-bg:                 rgba(244, 67, 54, 0.08);      /* 错误信息背景色 (更浅的透明度) */
+  --success-bg:               rgba(16, 185, 129, 0.08);     /* 成功信息背景色 */
+  --info-bg:                  rgba(67, 97, 238, 0.08);      /* 信息提示背景色 */
+  --warning-bg:               rgba(255, 152, 0, 0.08);      /* 警告信息背景色 */
+  --btn-primary-text:         #ffffff;                      /* 主按钮文字颜色 */
+  --btn-secondary-hover-bg:   #e9ecef;                      /* 次要按钮悬停背景色 */
+  --btn-utility-text:         var(--text-secondary);          /* 工具按钮文字颜色 */
+  --btn-utility-border:       var(--border-color);            /* 工具按钮边框颜色 */
+  --btn-utility-hover-bg:     #e9ecef;                      /* 工具按钮悬停背景色 */
+  --btn-utility-hover-border: var(--text-secondary);          /* 工具按钮悬停边框颜色 */
+  --btn-utility-hover-text:   var(--text-primary);            /* 工具按钮悬停文字颜色 */
+  --shadow-md-themed:         0 4px 10px var(--shadow-color-base); /* 根据主题调整的中等阴影 */
+}
+
+* {
+  box-sizing: border-box;                                /* 设置盒模型为 border-box */
+  margin: 0;                                             /* 重置外边距 */
+  padding: 0;                                            /* 重置内边距 */
+}
+
+html {
+  font-size: 16px;                                       /* 设置根字体大小 */
+}
+
+body {
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 设置字体栈，优先等宽，然后西文，最后中文 */
+  line-height: 1.6;                                      /* 设置行高 */
+  background-color: var(--bg-page);                      /* 设置页面背景色 */
+  color: var(--text-primary);                            /* 设置主要文字颜色 */
+  padding: 2rem;                                         /* 设置页面内边距 */
+  min-height: 100vh;                                     /* 最小高度为视口高度 */
+  display: flex;                                         /* 使用 flex 布局 */
+  flex-direction: column;                                /* 垂直排列子元素 */
+  align-items: center;                                   /* 水平居中对齐 */
+  transition: background-color 0.3s, color 0.3s;         /* 背景和颜色过渡效果 */
+}
+
+.container {
+  width: 100%;                                           /* 容器宽度为 100% */
+  max-width: 960px;                                      /* 容器最大宽度 */
+}
+
+header {
+  background-color: var(--bg-content);                   /* 头部背景色 */
+  color: var(--text-primary);                            /* 头部文字颜色 */
+  padding: 1.5rem 2rem;                                  /* 头部内边距 */
+  text-align: center;                                    /* 文字居中对齐 */
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; /* 头部顶部圆角 */
+  margin-bottom: 0;                                      /* 移除底部外边距 */
+  border: 1px solid var(--border-color);                 /* 头部边框 */
+  border-bottom: none;                                   /* 移除底部边框 */
+  position: relative;                                    /* 相对定位，用于主题切换按钮 */
+  transition: background-color 0.3s, border-color 0.3s;  /* 背景和边框颜色过渡 */
+}
+
+header h1 {
+  font-weight: 700;                                      /* 标题字重 */
+  font-size: 1.8rem;                                     /* 标题字号 */
+  margin-bottom: 0.5rem;                                 /* 标题下外边距 */
+  letter-spacing: 1px;                                   /* 字母间距 */
+  color: var(--text-primary);                            /* 标题颜色 */
+}
+
+header p {
+  color: var(--text-secondary);                          /* 副标题颜色 */
+  font-size: 1rem;                                       /* 副标题字号 */
+  font-weight: 300;                                      /* 副标题字重 */
+}
+
+#theme-toggle-btn {
+  position: absolute;                                    /* 绝对定位 */
+  top: 1rem;                                             /* 距离顶部 */
+  right: 1rem;                                           /* 距离右侧 */
+  background: none;                                      /* 无背景 */
+  border: 1px solid var(--border-color);                 /* 边框 */
+  border-radius: 50%;                                    /* 圆形 */
+  padding: 0.5rem;                                       /* 内边距 */
+  cursor: pointer;                                       /* 鼠标指针为手型 */
+  display: flex;                                         /* 使用 flex 布局 */
+  align-items: center;                                   /* 垂直居中 */
+  justify-content: center;                               /* 水平居中 */
+  color: var(--text-secondary);                          /* 图标颜色 */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.2s; /* 过渡效果 */
+}
+
+#theme-toggle-btn:hover {
+  background-color: var(--bg-element);                   /* 悬停背景色 */
+  color: var(--text-primary);                            /* 悬停图标颜色 */
+  box-shadow: 0 0 5px var(--shadow-color-base);          /* 悬停阴影 */
+}
+
+#theme-toggle-btn svg {
+  width: 20px;                                           /* SVG 图标宽度 */
+  height: 20px;                                          /* SVG 图标高度 */
+}
+
+main {
+  background: var(--bg-content);                                          /* 主内容区背景色 */
+  padding: 2.5rem;                                                        /* 主内容区内边距 */
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);     /* 主内容区底部圆角 */
+  box-shadow: var(--shadow-md-themed);                                    /* 主内容区阴影 */
+  border: 1px solid var(--border-color);                                  /* 主内容区边框 */
+  border-top: none;                                                       /* 移除顶部边框 */
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;  /* 过渡效果 */
+}
+
+.input-group {
+  display: grid;                                                  /* 使用 grid 布局 */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));    /* 响应式列布局 */
+  gap: 1.5rem;                                                    /* 网格间距 */
+  margin-bottom: 1rem;                                            /* 底部外边距 */
+}
+
+.input-field {
+  display: flex;                                         /* 使用 flex 布局 */
+  flex-direction: column;                                /* 垂直排列 */
+}
+
+label {
+  font-size: 0.9rem;                                     /* 标签字号 */
+  font-weight: 500;                                      /* 标签字重 */
+  margin-bottom: 0.75rem;                                /* 标签下外边距 */
+  color: var(--text-secondary);                          /* 标签颜色 */
+  display: flex;                                         /* 使用 flex 布局 */
+  align-items: center;                                   /* 垂直居中 */
+  gap: 0.5rem;                                           /* 标签内元素间距 */
+}
+
+label svg {
+  width: 18px;                                           /* 标签内 SVG 宽度 */
+  height: 18px;                                          /* 标签内 SVG 高度 */
+  stroke: var(--text-secondary);                         /* 标签内 SVG 描边颜色 */
+}
+
+input,
+select {
+  padding: 0.8rem 1rem;                                  /* 输入框/选择框内边距 */
+  border: 1px solid var(--border-color);                 /* 边框 */
+  border-radius: var(--border-radius-md);                /* 圆角 */
+  font-size: 1rem;                                       /* 字号 */
+  transition: all 0.2s ease-in-out;                      /* 所有属性过渡效果 */
+  background-color: var(--bg-element);                   /* 背景色 */
+  color: var(--text-primary);                            /* 文字颜色 */
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 字体栈 */
+}
+
+input:focus,
+select:focus {
+  outline: none;                                         /* 移除默认的焦点轮廓 */
+  border-color: var(--accent-color);                     /* 焦点状态边框颜色 */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);       /* 焦点状态阴影 (使用简单 box-shadow 提高兼容性) */
+  background-color: var(--bg-content);                   /* 焦点状态背景色 */
+}
+
+input::placeholder {
+  color: var(--text-muted);                              /* 占位符文字颜色 */
+  opacity: 0.7;                                          /* 占位符透明度 */
+}
+
+.input-hint {
+  font-size: 0.8rem;                                     /* 输入提示字号 */
+  color: var(--text-muted);                              /* 提示文字颜色 */
+  margin-top: 0.5rem;                                    /* 提示上外边距 */
+  margin-bottom: 1.5rem;                                 /* 提示下外边距 */
+  min-height: 1.2em;                                     /* 最小高度，防止布局跳动 */
+}
+
+.input-hint.warning {
+  color: var(--warning-color-fg);                        /* 警告提示颜色 */
+}
+
+.input-hint.error {
+  color: var(--error-color-fg);                          /* 错误提示颜色 */
+}
+
+.all-actions {
+  display: flex;                                         /* 使用 flex 布局 */
+  flex-wrap: wrap;                                       /* 允许换行 */
+  gap: 0.8rem;                                           /* 元素间距 */
+  margin-bottom: 2.5rem;                                 /* 底部外边距 */
+  align-items: center;                                   /* 垂直居中 */
+}
+
+.all-actions .btn {
+  padding: 0.8rem 1.5rem;                                /* 按钮内边距 */
+  /* border: none; */                                    /* 移除了此行，使用下面具体的边框设置 */
+  border-radius: var(--border-radius-md);                /* 按钮圆角 */
+  font-size: 0.95rem;                                    /* 按钮字号 */
+  font-weight: 600;                                      /* 按钮字重 */
+  cursor: pointer;                                       /* 鼠标指针为手型 */
+  transition: all 0.2s ease-in-out;                      /* 所有属性过渡效果 */
+  display: inline-flex;                                  /* 使用 inline-flex 布局 */
+  align-items: center;                                   /* 垂直居中 */
+  justify-content: center;                               /* 水平居中 */
+  gap: 0.6rem;                                           /* 按钮内元素间距 */
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 字体栈 */
+  line-height: 1.6;                                      /* 行高 */
+}
+
+.all-actions .btn svg {
+  width: 18px;                                           /* 按钮内 SVG 宽度 */
+  height: 18px;                                          /* 按钮内 SVG 高度 */
+}
+
+.all-actions .btn:disabled {
+  opacity: 0.5;                                          /* 禁用状态透明度 */
+  cursor: not-allowed;                                   /* 禁用状态鼠标指针 */
+  transform: none !important;                            /* 禁用状态移除 transform */
+  box-shadow: none !important;                           /* 禁用状态移除阴影 */
+}
+
+.btn-primary {
+  background-color: var(--accent-color);                 /* 主按钮背景色 */
+  color: var(--btn-primary-text);                        /* 主按钮文字颜色 */
+  border: 2px solid var(--accent-color);                 /* 主按钮边框 (从 1px 改为 2px) */
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-color-dark);            /* 主按钮悬停背景色 */
+  border-color: var(--accent-color-dark);                /* 主按钮悬停边框色 */
+  transform: translateY(-2px);                           /* 主按钮悬停向上移动效果 */
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);        /* 主按钮悬停阴影 (简化阴影) */
+}
+
+.btn-secondary {
+  background-color: transparent;                         /* 次按钮背景透明 */
+  color: var(--text-secondary);                          /* 次按钮文字颜色 */
+  border: 2px solid var(--border-color);                 /* 次按钮边框 (从 1px 改为 2px) */
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--btn-secondary-hover-bg);       /* 次按钮悬停背景色 */
+  border-color: var(--text-secondary);                   /* 次按钮悬停边框色 */
+  color: var(--text-primary);                            /* 次按钮悬停文字颜色 */
+}
+
+.btn-danger {
+  background-color: transparent;                         /* 危险按钮背景透明 */
+  color: var(--error-color-fg);                          /* 危险按钮文字颜色 */
+  border: 2px solid var(--error-color-fg);               /* 危险按钮边框 (从 1px 改为 2px) */
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--error-bg);                     /* 危险按钮悬停背景色 */
+}
+
+.btn-utility {
+  padding: 0.6rem 1rem !important;                       /* 工具按钮内边距 (覆盖默认) */
+  font-size: 0.85rem !important;                         /* 工具按钮字号 (覆盖默认) */
+  background-color: transparent !important;              /* 工具按钮背景透明 (覆盖默认) */
+  border: 1px solid var(--btn-utility-border) !important; /* 工具按钮边框 (保持 1px, 覆盖默认) */
+  color: var(--btn-utility-text) !important;             /* 工具按钮文字颜色 (覆盖默认) */
+}
+
+.btn-utility svg {
+  width: 16px !important;                                /* 工具按钮 SVG 宽度 (覆盖默认) */
+  height: 16px !important;                               /* 工具按钮 SVG 高度 (覆盖默认) */
+}
+
+.btn-utility:hover:not(:disabled) {
+  background-color: var(--btn-utility-hover-bg) !important;       /* 工具按钮悬停背景色 (覆盖默认) */
+  border-color: var(--btn-utility-hover-border) !important;       /* 工具按钮悬停边框色 (覆盖默认) */
+  color: var(--btn-utility-hover-text) !important;                /* 工具按钮悬停文字颜色 (覆盖默认) */
+  transform: none !important;                                     /* 工具按钮悬停移除 transform (覆盖默认) */
+  box-shadow: none !important;                                    /* 工具按钮悬停移除阴影 (覆盖默认) */
+}
+
+#result {
+  margin-top: 0;                                         /* 结果区域顶部外边距 */
+}
+
+.result-header {
+  padding: 1rem 0 1rem 0;                                /* 结果头部内边距 */
+  font-weight: 600;                                      /* 结果头部字重 */
+  display: flex;                                         /* 使用 flex 布局 */
+  justify-content: space-between;                        /* 两端对齐 */
+  align-items: center;                                   /* 垂直居中 */
+  border-bottom: 1px solid var(--border-color);          /* 结果头底部边框 */
+  color: var(--text-primary);                            /* 结果头文字颜色 */
+  font-size: 1rem;                                       /* 结果头字号 */
+  margin-bottom: 1.5rem;                                 /* 结果头下外边距 */
+}
+
+.result-header small {
+  font-weight: 400;                                      /* 结果头小字字重 */
+  font-size: 0.8rem;                                     /* 结果头小字字号 */
+  color: var(--text-muted);                              /* 结果头小字颜色 */
+  background-color: var(--bg-element);                   /* 结果头小字背景色 */
+  padding: 0.2rem 0.5rem;                                /* 结果头小字内边距 */
+  border-radius: 4px;                                    /* 结果头小字圆角 */
+}
+
+.result-body {
+  padding: 0;                                            /* 结果主体内边距 */
+}
+
+.record-grid {
+  display: grid;                                         /* 使用 grid 布局 */
+  grid-template-columns: 1fr;                            /* 单列布局 */
+  gap: 1rem;                                             /* 网格间距 */
+}
+
+.record-card {
+  padding: 1.25rem;                                      /* 记录卡片内边距 */
+  border-radius: var(--border-radius-md);                /* 卡片圆角 */
+  background-color: var(--bg-element);                   /* 卡片背景色 */
+  border: 1px solid var(--border-color);                 /* 卡片边框 */
+  transition: all 0.2s ease;                             /* 所有属性过渡效果 */
+  position: relative;                                    /* 相对定位，用于类型标签 */
+  overflow: hidden;                                      /* 隐藏溢出内容 */
+}
+
+.record-card:hover {
+  border-color: var(--accent-color);                     /* 卡片悬停边框色 */
+  box-shadow: 0 2px 8px var(--shadow-color-base);        /* 卡片悬停阴影 */
+}
+
+.record-type {
+  position: absolute;                                    /* 绝对定位 */
+  top: 0;                                                /* 顶部对齐 */
+  right: 0;                                              /* 右侧对齐 */
+  background-color: var(--accent-color);                 /* 类型标签背景色 */
+  color: var(--btn-primary-text);                        /* 类型标签文字颜色 */
+  padding: 0.3rem 0.8rem;                                /* 类型标签内边距 */
+  border-radius: 0 0 0 var(--border-radius-md);          /* 类型标签左下圆角 */
+  font-size: 0.8rem;                                     /* 类型标签字号 */
+  font-weight: 600;                                      /* 类型标签字重 */
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 字体栈 */
+  letter-spacing: 0.5px;                                 /* 字母间距 */
+}
+
+.record-detail {
+  margin-bottom: 0.8rem;                                 /* 记录详情项下外边距 */
+  display: flex;                                         /* 使用 flex 布局 */
+  flex-wrap: nowrap;                                     /* 不换行 */
+  align-items: baseline;                                 /* 基线对齐 */
+  font-size: 0.9rem;                                     /* 记录详情项字号 */
+  position: relative;                                    /* 相对定位，用于复制按钮 */
+}
+
+.record-detail:last-child {
+  margin-bottom: 0;                                      /* 最后一项移除下外边距 */
+}
+
+.record-detail strong {
+  color: var(--text-secondary);                          /* 详情项标签颜色 */
+  font-weight: 500;                                      /* 详情项标签字重 */
+  display: inline-block;                                 /* 行内块元素 */
+  width: 60px;                                           /* 固定宽度 */
+  flex-shrink: 0;                                        /* 防止被压缩 */
+  margin-right: 0.5rem;                                  /* 右外边距 */
+}
+
+.record-detail span {
+  flex-grow: 1;                                          /* 占据剩余空间 */
+  word-break: break-all;                                 /* 允许在任意字符处换行 */
+  color: var(--text-primary);                            /* 详情项值颜色 */
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 字体栈 */
+  line-height: 1.6;                                      /* 行高 */
+  padding-right: 30px;                                   /* 右内边距，为复制按钮留出空间 */
+}
+
+/* 不同类型记录值的特殊颜色 */
+.record-detail span[data-type="A"],
+.record-detail span[data-type="AAAA"] {
+  color: var(--info-color-fg);                           /* IP 地址使用信息色 */
+}
+
+.record-detail span[data-type="MX"] {
+  color: var(--success-color-fg);                        /* MX 记录使用成功色 */
+}
+
+.record-detail span[data-type="TTL"] {
+  color: var(--warning-color-fg);                        /* TTL 使用警告色 */
+}
+
+.copy-btn {
+  position: absolute;                                    /* 绝对定位 */
+  right: 5px;                                            /* 距离右侧 */
+  top: 50%;                                              /* 垂直居中 */
+  transform: translateY(-50%);                           /* 精确垂直居中 */
+  background: none;                                      /* 无背景 */
+  border: none;                                          /* 无边框 */
+  color: var(--text-muted);                              /* 图标颜色 */
+  cursor: pointer;                                       /* 鼠标指针为手型 */
+  padding: 4px;                                          /* 内边距 */
+  display: inline-flex;                                  /* 行内 flex 布局 */
+  align-items: center;                                   /* 垂直居中 */
+  justify-content: center;                               /* 水平居中 */
+  opacity: 0;                                            /* 默认透明 */
+  visibility: hidden;                                    /* 默认隐藏 */
+  border-radius: 4px;                                    /* 圆角 */
+  transition: opacity 0.2s, visibility 0.2s, color 0.2s, background-color 0.2s; /* 过渡效果 */
+}
+
+.record-detail:hover .copy-btn {
+  opacity: 0.7;                                          /* 悬停时显示按钮 */
+  visibility: visible;
+}
+
+.copy-btn:hover {
+  opacity: 1;                                            /* 按钮悬停时完全不透明 */
+  color: var(--accent-color);                            /* 按钮悬停图标颜色 */
+  background-color: rgba(16, 185, 129, 0.1);           /* 按钮悬停背景色 (浅绿色) */
+}
+
+.copy-btn svg {
+  width: 16px;                                           /* 复制按钮 SVG 宽度 */
+  height: 16px;                                          /* 复制按钮 SVG 高度 */
+}
+
+.copy-feedback {
+  font-size: 0.75rem;                                    /* 复制反馈文字字号 */
+  color: var(--accent-color);                            /* 反馈文字颜色 */
+  margin-left: 5px;                                      /* 左外边距 */
+  animation: fadeOut 1s ease-out forwards;               /* 应用淡出动画 */
+}
+
+@keyframes fadeOut {                                       /* 淡出动画定义 */
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.provider-info {
+  margin-top: 1rem;                                      /* 服务商信息上外边距 */
+  padding-top: 0.8rem;                                   /* 上内边距 */
+  border-top: 1px dashed var(--border-color);            /* 顶部虚线边框 */
+  font-size: 0.85rem;                                    /* 字号 */
+  color: var(--text-muted);                              /* 文字颜色 */
+  display: flex;                                         /* 使用 flex 布局 */
+  align-items: center;                                   /* 垂直居中 */
+  gap: 0.5rem;                                           /* 元素间距 */
+}
+
+.provider-info svg {
+  width: 16px;                                           /* 服务商图标宽度 */
+  height: 16px;                                          /* 服务商图标高度 */
+  fill: var(--text-muted);                               /* 图标填充色 */
+}
+
+.provider-info svg path {
+  fill: var(--text-muted);                               /* 确保路径也使用该填充色 */
+}
+
+.loader {
+  display: inline-block;                                 /* 行内块元素 */
+  width: 18px;                                           /* 加载指示器宽度 */
+  height: 18px;                                          /* 加载指示器高度 */
+  border: 3px solid rgba(from var(--btn-primary-text) r g b / 0.3); /* 边框 (使用透明度) */
+  border-radius: 50%;                                    /* 圆形 */
+  border-top-color: var(--btn-primary-text);             /* 顶部边框颜色，形成旋转效果 */
+  animation: spin 1s ease-in-out infinite;               /* 应用旋转动画 */
+}
+
+@keyframes spin {                                          /* 旋转动画定义 */
+  to { transform: rotate(360deg); }
+}
+
+.message {
+  padding: 1.5rem;                                       /* 消息框内边距 */
+  border-radius: var(--border-radius-md);                /* 圆角 */
+  margin-bottom: 1.5rem;                                 /* 下外边距 */
+  text-align: center;                                    /* 文字居中 */
+  border: 1px solid var(--border-color);                 /* 边框 */
+  font-weight: 500;                                      /* 字重 */
+  display: flex;                                         /* 使用 flex 布局 */
+  flex-direction: column;                                /* 垂直排列 */
+  align-items: center;                                   /* 水平居中 */
+  gap: 1rem;                                             /* 元素间距 */
+  background-color: var(--bg-element);                   /* 背景色 */
+}
+
+.message svg {
+  width: 40px;                                           /* 消息框图标宽度 */
+  height: 40px;                                          /* 消息框图标高度 */
+}
+
+.message-error {
+  background-color: var(--error-bg);                     /* 错误消息背景色 */
+  color: var(--error-color-fg);                          /* 错误消息文字颜色 */
+  border-color: rgba(244, 67, 54, 0.2);                  /* 错误消息边框色 (带透明度) */
+}
+
+.message-error svg {
+  stroke: var(--error-color-fg);                         /* 错误消息图标描边色 */
+}
+
+.message-success {
+  background-color: var(--success-bg);                   /* 成功消息背景色 */
+  color: var(--success-color-fg);                        /* 成功消息文字颜色 */
+  border-color: rgba(16, 185, 129, 0.2);                 /* 成功消息边框色 (带透明度) */
+}
+
+.message-success svg {
+  stroke: var(--success-color-fg);                       /* 成功消息图标描边色 */
+}
+
+.message-info {
+  background-color: var(--info-bg);                      /* 信息消息背景色 */
+  color: var(--info-color-fg);                           /* 信息消息文字颜色 */
+  border-color: rgba(143, 165, 255, 0.2);                /* 信息消息边框色 (带透明度) */
+}
+
+.message-info svg {
+  stroke: var(--info-color-fg);                          /* 信息消息图标描边色 */
+}
+
+.message-warning {
+  background-color: var(--warning-bg);                   /* 警告消息背景色 */
+  color: var(--warning-color-fg);                        /* 警告消息文字颜色 */
+  border-color: rgba(255, 152, 0, 0.2);                  /* 警告消息边框色 (带透明度) */
+}
+
+.message-warning svg {
+  stroke: var(--warning-color-fg);                       /* 警告消息图标描边色 */
+}
+
+
+.empty-state {
+  text-align: center;                                    /* 空状态文字居中 */
+  padding: 3rem 2rem;                                    /* 内边距 */
+  background-color: var(--bg-element);                   /* 背景色 */
+  border-radius: var(--border-radius-md);                /* 圆角 */
+  border: 1px solid var(--border-color);                 /* 边框 */
+  margin-bottom: 1.5rem;                                 /* 下外边距 */
+}
+
+.empty-state svg {
+  width: 60px;                                           /* 空状态图标宽度 */
+  height: 60px;                                          /* 空状态图标高度 */
+  margin-bottom: 1.5rem;                                 /* 图标下外边距 */
+  stroke: var(--text-muted);                             /* 图标描边色 */
+  opacity: 0.8;                                          /* 图标透明度 */
+}
+
+.empty-state h3 {
+  margin-bottom: 0.75rem;                                /* 标题下外边距 */
+  color: var(--text-primary);                            /* 标题颜色 */
+  font-size: 1.2rem;                                     /* 标题字号 */
+}
+
+.empty-state p {
+  color: var(--text-secondary);                          /* 描述文字颜色 */
+  max-width: 450px;                                      /* 最大宽度 */
+  margin: 0 auto;                                        /* 水平居中 */
+  font-size: 0.95rem;                                    /* 描述文字字号 */
+}
+
+@media (max-width: 768px) {                                /* 针对小屏幕的响应式样式 */
+  body {
+      padding: 1rem;                                     /* 调整页面内边距 */
+  }
+
+  .container {
+      max-width: 100%;                                   /* 容器最大宽度适应屏幕 */
+  }
+
+  header {
+      padding: 1.5rem 1rem;                              /* 调整头部内边距 */
+      border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; /* 保持圆角 */
+  }
+
+  header h1 {
+      font-size: 1.5rem;                                 /* 调整标题字号 */
+  }
+
+  header p {
+      font-size: 0.9rem;                                 /* 调整副标题字号 */
+  }
+
+  #theme-toggle-btn {
+      top: 0.5rem;                                       /* 调整切换按钮位置 */
+      right: 0.5rem;
+      padding: 0.4rem;                                   /* 调整切换按钮内边距 */
+  }
+
+  #theme-toggle-btn svg {
+      width: 18px;                                       /* 调整切换按钮图标大小 */
+      height: 18px;
+  }
+
+  main {
+      padding: 1.5rem 1rem;                              /* 调整主内容区内边距 */
+      border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); /* 保持圆角 */
+  }
+
+  .input-group {
+      grid-template-columns: 1fr;                        /* 输入组改为单列布局 */
+      gap: 1rem;                                         /* 调整间距 */
+  }
+
+  .all-actions {
+      gap: 0.8rem;                                       /* 调整按钮间距 */
+  }
+
+  .record-grid {
+      gap: 0.8rem;                                       /* 调整记录卡片间距 */
+  }
+
+  .record-card {
+      padding: 1rem;                                     /* 调整记录卡片内边距 */
+  }
+
+  .record-detail {
+      font-size: 0.85rem;                                /* 调整记录详情字号 */
+  }
+
+  .record-detail strong {
+      width: 50px;                                       /* 调整记录详情标签宽度 */
+  }
+
+  .record-detail span {
+      padding-right: 25px;                               /* 调整记录详情值右内边距 */
+  }
+
+  .copy-btn {
+      right: 3px;                                        /* 调整复制按钮位置 */
+      padding: 2px;                                      /* 调整复制按钮内边距 */
+  }
+
+  .copy-btn svg {
+      width: 14px;                                       /* 调整复制按钮图标大小 */
+      height: 14px;
+  }
+
+  .provider-info {
+      font-size: 0.8rem;                                 /* 调整服务商信息字号 */
+  }
+}
+
+@keyframes fadeIn {                                        /* 淡入动画定义 */
+  from {
+      opacity: 0;
+      transform: translateY(8px);                        /* 从下方轻微移入 */
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;              /* 应用淡入动画 */
+}
+
+/* --- 页脚样式 --- */
+footer {
+  font-family: var(--font-sans-base), var(--font-sans-chinese);
+  margin: 40px auto;
+  text-align: center;
+  font-size: 16px;
+  max-width: 100%;
+}
+
+.footer-nav-dot {
+  display: flex;                                              /* 使用 flex 布局 */
+  gap: 80px;                                                  /* 导航点之间的间距为 80px */
+  justify-content: center;                                    /* 导航点水平居中 */
+}
+
+.footer-nav-dot a {
+  text-decoration: none;                                      /* 去除链接下划线 */
+  color: #555;                                              /* 链接文字颜色 */
+  font-weight: 500;                                           /* 链接文字字体粗细 */
+  position: relative;                                         /* 相对定位，用于伪元素定位 */
+  padding-left: 20px;                                         /* 链接左侧内边距为 20px */
+}
+
+.footer-nav-dot a:before {
+  content: "";                                                /* 伪元素内容为空 */
+  position: absolute;                                         /* 绝对定位，相对于父元素 */
+  left: 0;                                                    /* 左侧距离为 0 */
+  top: 50%;                                                   /* 垂直居中 */
+  transform: translateY(-50%);
+  width: 8px;                                                 /* 伪元素宽度为 8px */
+  height: 8px;                                                /* 伪元素高度为 8px */
+  background-color: #4285f4;                                /* 伪元素背景颜色为蓝色 */
+  border-radius: 50%;                                         /* 伪元素边框圆角为 50%，形成圆形 */
+  transition: all 0.3s ease;                                  /* 过渡效果，动画时间为 0.3s，缓动函数为 ease */
+}
+
+.footer-nav-dot a:hover {
+  color: #4285f4;                                           /* 鼠标悬停时链接文字颜色变为蓝色 */
+}
+
+.footer-nav-dot a:hover:before {
+  background-color: #ff7043;                                  /* 鼠标悬停时伪元素背景颜色变为橙色 */
+  transform: translateY(-50%) scale(1.3);                       /* 鼠标悬停时伪元素放大 1.3 倍 */
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: center;
+  color: #555;
+}
+
+.footer-copyright a {
+  text-decoration: none;                                      /* 去除链接下划线 */
+  color: #555;                                              /* 链接文字颜色 */
+}
+
+.footer-copyright a:hover {
+  color: #4285f4;                                            /* 鼠标悬停时链接文字颜色变为蓝色 */
+}
+
+.footer-copyright span:not(:last-child)::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background-color: #555;
+  margin: 0 8px;
+  vertical-align: middle;
+  position: relative; 
+  bottom: 1px;
+}

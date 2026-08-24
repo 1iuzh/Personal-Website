@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="个人网址导航：AI 应用、搜索引擎、社交媒体、购物、资讯、工具等常用网站分类合集。" />
+    <title>网址导航</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="123.css" />
+  </head>
+
+  <body>
+    <!-- 页首 -->
+    <header>
+      <div class="header-container">
+        <!-- 品牌 -->
+        <div class="brand">
+          <a href="/" class="brand-link">
+            <img src="favicon.png" alt="网址导航 Logo" class="brand-logo" />
+            <div class="brand-text">
+              <span class="brand-name">网址导航</span>
+              <span class="brand-tagline">高效上网，一站直达</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- 搜索区 -->
+        <div class="header-search-wrapper">
+          <div class="search-row">
+            <div class="search-engine-tabs">
+              <button class="search-tab active" data-engine="google">Google</button>
+              <button class="search-tab" data-engine="bing">Bing</button>
+              <button class="search-tab" data-engine="baidu">百度</button>
+            </div>
+            <div class="header-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input type="text" id="site-search" placeholder="输入关键词，回车搜索网页…" autocomplete="off" aria-label="搜索网页" />
+              <kbd>/</kbd>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧信息 -->
+        <div class="header-meta">
+          <div class="header-clock">
+            <span class="clock-time" id="clock-time">--:--:--</span>
+            <span class="clock-date" id="clock-date">--月--日 星期-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分类快捷导航 -->
+      <nav class="header-nav" id="header-nav">
+        <div class="header-nav-inner">
+          <!-- 由 JS 动态生成分类链接 -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <main>
+      <div class="grid-container"></div>
+    </main>
+
+    <!-- 返回顶部 -->
+    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-grid">
+          <!-- 品牌栏 -->
+          <div class="footer-col footer-brand">
+            <div class="footer-brand-header">
+              <img src="favicon.png" alt="Logo" class="footer-logo" />
+              <span class="footer-brand-name">网址导航</span>
+            </div>
+            <p class="footer-desc">精心整理的常用网站分类导航，涵盖 AI 应用、搜索、社交、购物、资讯、工具等多个领域，助你高效上网。</p>
+            <div class="footer-social">
+              <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+              <a href="mailto:contact@example.com" aria-label="邮箱">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- 快速链接 -->
+          <div class="footer-col">
+            <h4>快速链接</h4>
+            <ul>
+              <li><a href="/">主页</a></li>
+              <li><a href="/creative/">创意工坊</a></li>
+              <li><a href="/readme">用户协议</a></li>
+              <li><a href="/contact">与我联系</a></li>
+            </ul>
+          </div>
+
+          <!-- 热门分类 -->
+          <div class="footer-col">
+            <h4>热门分类</h4>
+            <ul id="footer-categories">
+              <!-- JS 动态填充 -->
+            </ul>
+          </div>
+
+          <!-- 站点信息 -->
+          <div class="footer-col">
+            <h4>站点信息</h4>
+            <ul>
+              <li><span class="footer-stat-item">分类总数：<strong id="footer-cat-count">0</strong></span></li>
+              <li><span class="footer-stat-item">收录网站：<strong id="footer-link-count">0</strong></span></li>
+              <li><span class="footer-stat-item">已苟延残喘：<strong id="footer-uptime">0 天</strong></span></li>
+              <li><span class="footer-stat-item">最后更新：2026.08</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+          <p class="footer-copyright">© 2025–2026 LIUZHANGBIN. All rights reserved.</p>
+          <p class="footer-made">Made with care for efficient browsing.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

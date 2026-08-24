@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="常用软件清单，精选常用办公、浏览器、系统维护、文件处理等软件。">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+    <title>常用软件清单</title>
+
+    <style>
+        /* =========================================================
+           Design System
+           ========================================================= */
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #3730a3;
+
+            --accent: #06b6d4;
+
+            --text: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+
+            --background: #f6f7fb;
+            --surface: rgba(255, 255, 255, 0.86);
+            --surface-solid: #ffffff;
+
+            --border: rgba(24, 24, 27, 0.07);
+            --border-hover: rgba(79, 70, 229, 0.22);
+
+            --shadow-sm:
+                0 1px 2px rgba(0, 0, 0, 0.04);
+
+            --shadow:
+                0 8px 30px rgba(15, 23, 42, 0.06);
+
+            --shadow-hover:
+                0 16px 40px rgba(15, 23, 42, 0.10);
+
+            --radius-sm: 10px;
+            --radius: 16px;
+            --radius-lg: 24px;
+
+            --transition:
+                0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+            --container: 1280px;
+        }
+
+
+        /* =========================================================
+           Reset
+           ========================================================= */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                "SF Pro Display",
+                "PingFang SC",
+                "Microsoft YaHei",
+                sans-serif;
+
+            line-height: 1.6;
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(99, 102, 241, 0.10),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(6, 182, 212, 0.08),
+                    transparent 25%
+                ),
+                var(--background);
+        }
+
+        a {
+            color: inherit;
+        }
+
+
+        /* =========================================================
+           Scrollbar
+           ========================================================= */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1aa;
+        }
+
+
+        /* =========================================================
+           Common
+           ========================================================= */
+
+        .container {
+            width: min(
+                calc(100% - 40px),
+                var(--container)
+            );
+
+            margin-inline: auto;
+        }
+
+
+        /* =========================================================
+           Header
+           ========================================================= */
+
+        .hero {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 72px 0 64px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #312e81 0%,
+                    #4f46e5 48%,
+                    #2563eb 100%
+                );
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            top: -280px;
+            left: -120px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            filter: blur(2px);
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            right: -220px;
+            bottom: -420px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(6, 182, 212, 0.13);
+
+            filter: blur(5px);
+        }
+
+        .hero-inner {
+            position: relative;
+
+            z-index: 1;
+
+            text-align: center;
+        }
+
+
+        /* =========================================================
+           Hero Badge
+           ========================================================= */
+
+        .hero-badge {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+
+            margin-bottom: 20px;
+
+            color: rgba(255, 255, 255, 0.92);
+
+            font-size: 13px;
+            font-weight: 500;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.16);
+
+            border-radius: 999px;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #67e8f9;
+
+            box-shadow:
+                0 0 10px rgba(103, 232, 249, 0.8);
+        }
+
+
+        /* =========================================================
+           Hero Title
+           ========================================================= */
+
+        .hero-title {
+            margin-bottom: 14px;
+
+            font-size:
+                clamp(2.2rem, 6vw, 4rem);
+
+            font-weight: 750;
+
+            letter-spacing: -0.04em;
+
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            max-width: 620px;
+
+            margin: 0 auto;
+
+            color:
+                rgba(255, 255, 255, 0.78);
+
+            font-size:
+                clamp(0.95rem, 2vw, 1.08rem);
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           Search
+           ========================================================= */
+
+        .search-wrapper {
+            position: relative;
+
+            max-width: 620px;
+
+            margin: 32px auto 0;
+        }
+
+        .search-icon {
+            position: absolute;
+
+            top: 50%;
+            left: 20px;
+
+            width: 18px;
+            height: 18px;
+
+            transform: translateY(-50%);
+
+            color: rgba(255, 255, 255, 0.65);
+
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+
+            height: 54px;
+
+            padding:
+                0 20px 0 52px;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.11);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            border-radius: 15px;
+
+            outline: none;
+
+            backdrop-filter: blur(16px);
+
+            transition:
+                background var(--transition),
+                border-color var(--transition),
+                box-shadow var(--transition);
+        }
+
+        .search-input::placeholder {
+            color:
+                rgba(255, 255, 255, 0.58);
+        }
+
+        .search-input:focus {
+            background:
+                rgba(255, 255, 255, 0.16);
+
+            border-color:
+                rgba(255, 255, 255, 0.35);
+
+            box-shadow:
+                0 0 0 4px rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* =========================================================
+           Main
+           ========================================================= */
+
+        .main {
+            padding: 42px 0 60px;
+        }
+
+
+        /* =========================================================
+           Toolbar
+           ========================================================= */
+
+        .toolbar {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+        .toolbar-title {
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .toolbar-count {
+            color: var(--text-muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           Software Grid
+           ========================================================= */
+
+        .software-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(290px, 1fr)
+                );
+
+            gap: 20px;
+        }
+
+
+        /* =========================================================
+           Category Card
+           ========================================================= */
+
+        .category {
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(16px);
+
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition),
+                border-color var(--transition);
+        }
+
+        .category::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            opacity: 0;
+
+            transition:
+                opacity var(--transition);
+        }
+
+        .category:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                var(--border-hover);
+
+            box-shadow:
+                var(--shadow-hover);
+        }
+
+        .category:hover::before {
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+           Category Header
+           ========================================================= */
+
+        .category-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 17px 18px 15px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .category-name {
+            display: flex;
+
+            align-items: center;
+            gap: 10px;
+
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 650;
+        }
+
+        .category-icon {
+            display: grid;
+
+            place-items: center;
+
+            width: 30px;
+            height: 30px;
+
+            color: var(--primary);
+
+            font-size: 14px;
+            font-weight: 700;
+
+            background:
+                rgba(79, 70, 229, 0.09);
+
+            border-radius:
+                9px;
+        }
+
+        .category-count {
+            padding:
+                3px 8px;
+
+            color:
+                var(--text-muted);
+
+            font-size: 11px;
+
+            background:
+                #f4f4f5;
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =========================================================
+           Software List
+           ========================================================= */
+
+        .software-list {
+            list-style: none;
+
+            padding: 7px;
+        }
+
+        .software-item {
+            position: relative;
+        }
+
+        .software-link {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            min-height: 48px;
+
+            padding:
+                10px 11px 10px 12px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            border-radius:
+                var(--radius-sm);
+
+            transition:
+                color var(--transition),
+                background var(--transition),
+                transform var(--transition);
+        }
+
+        .software-link:hover {
+            color:
+                var(--primary);
+
+            background:
+                rgba(79, 70, 229, 0.055);
+
+            transform:
+                translateX(3px);
+        }
+
+        .software-link::after {
+            content: "↗";
+
+            color:
+                var(--text-muted);
+
+            font-size: 15px;
+
+            opacity: 0;
+
+            transform:
+                translateX(-4px);
+
+            transition:
+                opacity var(--transition),
+                transform var(--transition);
+        }
+
+        .software-link:hover::after {
+            opacity: 1;
+
+            transform:
+                translateX(0);
+        }
+
+
+        /* =========================================================
+           Empty State
+           ========================================================= */
+
+        .empty-state {
+            display: none;
+
+            padding: 80px 20px;
+
+            color: var(--text-muted);
+
+            text-align: center;
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+
+        /* =========================================================
+           Footer
+           ========================================================= */
+
+        .footer {
+            padding: 36px 0 40px;
+
+            color: #a1a1aa;
+
+            background:
+                #18181b;
+        }
+
+        .footer-inner {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+        .footer-nav {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 24px;
+
+            margin-bottom: 22px;
+        }
+
+        .footer-nav a {
+            color: #d4d4d8;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition:
+                color var(--transition);
+        }
+
+        .footer-nav a:hover {
+            color: #ffffff;
+        }
+
+        .footer-divider {
+            width: 48px;
+            height: 2px;
+
+            margin-bottom: 18px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary-light),
+                    var(--accent)
+                );
+
+            border-radius: 999px;
+        }
+
+        .footer-info {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            color: #71717a;
+
+            font-size: 12px;
+        }
+
+        .footer-info a {
+            color: #a5b4fc;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           Mobile
+           ========================================================= */
+
+        @media (max-width: 768px) {
+
+            .container {
+                width:
+                    min(
+                        calc(100% - 24px),
+                        var(--container)
+                    );
+            }
+
+            .hero {
+                padding:
+                    52px 0 44px;
+            }
+
+            .main {
+                padding:
+                    28px 0 40px;
+            }
+
+            .software-grid {
+                grid-template-columns: 1fr;
+
+                gap: 14px;
+            }
+
+            .category:hover {
+                transform: none;
+            }
+
+            .category::before {
+                display: none;
+            }
+
+            .software-link:hover {
+                transform: none;
+            }
+        }
+
+
+        /* =========================================================
+           Small Mobile
+           ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .hero {
+                padding:
+                    42px 0 36px;
+            }
+
+            .hero-title {
+                font-size:
+                    2.2rem;
+            }
+
+            .hero-subtitle {
+                padding:
+                    0 12px;
+            }
+
+            .search-wrapper {
+                margin-top: 26px;
+            }
+
+            .search-input {
+                height: 50px;
+            }
+
+            .toolbar {
+                margin-bottom: 16px;
+            }
+
+            .category-header {
+                padding:
+                    15px 15px 13px;
+            }
+
+            .software-list {
+                padding: 6px;
+            }
+
+            .footer-nav {
+                gap: 18px;
+            }
+
+            .footer-info {
+                flex-direction:
+                    column;
+
+                align-items: center;
+
+                gap: 3px;
+            }
+        }
+
+
+        /* =========================================================
+           Print
+           ========================================================= */
+
+        @media print {
+
+            .hero,
+            .footer,
+            .search-wrapper,
+            .toolbar {
+                display: none;
+            }
+
+            .main {
+                padding: 0;
+            }
+
+            .software-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .category {
+                box-shadow: none;
+
+                break-inside: avoid;
+            }
+        }
+
+
+        /* =========================================================
+           Reduced Motion
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+
+                transition:
+                    none !important;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         Hero
+         ========================================================= -->
+
+    <header class="hero">
+
+        <div class="container hero-inner">
+
+            <div class="hero-badge">
+                Software Collection
+            </div>
+
+            <h1 class="hero-title">
+                常用软件清单
+            </h1>
+
+            <p class="hero-subtitle">
+                精选常用软件，整理常见工具，让每一次安装都更简单。
+            </p>
+
+
+            <!-- Search -->
+
+            <div class="search-wrapper">
+
+                <svg
+                    class="search-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                >
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+                </svg>
+
+                <input
+                    id="searchInput"
+                    class="search-input"
+                    type="search"
+                    placeholder="搜索软件，例如：Chrome、Office、截图……"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         Main
+         ========================================================= -->
+
+    <main class="main">
+
+        <div class="container">
+
+            <div class="toolbar">
+
+                <div class="toolbar-title">
+                    软件分类
+                </div>
+
+                <div
+                    id="softwareCount"
+                    class="toolbar-count"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="softwareCategories"
+                class="software-grid"
+            ></div>
+
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+                没有找到相关软件
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         Footer
+         ========================================================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <nav
+                class="footer-nav"
+                aria-label="页脚导航"
+            >
+
+                <a href="/">
+                    主页
+                </a>
+
+                <a href="/123/">
+                    网址导航
+                </a>
+
+                <a href="/creative/">
+                    创意工坊
+                </a>
+
+            </nav>
+
+
+            <div class="footer-divider"></div>
+
+
+            <div class="footer-info">
+
+                <span>
+                    © 2025
+                    <a href="https://liuzhangbin.com/">
+                        Liuzh
+                    </a>
+                </span>
+
+                <span>
+                    Powered by KFC
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        /* =========================================================
+           Software Data
+           ========================================================= */
+
+        const softwareCategories = [
+
+            {
+                name: "IM软件",
+                items: [
+                    ["飞书", "https://www.feishu.cn/download"],
+                    ["钉钉", "https://www.dingtalk.com/download"],
+                    ["企业微信", "https://work.weixin.qq.com/#indexDownload"],
+                    ["微信", "https://weixin.qq.com/"],
+                    ["QQ", "https://im.qq.com/"]
+                ]
+            },
+
+            {
+                name: "Office",
+                items: [
+                    ["Office Tool", "https://otp.landian.vip/zh-cn/download.html"],
+                    ["WPS", "https://www.wps.cn/"]
+                ]
+            },
+
+            {
+                name: "PDF查看编辑",
+                items: [
+                    [
+                        "Adobe Acrobat",
+                        "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html"
+                    ],
+                    ["WPS", "https://www.wps.cn/"]
+                ]
+            },
+
+            {
+                name: "翻译词典",
+                items: [
+                    [
+                        "有道词典",
+                        "https://fanyi.youdao.com/download-Windows/"
+                    ],
+                    [
+                        "金山词霸",
+                        "https://cp.iciba.com/"
+                    ]
+                ]
+            },
+
+            {
+                name: "截图",
+                items: [
+                    ["Pixpin", "https://pixpin.cn/"],
+                    ["Snipaste", "https://zh.snipaste.com/"]
+                ]
+            },
+
+            {
+                name: "看图",
+                items: [
+                    [
+                        "Honeyview",
+                        "https://www.bandisoft.com/honeyview/"
+                    ],
+                    ["WPS", "https://www.wps.cn/"]
+                ]
+            },
+
+            {
+                name: "浏览器",
+                items: [
+                    [
+                        "Google Chrome",
+                        "https://www.google.com/chrome/?system=true&standalone=1"
+                    ],
+                    [
+                        "Microsoft Edge",
+                        "https://www.microsoft.com/edge"
+                    ]
+                ]
+            },
+
+            {
+                name: "视频播放",
+                items: [
+                    [
+                        "PotPlayer",
+                        "https://potplayer.tv/"
+                    ],
+                    [
+                        "MPC-BE",
+                        "https://github.com/Aleksoid1978/MPC-BE/releases"
+                    ]
+                ]
+            },
+
+            {
+                name: "视频会议",
+                items: [
+                    [
+                        "腾讯会议",
+                        "https://meeting.tencent.com/"
+                    ],
+                    [
+                        "Zoom",
+                        "https://www.zoom.com/zh-cn"
+                    ]
+                ]
+            },
+
+            {
+                name: "输入法",
+                items: [
+                    [
+                        "微信输入法",
+                        "https://z.weixin.qq.com/"
+                    ],
+                    [
+                        "搜狗输入法",
+                        "https://shurufa.sogou.com/"
+                    ]
+                ]
+            },
+
+            {
+                name: "思维导图",
+                items: [
+                    [
+                        "Xmind",
+                        "https://www.xmind.cn/"
+                    ],
+                    [
+                        "WPS",
+                        "https://www.wps.cn/"
+                    ]
+                ]
+            },
+
+            {
+                name: "网盘",
+                items: [
+                    [
+                        "OneDrive",
+                        "https://www.microsoft.com/zh-cn/microsoft-365/onedrive/online-cloud-storage"
+                    ],
+                    [
+                        "坚果云",
+                        "https://www.jianguoyun.com/"
+                    ],
+                    [
+                        "百度网盘",
+                        "https://pan.baidu.com/"
+                    ]
+                ]
+            },
+
+            {
+                name: "文件检索",
+                items: [
+                    [
+                        "Everything",
+                        "https://www.voidtools.com/zh-cn/downloads/"
+                    ]
+                ]
+            },
+
+            {
+                name: "文件压缩",
+                items: [
+                    [
+                        "WinRAR",
+                        "https://www.rarlab.com/"
+                    ],
+                    [
+                        "7-Zip",
+                        "https://www.7-zip.org/"
+                    ]
+                ]
+            },
+
+            {
+                name: "系统维护",
+                items: [
+                    [
+                        "火绒",
+                        "https://www.huorong.cn/"
+                    ],
+                    [
+                        "Dism++",
+                        "https://github.com/Chuyu-Team/Dism-Multi-language/releases"
+                    ],
+                    [
+                        "CCleaner",
+                        "https://www.ccleaner.com/"
+                    ],
+                    [
+                        "IObit",
+                        "https://www.iobit.com/"
+                    ]
+                ]
+            },
+
+            {
+                name: "驱动",
+                items: [
+                    [
+                        "NVIDIA驱动",
+                        "https://www.nvidia.cn/geforce/drivers/"
+                    ],
+                    [
+                        "AMD驱动",
+                        "https://www.amd.com/zh-cn/support/download/drivers.html"
+                    ],
+                    [
+                        "360驱动大师",
+                        "https://dm.weishi.360.cn/home.html"
+                    ]
+                ]
+            },
+
+            {
+                name: "邮箱客户端",
+                items: [
+                    [
+                        "Foxmail",
+                        "https://www.foxmail.com/"
+                    ],
+                    [
+                        "Outlook",
+                        "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook"
+                    ]
+                ]
+            },
+
+            {
+                name: "协作文档",
+                items: [
+                    [
+                        "腾讯文档",
+                        "https://docs.qq.com/"
+                    ],
+                    [
+                        "石墨文档",
+                        "https://shimo.im/"
+                    ],
+                    [
+                        "金山文档",
+                        "https://www.kdocs.cn/"
+                    ]
+                ]
+            },
+
+            {
+                name: "游戏",
+                items: [
+                    [
+                        "Steam",
+                        "https://store.steampowered.com/about/"
+                    ],
+                    [
+                        "WeGame",
+                        "https://www.wegame.com.cn/home/"
+                    ]
+                ]
+            },
+
+            {
+                name: "其他",
+                items: [
+                    [
+                        "ITELLYOU",
+                        "https://next.itellyou.cn/"
+                    ]
+                ]
+            }
+
+        ];
+
+
+        /* =========================================================
+           DOM
+           ========================================================= */
+
+        const categoryContainer =
+            document.getElementById(
+                "softwareCategories"
+            );
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const softwareCount =
+            document.getElementById(
+                "softwareCount"
+            );
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        /* =========================================================
+           Category Icon
+           
+           使用简单文字图标，避免额外加载图标库。
+           ========================================================= */
+
+        const categoryIcons = {
+            "IM软件": "IM",
+            "Office": "OF",
+            "PDF查看编辑": "PDF",
+            "翻译词典": "译",
+            "截图": "截",
+            "看图": "图",
+            "浏览器": "网",
+            "视频播放": "▶",
+            "视频会议": "会",
+            "输入法": "文",
+            "思维导图": "思",
+            "网盘": "盘",
+            "文件检索": "搜",
+            "文件压缩": "压",
+            "系统维护": "维",
+            "驱动": "驱",
+            "邮箱客户端": "邮",
+            "协作文档": "协",
+            "游戏": "游",
+            "其他": "…"
+        };
+
+
+        /* =========================================================
+           Create Category
+           ========================================================= */
+
+        function createCategory(
+            category,
+            visibleItems = category.items
+        ) {
+
+            const section =
+                document.createElement("section");
+
+            section.className = "category";
+
+
+            /* Header */
+
+            const header =
+                document.createElement("div");
+
+            header.className =
+                "category-header";
+
+
+            const name =
+                document.createElement("h2");
+
+            name.className =
+                "category-name";
+
+
+            const icon =
+                document.createElement("span");
+
+            icon.className =
+                "category-icon";
+
+            icon.textContent =
+                categoryIcons[category.name] || "•";
+
+
+            const title =
+                document.createElement("span");
+
+            title.textContent =
+                category.name;
+
+
+            name.appendChild(icon);
+            name.appendChild(title);
+
+
+            const count =
+                document.createElement("span");
+
+            count.className =
+                "category-count";
+
+            count.textContent =
+                `${visibleItems.length}`;
+
+
+            header.appendChild(name);
+            header.appendChild(count);
+
+
+            /* List */
+
+            const list =
+                document.createElement("ul");
+
+            list.className =
+                "software-list";
+
+
+            visibleItems.forEach(
+                ([softwareName, url]) => {
+
+                    const item =
+                        document.createElement("li");
+
+                    item.className =
+                        "software-item";
+
+
+                    const link =
+                        document.createElement("a");
+
+                    link.className =
+                        "software-link";
+
+                    link.href =
+                        url;
+
+                    link.target =
+                        "_blank";
+
+                    link.rel =
+                        "noopener noreferrer";
+
+                    link.textContent =
+                        softwareName;
+
+
+                    item.appendChild(link);
+
+                    list.appendChild(item);
+                }
+            );
+
+
+            section.appendChild(header);
+            section.appendChild(list);
+
+
+            return section;
+        }
+
+
+        /* =========================================================
+           Render
+           ========================================================= */
+
+        function renderCategories(
+            keyword = ""
+        ) {
+
+            const query =
+                keyword.trim().toLowerCase();
+
+
+            categoryContainer.innerHTML = "";
+
+
+            let total = 0;
+            let visibleCategories = 0;
+
+
+            softwareCategories.forEach(
+                category => {
+
+                    const items =
+                        category.items.filter(
+                            ([name]) => {
+
+                                if (!query) {
+                                    return true;
+                                }
+
+                                return (
+                                    name
+                                        .toLowerCase()
+                                        .includes(query)
+                                    ||
+                                    category.name
+                                        .toLowerCase()
+                                        .includes(query)
+                                );
+                            }
+                        );
+
+
+                    if (
+                        items.length === 0
+                    ) {
+                        return;
+                    }
+
+
+                    visibleCategories++;
+
+                    total += items.length;
+
+
+                    categoryContainer.appendChild(
+                        createCategory(
+                            category,
+                            items
+                        )
+                    );
+
+                }
+            );
+
+
+            /* Count */
+
+            if (query) {
+
+                softwareCount.textContent =
+                    `找到 ${total} 个软件`;
+
+            } else {
+
+                const totalSoftware =
+                    softwareCategories.reduce(
+                        (sum, category) =>
+                            sum + category.items.length,
+                        0
+                    );
+
+                softwareCount.textContent =
+                    `${softwareCategories.length} 个分类 · ${totalSoftware} 个软件`;
+            }
+
+
+            /* Empty */
+
+            emptyState.classList.toggle(
+                "show",
+                visibleCategories === 0
+            );
+        }
+
+
+        /* =========================================================
+           Search
+           ========================================================= */
+
+        searchInput.addEventListener(
+            "input",
+            event => {
+
+                renderCategories(
+                    event.target.value
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           Initialize
+           ========================================================= */
+
+        renderCategories();
+
+    </script>
+
+</body>
+
+</html>

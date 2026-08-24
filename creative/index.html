@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Creative · 实用工具集</title>
+
+    <meta
+        name="description"
+        content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f7f8fa"
+    >
+
+    <style>
+
+        /* =========================================================
+           基础
+        ========================================================= */
+
+        :root {
+
+            --bg: #f7f8fa;
+            --surface: #ffffff;
+            --surface-hover: #fafafa;
+
+            --text: #111827;
+            --text-secondary: #6b7280;
+            --text-tertiary: #9ca3af;
+
+            --border: #e5e7eb;
+
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+
+            --header-bg: rgba(247, 248, 250, 0.82);
+
+            --shadow:
+                0 4px 20px rgba(0, 0, 0, 0.04);
+
+            --shadow-hover:
+                0 16px 40px rgba(0, 0, 0, 0.08);
+
+            --radius: 18px;
+
+            --max-width: 1120px;
+        }
+
+
+        /* =========================================================
+           深色模式
+        ========================================================= */
+
+        html.dark {
+
+            --bg: #0b0d10;
+
+            --surface: #12161b;
+            --surface-hover: #171c22;
+
+            --text: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-tertiary: #6b7280;
+
+            --border: #242a32;
+
+            --accent: #60a5fa;
+            --accent-soft: #172554;
+
+            --header-bg: rgba(11, 13, 16, 0.82);
+
+            --shadow:
+                0 4px 20px rgba(0, 0, 0, 0.18);
+
+            --shadow-hover:
+                0 16px 40px rgba(0, 0, 0, 0.30);
+        }
+
+
+        /* =========================================================
+           Reset
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "PingFang SC",
+                "Microsoft YaHei",
+                sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            line-height: 1.6;
+
+            transition:
+                background-color 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           Container
+        ========================================================= */
+
+        .container {
+
+            width:
+                min(
+                    var(--max-width),
+                    calc(100% - 40px)
+                );
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           顶部导航
+        ========================================================= */
+
+        .topbar {
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: relative;
+
+            z-index: 10;
+        }
+
+
+        .logo {
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .logo-mark {
+
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: var(--text);
+            color: var(--bg);
+
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+
+        .logo-text {
+            font-size: 16px;
+        }
+
+
+        .top-actions {
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .icon-button {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            background: var(--surface);
+
+            color: var(--text-secondary);
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .icon-button:hover {
+
+            color: var(--text);
+
+            border-color:
+                color-mix(
+                    in srgb,
+                    var(--border) 60%,
+                    var(--text)
+                );
+
+            transform: translateY(-1px);
+        }
+
+
+        .icon-button svg {
+
+            width: 17px;
+            height: 17px;
+        }
+
+
+        /* =========================================================
+           Hero
+        ========================================================= */
+
+        .hero {
+
+            padding:
+                72px 0 54px;
+        }
+
+
+        .hero-content {
+
+            max-width: 760px;
+        }
+
+
+        .eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 18px;
+
+            padding: 5px 10px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 999px;
+
+            background: var(--surface);
+
+            color: var(--text-secondary);
+
+            font-size: 12px;
+        }
+
+
+        .eyebrow-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(
+                42px,
+                7vw,
+                72px
+            );
+
+            line-height: 1.02;
+
+            letter-spacing: -4px;
+
+            font-weight: 750;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 span {
+
+            color: var(--text-secondary);
+        }
+
+
+        .hero-description {
+
+            max-width: 580px;
+
+            color: var(--text-secondary);
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================================
+           搜索
+        ========================================================= */
+
+        .search-box {
+
+            position: relative;
+
+            max-width: 640px;
+        }
+
+
+        .search-box svg {
+
+            position: absolute;
+
+            left: 17px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 19px;
+            height: 19px;
+
+            color: var(--text-tertiary);
+
+            pointer-events: none;
+        }
+
+
+        #search {
+
+            width: 100%;
+
+            height: 56px;
+
+            padding:
+                0 52px 0 48px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            box-shadow: var(--shadow);
+
+            transition: 0.2s ease;
+        }
+
+
+        #search::placeholder {
+
+            color: var(--text-tertiary);
+        }
+
+
+        #search:focus {
+
+            border-color: #93c5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, 0.08),
+                var(--shadow);
+        }
+
+
+        .search-key {
+
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            padding: 3px 7px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 6px;
+
+            color: var(--text-tertiary);
+
+            font-size: 11px;
+
+            background: var(--surface);
+        }
+
+
+        /* =========================================================
+           分类
+        ========================================================= */
+
+        .filters {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 38px;
+        }
+
+
+        .filter {
+
+            padding:
+                7px 14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 999px;
+
+            background: var(--surface);
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .filter:hover {
+
+            color: var(--text);
+
+            border-color:
+                var(--text-tertiary);
+        }
+
+
+        .filter.active {
+
+            background: var(--text);
+
+            color: var(--bg);
+
+            border-color: var(--text);
+        }
+
+
+        /* =========================================================
+           Section
+        ========================================================= */
+
+        .section {
+
+            margin-bottom: 54px;
+        }
+
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .section-title {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.3px;
+        }
+
+
+        .section-count {
+
+            color: var(--text-tertiary);
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           Bento
+        ========================================================= */
+
+        .featured-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.35fr
+                0.85fr
+                0.85fr;
+
+            grid-template-rows:
+                210px
+                170px;
+
+            gap: 14px;
+        }
+
+
+        .featured-grid .tool-card:first-child {
+
+            grid-row:
+                span 2;
+        }
+
+
+        /* =========================================================
+           普通 Grid
+        ========================================================= */
+
+        .tools-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+
+        /* =========================================================
+           Tool Card
+        ========================================================= */
+
+        .tool-card {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            padding: 23px;
+
+            overflow: hidden;
+
+            background: var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease,
+                border-color 0.22s ease;
+        }
+
+
+        .tool-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                var(--shadow-hover);
+
+            border-color:
+                color-mix(
+                    in srgb,
+                    var(--border) 60%,
+                    var(--text)
+                );
+        }
+
+
+        .tool-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -80px;
+            bottom: -80px;
+
+            border-radius: 50%;
+
+            background:
+                var(--accent-soft);
+
+            opacity: 0;
+
+            transition:
+                opacity 0.25s ease;
+        }
+
+
+        .tool-card:hover::after {
+
+            opacity: 0.55;
+        }
+
+
+        .tool-icon {
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 17px;
+
+            border-radius: 12px;
+
+            background:
+                var(--accent-soft);
+
+            color:
+                var(--accent);
+        }
+
+
+        .tool-icon svg {
+
+            width: 21px;
+            height: 21px;
+        }
+
+
+        .tool-name {
+
+            font-size: 16px;
+
+            font-weight: 680;
+
+            margin-bottom: 6px;
+        }
+
+
+        .tool-description {
+
+            color:
+                var(--text-secondary);
+
+            font-size: 13px;
+
+            line-height: 1.65;
+
+            max-width: 420px;
+        }
+
+
+        .tool-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: auto;
+
+            padding-top: 17px;
+        }
+
+
+        .tool-category {
+
+            color:
+                var(--text-tertiary);
+
+            font-size: 11px;
+        }
+
+
+        .tool-arrow {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 28px;
+            height: 28px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            color:
+                var(--text-tertiary);
+
+            transition:
+                0.2s ease;
+        }
+
+
+        .tool-arrow svg {
+
+            width: 14px;
+            height: 14px;
+        }
+
+
+        .tool-card:hover .tool-arrow {
+
+            color:
+                var(--accent);
+
+            border-color:
+                var(--accent);
+
+            transform:
+                translateX(2px);
+        }
+
+
+        /* =========================================================
+           Featured Card
+        ========================================================= */
+
+        .featured-grid
+        .tool-card:first-child {
+
+            padding: 30px;
+        }
+
+
+        .featured-grid
+        .tool-card:first-child
+        .tool-icon {
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 14px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .featured-grid
+        .tool-card:first-child
+        .tool-icon svg {
+
+            width: 25px;
+            height: 25px;
+        }
+
+
+        .featured-grid
+        .tool-card:first-child
+        .tool-name {
+
+            font-size: 23px;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .featured-grid
+        .tool-card:first-child
+        .tool-description {
+
+            font-size: 14px;
+
+            max-width: 400px;
+        }
+
+
+        /* =========================================================
+           Empty
+        ========================================================= */
+
+        .empty {
+
+            display: none;
+
+            padding:
+                80px 20px;
+
+            text-align: center;
+
+            color:
+                var(--text-secondary);
+        }
+
+
+        .empty svg {
+
+            width: 30px;
+            height: 30px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty-title {
+
+            color: var(--text);
+
+            font-size: 15px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .empty-description {
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           Footer
+        ========================================================= */
+
+        footer {
+
+            margin-top: 80px;
+
+            padding:
+                28px 0 38px;
+
+            border-top:
+                1px solid var(--border);
+
+            color:
+                var(--text-tertiary);
+
+            font-size: 12px;
+        }
+
+
+        .footer-inner {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .footer-link {
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .footer-link:hover {
+
+            color:
+                var(--text);
+        }
+
+
+        /* =========================================================
+           动画
+        ========================================================= */
+
+        @keyframes cardIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(8px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        .tool-card {
+
+            animation:
+                cardIn 0.35s ease both;
+        }
+
+
+        /* =========================================================
+           平板
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .featured-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                grid-template-rows:
+                    auto;
+            }
+
+
+            .featured-grid
+            .tool-card:first-child {
+
+                grid-row:
+                    auto;
+
+                grid-column:
+                    span 2;
+            }
+
+
+            .tools-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+
+        /* =========================================================
+           手机
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                width:
+                    calc(100% - 28px);
+            }
+
+
+            .topbar {
+
+                height: 62px;
+            }
+
+
+            .hero {
+
+                padding:
+                    52px 0 38px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 45px;
+
+                letter-spacing: -2.5px;
+            }
+
+
+            .hero-description {
+
+                font-size: 14px;
+            }
+
+
+            .search-key {
+
+                display: none;
+            }
+
+
+            .featured-grid {
+
+                display: grid;
+
+                grid-template-columns: 1fr;
+
+                grid-template-rows: auto;
+
+                gap: 12px;
+            }
+
+
+            .featured-grid
+            .tool-card:first-child {
+
+                grid-column: auto;
+            }
+
+
+            .tools-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+
+            .tool-card {
+
+                min-height: 170px;
+            }
+
+
+            .featured-grid
+            .tool-card:first-child {
+
+                min-height: 210px;
+
+                padding: 25px;
+            }
+
+
+            .footer-inner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 7px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     顶部
+========================================================= -->
+
+<div class="container">
+
+    <header class="topbar">
+
+        <a
+            href="/creative/"
+            class="logo"
+        >
+
+            <div class="logo-mark">
+                C
+            </div>
+
+            <div class="logo-text">
+                Creative
+            </div>
+
+        </a>
+
+
+        <div class="top-actions">
+
+            <button
+                class="icon-button"
+                id="themeToggle"
+                aria-label="切换主题"
+                title="切换主题"
+            >
+
+                <svg
+                    id="themeIcon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="4"
+                    />
+
+                    <path
+                        d="
+                            M12 2v2
+                            M12 20v2
+                            M4.93 4.93l1.41 1.41
+                            M17.66 17.66l1.41 1.41
+                            M2 12h2
+                            M20 12h2
+                            M4.93 19.07l1.41-1.41
+                            M17.66 6.34l1.41-1.41
+                        "
+                    />
+                </svg>
+
+            </button>
+
+
+            <a
+                class="icon-button"
+                href="https://liuzhangbin.com/"
+                target="_blank"
+                rel="noopener"
+                aria-label="返回主页"
+                title="返回主页"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path
+                        d="
+                            M3 10.5
+                            L12 3
+                            L21 10.5
+                        "
+                    />
+
+                    <path
+                        d="
+                            M5 9.5
+                            V21
+                            H19
+                            V9.5
+                        "
+                    />
+
+                    <path
+                        d="
+                            M9 21
+                            V14
+                            H15
+                            V21
+                        "
+                    />
+
+                </svg>
+
+            </a>
+
+        </div>
+
+    </header>
+
+</div>
+
+
+
+<!-- =========================================================
+     Hero
+========================================================= -->
+
+<main>
+
+    <div class="container">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+
+                    <span class="eyebrow-dot"></span>
+
+                    Personal Tool Collection
+
+                </div>
+
+
+                <h1>
+
+                    Creative
+                    <span>Tools.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    一些自己做的、常用的实用工具。
+                    简单、直接，不需要复杂的操作。
+
+                </p>
+
+
+                <div class="search-box">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+
+                        <circle
+                            cx="11"
+                            cy="11"
+                            r="7"
+                        />
+
+                        <path
+                            d="m20 20-4-4"
+                        />
+
+                    </svg>
+
+
+                    <input
+                        id="search"
+                        type="search"
+                        placeholder="搜索工具……"
+                        autocomplete="off"
+                    >
+
+
+                    <span class="search-key">
+                        /
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             分类
+        ====================================================== -->
+
+        <nav class="filters">
+
+            <button
+                class="filter active"
+                data-category="all"
+            >
+                全部
+            </button>
+
+
+            <button
+                class="filter"
+                data-category="system"
+            >
+                系统与硬件
+            </button>
+
+
+            <button
+                class="filter"
+                data-category="network"
+            >
+                网络工具
+            </button>
+
+
+            <button
+                class="filter"
+                data-category="security"
+            >
+                安全工具
+            </button>
+
+
+            <button
+                class="filter"
+                data-category="development"
+            >
+                开发工具
+            </button>
+
+
+            <button
+                class="filter"
+                data-category="text"
+            >
+                文本工具
+            </button>
+
+        </nav>
+
+
+
+        <!-- =====================================================
+             精选工具
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2 class="section-title">
+                    精选工具
+                </h2>
+
+                <span class="section-count">
+                    常用工具
+                </span>
+
+            </div>
+
+
+            <div
+                class="featured-grid"
+                id="featuredGrid"
+            >
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             全部工具
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2 class="section-title">
+                    全部工具
+                </h2>
+
+                <span
+                    class="section-count"
+                    id="toolCount"
+                >
+                </span>
+
+            </div>
+
+
+            <div
+                class="tools-grid"
+                id="toolsGrid"
+            >
+            </div>
+
+
+            <div
+                class="empty"
+                id="empty"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    />
+
+                    <path
+                        d="m20 20-4-4"
+                    />
+
+                </svg>
+
+
+                <div class="empty-title">
+                    没有找到相关工具
+                </div>
+
+
+                <div class="empty-description">
+                    换一个关键词试试看
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     Footer
+========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <span>
+                Creative · liuzhangbin.com
+            </span>
+
+
+            <a
+                class="footer-link"
+                href="https://liuzhangbin.com/"
+                target="_blank"
+                rel="noopener"
+            >
+                liuzhangbin.com
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =============================================================
+   SVG 图标
+============================================================= */
+
+const icons = {
+
+    key: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <circle cx="8" cy="15" r="4"/>
+
+            <path d="M11 12l8-8"/>
+
+            <path d="M16 6l2 2"/>
+
+            <path d="M18 4l2 2"/>
+
+        </svg>
+    `,
+
+
+    globe: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <circle cx="12" cy="12" r="9"/>
+
+            <path d="M3 12h18"/>
+
+            <path d="
+                M12 3
+                c3 3 4 6 4 9
+                s-1 6-4 9
+            "/>
+
+            <path d="
+                M12 3
+                c-3 3-4 6-4 9
+                s1 6 4 9
+            "/>
+
+        </svg>
+    `,
+
+
+    package: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="
+                M21 16
+                V8
+                l-9-5
+                -9 5
+                v8
+                l9 5
+                9-5z
+            "/>
+
+            <path d="M3.3 7.8L12 13l8.7-5.2"/>
+
+            <path d="M12 13v8"/>
+
+        </svg>
+    `,
+
+
+    drive: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="2"
+            />
+
+            <path d="M7 15h.01"/>
+
+            <path d="M10 15h.01"/>
+
+            <path d="M13 15h4"/>
+
+        </svg>
+    `,
+
+
+    hash: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M10 3L8 21"/>
+
+            <path d="M16 3l-2 18"/>
+
+            <path d="M4 9h17"/>
+
+            <path d="M3 15h17"/>
+
+        </svg>
+    `,
+
+
+    arrow: `
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M5 12h14"/>
+
+            <path d="m13 6 6 6-6 6"/>
+
+        </svg>
+    `
+
+};
+
+
+
+/* =============================================================
+   工具数据
+   ============================================================= */
+
+const tools = [
+
+    {
+        name: "密码生成器",
+
+        description:
+            "生成随机、安全的密码，支持自定义长度与字符类型。",
+
+        category: "security",
+
+        categoryName: "安全工具",
+
+        icon: "key",
+
+        url:
+            "/creative/password-generator/",
+
+        tags:
+            "密码 password 安全 随机",
+
+        featured: true
+    },
+
+
+    {
+        name: "高级 DNS 工具",
+
+        description:
+            "查询 DNS 记录、解析结果以及域名相关网络信息。",
+
+        category: "network",
+
+        categoryName: "网络工具",
+
+        icon: "globe",
+
+        url:
+            "/creative/nslookup/",
+
+        tags:
+            "DNS 域名 网络 nslookup",
+
+        featured: true
+    },
+
+
+    {
+        name: "硬盘容量换算器",
+
+        description:
+            "快速进行 GB、TB、GiB、TiB 等存储容量单位换算。",
+
+        category: "system",
+
+        categoryName: "系统与硬件",
+
+        icon: "drive",
+
+        url:
+            "/creative/hdcalc/",
+
+        tags:
+            "硬盘 SSD HDD 容量 GB TB GiB",
+
+        featured: true
+    },
+
+
+    {
+        name: "常用软件清单",
+
+        description:
+            "Windows 装机、重装系统时的常用软件参考。",
+
+        category: "system",
+
+        categoryName: "系统与硬件",
+
+        icon: "package",
+
+        url:
+            "/creative/newbuild/",
+
+        tags:
+            "Windows 软件 装机 重装系统",
+
+        featured: true
+    },
+
+
+    {
+        name: "Hash Checker",
+
+        description:
+            "计算并校验文件的 MD5、SHA-1、SHA-256 等哈希值。",
+
+        category: "security",
+
+        categoryName: "安全工具",
+
+        icon: "hash",
+
+        url:
+            "/creative/hash-checker/",
+
+        tags:
+            "Hash MD5 SHA1 SHA256 文件校验",
+
+        featured: false
+    }
+
+];
+
+
+
+/* =============================================================
+   DOM
+   ============================================================= */
+
+const searchInput =
+    document.getElementById("search");
+
+const featuredGrid =
+    document.getElementById("featuredGrid");
+
+const toolsGrid =
+    document.getElementById("toolsGrid");
+
+const empty =
+    document.getElementById("empty");
+
+const toolCount =
+    document.getElementById("toolCount");
+
+const filters =
+    document.querySelectorAll(".filter");
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const themeIcon =
+    document.getElementById("themeIcon");
+
+
+
+/* =============================================================
+   状态
+   ============================================================= */
+
+let currentCategory = "all";
+
+let currentKeyword = "";
+
+
+
+/* =============================================================
+   创建卡片
+   ============================================================= */
+
+function createToolCard(tool) {
+
+    const card =
+        document.createElement("a");
+
+    card.className =
+        "tool-card";
+
+    card.href =
+        tool.url;
+
+
+    card.innerHTML = `
+
+        <div class="tool-icon">
+
+            ${icons[tool.icon] || icons.package}
+
+        </div>
+
+
+        <div class="tool-name">
+
+            ${tool.name}
+
+        </div>
+
+
+        <div class="tool-description">
+
+            ${tool.description}
+
+        </div>
+
+
+        <div class="tool-meta">
+
+            <span class="tool-category">
+
+                ${tool.categoryName}
+
+            </span>
+
+
+            <span class="tool-arrow">
+
+                ${icons.arrow}
+
+            </span>
+
+        </div>
+
+    `;
+
+
+    return card;
+}
+
+
+
+/* =============================================================
+   筛选
+   ============================================================= */
+
+function filterTools() {
+
+    return tools.filter(tool => {
+
+        const categoryMatch =
+
+            currentCategory === "all" ||
+
+            tool.category ===
+                currentCategory;
+
+
+        const searchText = (
+
+            tool.name +
+            " " +
+            tool.description +
+            " " +
+            tool.tags
+
+        ).toLowerCase();
+
+
+        const keywordMatch =
+
+            !currentKeyword ||
+
+            searchText.includes(
+                currentKeyword.toLowerCase()
+            );
+
+
+        return (
+            categoryMatch &&
+            keywordMatch
+        );
+
+    });
+
+}
+
+
+
+/* =============================================================
+   渲染
+   ============================================================= */
+
+function render() {
+
+    const filtered =
+        filterTools();
+
+
+    /* ---------------------------------------------------------
+       全部工具
+    --------------------------------------------------------- */
+
+    toolsGrid.innerHTML = "";
+
+
+    filtered.forEach(tool => {
+
+        toolsGrid.appendChild(
+            createToolCard(tool)
+        );
+
+    });
+
+
+    toolCount.textContent =
+        `${filtered.length} 个工具`;
+
+
+    /* ---------------------------------------------------------
+       精选工具
+    --------------------------------------------------------- */
+
+    featuredGrid.innerHTML = "";
+
+
+    const featured =
+        filtered.filter(
+            tool => tool.featured
+        );
+
+
+    featured.forEach(tool => {
+
+        featuredGrid.appendChild(
+            createToolCard(tool)
+        );
+
+    });
+
+
+    /*
+     * 没有搜索结果
+     */
+
+    if (filtered.length === 0) {
+
+        empty.style.display =
+            "block";
+
+    } else {
+
+        empty.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* =============================================================
+   搜索
+   ============================================================= */
+
+searchInput.addEventListener(
+    "input",
+    event => {
+
+        currentKeyword =
+            event.target.value.trim();
+
+        render();
+
+    }
+);
+
+
+
+/* =============================================================
+   分类
+   ============================================================= */
+
+filters.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            filters.forEach(
+                item => {
+
+                    item.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            currentCategory =
+                button.dataset.category;
+
+
+            render();
+
+        }
+    );
+
+});
+
+
+
+/* =============================================================
+   快捷键 /
+   ============================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "/" &&
+            document.activeElement !== searchInput
+        ) {
+
+            event.preventDefault();
+
+            searchInput.focus();
+
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            searchInput.value = "";
+
+            currentKeyword = "";
+
+            searchInput.blur();
+
+            render();
+
+        }
+
+    }
+);
+
+
+
+/* =============================================================
+   深色模式
+   ============================================================= */
+
+function updateThemeIcon() {
+
+    const dark =
+        document.documentElement
+            .classList.contains("dark");
+
+
+    if (dark) {
+
+        themeIcon.innerHTML = `
+
+            <path
+                d="
+                    M21 12.8
+                    A8.5 8.5 0 1 1
+                    11.2 3
+                    A6.7 6.7 0 0 0
+                    21 12.8z
+                "
+            />
+
+        `;
+
+    } else {
+
+        themeIcon.innerHTML = `
+
+            <circle
+                cx="12"
+                cy="12"
+                r="4"
+            />
+
+            <path
+                d="
+                    M12 2v2
+                    M12 20v2
+                    M4.93 4.93l1.41 1.41
+                    M17.66 17.66l1.41 1.41
+                    M2 12h2
+                    M20 12h2
+                    M4.93 19.07l1.41-1.41
+                    M17.66 6.34l1.41-1.41
+                "
+            />
+
+        `;
+
+    }
+
+}
+
+
+themeToggle.addEventListener(
+    "click",
+    () => {
+
+        const dark =
+            document.documentElement
+                .classList.toggle("dark");
+
+
+        localStorage.setItem(
+            "creative-theme",
+            dark ? "dark" : "light"
+        );
+
+
+        updateThemeIcon();
+
+    }
+);
+
+
+
+/* =============================================================
+   初始化主题
+   ============================================================= */
+
+const savedTheme =
+    localStorage.getItem(
+        "creative-theme"
+    );
+
+
+if (savedTheme === "dark") {
+
+    document.documentElement
+        .classList.add("dark");
+
+}
+
+
+updateThemeIcon();
+
+
+
+/* =============================================================
+   初始化
+   ============================================================= */
+
+render();
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+/* --- CSS 根变量定义 --- */
+:root {
+    /* 中文字体栈 (优先使用系统UI字体) */
+    --font-sans-chinese: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+
+    /* 西文字体栈 (常用无衬线字体) */
+    --font-sans-base: "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
+
+    /* 等宽代码字体栈 (用于代码、输入框等) */
+    --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", "Roboto Mono", "Inconsolata", "Ubuntu Mono", "Courier New", "JetBrains Mono";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;                              /* 基础字号18px */
+}
+
+body {
+    font-family: var(--font-sans-base), var(--font-sans-chinese);  /* 继承字体设置 */
+    line-height: 1.6;                             /* 行高为字体大小的1.6倍 */
+    max-width: 700px;                             /* 页面最大宽度700px */
+    margin: 30px auto;                            /* 上下边距30px，左右居中 */
+    padding: 0 10px;                              /* 左右内边距10px */
+    background: #f0f0f0;                        /* 背景浅灰色 */
+    color: #121212;                             /* 主文字颜色深灰 */
+    -webkit-font-smoothing: antialiased;          /* 字体平滑，使字体显示更清晰 */
+    text-rendering: optimizeLegibility;
+}
+
+/* --- 内容容器样式 --- */
+.container {
+    background: #ffffff;                          /* 内容容器背景颜色为白色 */
+    padding: 30px;                                  /* 内容容器内边距为 30px */
+    border-radius: 8px;                             /* 内容容器边框圆角为 8px */
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.1);    /* 内容容器阴影效果 */
+}
+
+h1 {
+    font-family: var(--font-sans-chinese);        /* 中文字体 */
+    letter-spacing: 1px;                          /* 字间距1px */
+    text-align: center;                           /* 居中显示 */
+    font-size: 2.3rem;                            /* 2倍基础字号 */
+    margin: 0 0 30px;                             /* 标题上下外边距为 0 和 30px */
+    position: relative;                           /* 相对定位 */
+}
+
+h1::after {
+    content: '';                                  /* 伪元素内容 */
+    display: block;                               /* 块级显示 */
+    width: 80px;                                  /* 宽度60px */
+    height: 3px;                                  /* 高度3px */
+    background: #4361ee;                        /* 蓝色下划线 */
+    margin: 10px auto;                            /* 上下边距15px，左右居中 */
+    border-radius: 3px;                           /* 圆角3px */
+}
+
+/* 输入区域 */
+.input-group {
+    display: flex;                                /* 弹性布局 */
+    align-items: center;                          /* 垂直居中 */
+    gap: 10px;                                    /* 子元素间距10px */
+    margin-bottom: 30px;                          /* 下边距30px */
+}
+
+.input-group input[type="number"]::placeholder {
+    color: #999;                                  /* 提示文字颜色 */
+    opacity: 1;                                     /* 确保在Firefox中显示正常 */
+    font-size: 1rem;                                /* 稍小的字号 */
+    font-family: var(--font-sans-chinese);          /* 使用中文字体 */
+}
+
+.input-group input[type="number"],
+.input-group select.unit {
+    flex: 1;                                      /* 自动填充剩余空间 */
+    padding: 10px;                                /* 内边距10px */
+    font-size: 1.1rem;                            /* 1.1倍基础字号 */
+    border: 1px solid #e0e0e0;                  /* 浅灰色边框 */
+    border-radius: 3px;                           /* 圆角3px */
+    transition: all 0.3s ease;                    /* 过渡动画0.3秒 */
+    font-family: var(--font-mono), monospace;     /* 等宽字体 */
+    text-align: center;                           /* 内容居中 */
+}
+
+/* 单位选择框下拉选项也居中 */
+.input-group select.unit option {
+    text-align: center;                           /* 下拉选项居中 */
+}
+
+.input-group input[type="number"]:focus,
+.input-group select.unit:focus {
+    border-color: #4361ee;                        /* 聚焦时蓝色边框 */
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2); /* 蓝色阴影效果 */
+    outline: none;                                  /* 移除默认轮廓 */
+}
+
+button {
+    padding: 10px 18px;                           /* 内边距12px 20px */
+    font-size: 1.1rem;                              /* 基础字号 */
+    color: #fff;                                /* 白色文字 */
+    background-color: #4361ee;                  /* 蓝色背景 */
+    border: none;                                 /* 无边框 */
+    border-radius: 3px;                           /* 圆角3px */
+    cursor: pointer;                              /* 手型指针 */
+    transition: all 0.3s ease;                    /* 过渡动画0.3秒 */
+    font-weight: 500;                             /* 中等加粗 */
+}
+
+button:hover {
+    background-color: #3a56d4;                    /* 深蓝色悬停状态 */
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3); /* 阴影效果 */
+}
+
+button:active {
+    background-color: #2f48b9;                    /* 点击时更深的蓝色 */
+    transform: scale(0.95);                         /* 轻微缩小效果 */
+    box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3); /* 点击时阴影减弱 */
+}
+
+/* 结果展示区域 */
+.result-container {
+    font-family: var(--font-mono), monospace, var(--font-sans-chinese);
+    margin-top: 30px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    color: #121212;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.result-container h2 {
+    font-family: var(--font-sans-chinese);        /* 中文字体 */
+    font-size: 1.2rem;                            /* 1.2倍基础字号 */
+    letter-spacing: 1px;                          /* 字间距1px */
+    text-align: center;                           /* 居中显示 */
+    margin-bottom: 30px;                          /* 下边距20px */
+    font-weight: 600;                             /* 中等加粗 */
+}
+
+.result-list {
+    display: flex;                                /* 弹性布局 */
+    flex-direction: column;                       /* 垂直排列 */
+    gap: 12px;                                    /* 子元素间距12px */
+}
+
+.result-item {
+    display: flex;                                /* 弹性布局 */
+    justify-content: space-between;               /* 两端对齐 */
+    align-items: center;                          /* 垂直居中 */
+    padding: 12px 16px;                           /* 内边距12px 16px */
+    background-color: #fff;                     /* 白色背景 */
+    border: 1px solid #e0e0e0;                  /* 浅灰色边框 */
+    border-radius: 3px;                           /* 圆角3px */
+    transition: all 0.3s ease;                    /* 过渡动画0.3秒 */
+}
+
+.result-item:hover {
+    transform: translateY(-2px);                    /* 悬停上移2px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);    /* 浅阴影 */
+    border-color: #4361ee;                        /* 蓝色边框 */
+}
+
+.label {
+    font-size: 1rem;                                /* 基础字号 */
+    color: #555;                                  /* 灰色文字 */
+}
+
+.value {
+    font-size: 1.2rem;                            /* 1.1倍基础字号 */
+    font-weight: bold;                            /* 加粗显示 */
+    color: #4361ee;                             /* 蓝色文字 */
+    text-align: right;                            /* 右对齐 */
+    min-width: 120px;                             /* 最小宽度120px */
+    letter-spacing: 1px;                          /* 字间距1px */
+}
+
+/* 折叠面板样式 */
+.explanation {
+    font-family: var(--font-sans-chinese);
+    letter-spacing: 1px;                          /* 说明面板字母间距 */
+    margin-top: 20px;                             /* 缩小上外边距 */
+    font-size: 16px;                              /* 说明面板字体大小 */
+    color: #333;                                  /* 说明面板文字颜色 */
+    border-top: 1px solid #ccc;                /* 说明面板上边框样式 */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.explanation h3 {
+    color: #555;
+    margin-top: 20px;                             /* 说明面板标题上下外边距 */
+    font-size: 17px;
+    cursor: pointer;                              /* 鼠标悬停时显示手型光标 */
+    font-weight: 500;                             /* 说明面板标题字体粗细 */
+    display: flex;                                /* 使用 flex 布局 */
+    align-items: center;                          /* 垂直居中 */
+}
+
+.explanation h3 span.arrow {
+    margin-left: 8px;                                           /* 箭头左侧边距 */
+    font-size: 0.8rem;                                          /* 基础字号 */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);    /* 箭头旋转过渡 */
+}
+
+.explanation.active h3 span.arrow {
+    transform: rotate(90deg);                     /* 箭头旋转90度 */
+    font-size: 0.7rem;                            /* 基础字号 */
+}
+
+.explanation-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    margin-top: 20px;
+}
+
+.explanation.active .explanation-content {
+    max-height: 1000px;                           /* 展开时最大高度 */
+}
+
+.explanation .formula {
+    background-color: #e6f2ff;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 12px 0;
+}
+
+/* --- 页脚样式 --- */
+footer {
+    font-family: var(--font-sans-base), var(--font-sans-chinese);
+    margin: 40px auto 20px;
+    text-align: center;
+    font-size: 16px;
+    max-width: 100%;
+  }
+  
+  .footer-nav-dot {
+    display: flex;                                              /* 使用 flex 布局 */
+    gap: 80px;                                                  /* 导航点之间的间距为 80px */
+    justify-content: center;                                    /* 导航点水平居中 */
+  }
+  
+  .footer-nav-dot a {
+    text-decoration: none;                                      /* 去除链接下划线 */
+    color: #555;                                              /* 链接文字颜色 */
+    font-weight: 500;                                           /* 链接文字字体粗细 */
+    position: relative;                                         /* 相对定位，用于伪元素定位 */
+    padding-left: 20px;                                         /* 链接左侧内边距为 20px */
+  }
+  
+  .footer-nav-dot a:before {
+    content: "";                                                /* 伪元素内容为空 */
+    position: absolute;                                         /* 绝对定位，相对于父元素 */
+    left: 0;                                                    /* 左侧距离为 0 */
+    top: 50%;                                                   /* 垂直居中 */
+    transform: translateY(-50%);
+    width: 8px;                                                 /* 伪元素宽度为 8px */
+    height: 8px;                                                /* 伪元素高度为 8px */
+    background-color: #4285f4;                                /* 伪元素背景颜色为蓝色 */
+    border-radius: 50%;                                         /* 伪元素边框圆角为 50%，形成圆形 */
+    transition: all 0.3s ease;                                  /* 过渡效果，动画时间为 0.3s，缓动函数为 ease */
+  }
+  
+  .footer-nav-dot a:hover {
+    color: #4285f4;                                           /* 鼠标悬停时链接文字颜色变为蓝色 */
+  }
+  
+  .footer-nav-dot a:hover:before {
+    background-color: #ff7043;                                  /* 鼠标悬停时伪元素背景颜色变为橙色 */
+    transform: translateY(-50%) scale(1.3);                       /* 鼠标悬停时伪元素放大 1.3 倍 */
+  }
+
+  .footer-copyright {
+    display: flex;
+    justify-content: center;
+    color: #555;
+  }
+  
+  .footer-copyright a {
+    text-decoration: none;                                      /* 去除链接下划线 */
+    color: #555;                                              /* 链接文字颜色 */
+  }
+  
+  .footer-copyright a:hover {
+    color: #4285f4;                                            /* 鼠标悬停时链接文字颜色变为蓝色 */
+  }
+  
+  .footer-copyright span:not(:last-child)::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    background-color: #555;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative; 
+    bottom: 1px;
+  }

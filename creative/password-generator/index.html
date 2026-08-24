@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="强大、安全、卓越、可爱的密码生成器">
+    <title>密码生成器</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="password-generator.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>密码生成器</h1>
+
+      <div class="input-group">
+        <label for="length">密码长度 ( 4 - 2048 ) :</label>
+        <div class="number-input-container">
+          <button class="number-btn decrement-btn" id="decrease-length"
+            aria-label="减少长度"></button>
+          <input type="number" class="number-input" inputmode="numeric"
+            id="length" min="4" max="2048" value="12" step="1">
+          <button class="number-btn increment-btn" id="increase-length"
+            aria-label="增加长度"></button>
+        </div>
+        <span id="lengthError" class="error"></span>
+      </div>
+
+      <div class="options">
+        <label><input type="checkbox" id="containsDigit" checked />数字</label>
+        <label><input type="checkbox" id="containsSymbol" checked />符号</label>
+        <label><input type="checkbox" id="containsLowercase"
+            checked />小写字母</label>
+        <label><input type="checkbox" id="containsUppercase"
+            checked />大写字母</label>
+        <label><input type="checkbox" id="pinMode" />#PIN模式</label>
+        <label><input type="checkbox" id="withNoSymbolAtEdge" />首尾非符号</label>
+        <label><input type="checkbox" id="avoidAmbiguity" />避免易混淆</label>
+        <label><input type="checkbox" id="enhanceReadability" />增强识别</label>
+      </div>
+
+      <div id="password" aria-live="polite"></div>
+
+      <div class="buttons">
+        <button id="generate-btn" class="btn btn-generate">生成密码</button>
+        <button id="copy-btn" class="btn btn-copy">复制密码</button>
+      </div>
+
+      <span id="generateError" class="error"></span>
+      <span id="copyMessage" class="error" style="display: none"></span>
+
+      <div class="instructions">
+        <div class="instructions-header collapsed"
+          onclick="toggleInstructions()">
+          功能说明
+        </div>
+        <div class="instructions-content" id="instructionsContent">
+          <ul>
+            <li>勾选需要的字符类型组合生成密码</li>
+            <li>不提供历史密码回溯功能，生成的密码请及时保存</li>
+            <li>符号类型仅提供!@#$%&.-</li>
+            <li>#PIN模式：仅生成数字密码</li>
+            <li>首尾非符号：确保密码不以符号开头或结尾</li>
+            <li>避免易混淆：密码字符排除0IloO</li>
+            <li>增强识别：适合手写记录，密码字符排除019IlqCcKkOoPpSsUuVvWwXxZz</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div style="display: inline-block;">
+        <div class="footer-nav-dot">
+          <a href="/">主页</a>
+          <a href="/123/">网址导航</a>
+          <a href="/creative/">创意工坊</a>
+        </div>
+        <div style="border-top: 1px solid #999; margin: 10px auto;"></div>
+      </div>
+      <div class="footer-copyright">
+        <span>© 2025 <a href="https://liuzhangbin.com/">Liuzh</a></span>
+        <span>Powered by KFC</span>
+      </div>
+    </footer>
+
+    <script src="password-generator.js" defer></script>
+  </body>
+
+</html>
