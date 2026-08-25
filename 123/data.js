@@ -246,11 +246,18 @@ const navData = [
     ]
   },
   {
-    title: "待定",
+    title: "车",
     links: [
       { name: "懂车帝", url: "https://www.dongchedi.com/", icon: "https://api.xinac.net/icon/?url=https://www.dongchedi.com/" },
       { name: "易车网", url: "https://www.yiche.com/", icon: "https://api.xinac.net/icon/?url=https://www.yiche.com/" },
       { name: "汽车之家", url: "https://www.autohome.com.cn/", icon: "https://api.xinac.net/icon/?url=https://www.autohome.com.cn/" },
+      { name: "摩托范", url: "https://www.58moto.com/", icon: "https://api.xinac.net/icon/?url=https://www.58moto.com/" },
+      { name: "卡车之家", url: "https://www.360che.com/", icon: "https://api.xinac.net/icon/?url=https://www.360che.com/" }
+    ]
+  },
+  {
+    title: "待定",
+    links: [
       { name: "苏州贝壳网", url: "https://su.ke.com/", icon: "https://api.xinac.net/icon/?url=https://su.ke.com/" },
       { name: "医保政策导航", url: "https://yibao.233h.com/", icon: "https://api.xinac.net/icon/?url=https://yibao.233h.com/" },
       { name: "永久基本农田信息查询", url: "https://yncx.mnr.gov.cn/yn/#/home", icon: "https://api.xinac.net/icon/?url=https://yncx.mnr.gov.cn/" }
