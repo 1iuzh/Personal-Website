@@ -10,18 +10,15 @@
   </head>
 
   <body>
-    <!-- 页首：仿 Apple 官网的极简单行导航条 -->
-    <header>
+        <header>
       <div class="header-bar">
         <a href="" class="brand-link">
           <img src="favicon.png" alt="网址导航" class="brand-logo" />
         </a>
 
-        <!-- 分类快捷导航：放进主导航条本身，横向滚动（分类较多，仿 Apple 产品页的二级导航条做法） -->
-        <nav class="header-nav" id="header-nav" aria-label="分类导航">
+                <nav class="header-nav" id="header-nav" aria-label="分类导航">
           <div class="header-nav-inner">
-            <!-- 由 JS 动态生成分类链接 -->
-          </div>
+                      </div>
         </nav>
 
         <button
@@ -39,8 +36,7 @@
         </button>
       </div>
 
-      <!-- 搜索面板：点击放大镜后从顶部展开，仿 Apple 官网的搜索交互 -->
-      <div class="search-panel" id="search-panel" hidden>
+            <div class="search-panel" id="search-panel" hidden>
         <div class="search-panel-inner">
           <div class="search-engine-tabs" role="radiogroup" aria-label="选择搜索引擎">
             <button class="search-tab active" data-engine="google" role="radio" aria-checked="true" tabindex="0">Google</button>
@@ -64,37 +60,40 @@
       </div>
     </header>
 
-    <!-- 主要内容 -->
-    <main>
+        <main>
       <div class="grid-container"></div>
     </main>
 
-    <!-- 返回顶部 -->
-    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+        <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="18 15 12 9 6 15" />
       </svg>
     </button>
 
-    <!-- 页脚：极简信息条（统计信息 + 版权 + 常用链接） -->
-    <footer>
+        <footer>
       <div class="footer-container">
-        <p class="footer-meta-line">
-          <span id="footer-cat-count">0</span> 个分类 ·
-          <span id="footer-link-count">0</span> 个网站 ·
-          已运行 <span id="footer-uptime">0 天</span>
-        </p>
+        <div class="footer-top">
+          <p class="footer-stats-primary">
+            共收集 <span id="footer-cat-count">0</span> 个分类 ·
+            <span id="footer-link-count">0</span> 个网站
+          </p>
 
-        <div class="footer-divider"></div>
-
-        <div class="footer-bottom">
-          <p class="footer-copyright"> © 2025–2026 LIUZHANGBIN. </p>
           <ul class="footer-legal-links">
             <li><a href="/">主页</a></li>
             <li><a href="/creative/">创意工坊</a></li>
             <li><a href="/readme">用户协议</a></li>
             <li><a href="/contact">与我联系</a></li>
           </ul>
+
+          <p class="footer-stats-secondary">
+            本项目已苟延残喘 <span id="footer-uptime">0 天</span>
+          </p>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+          <p class="footer-copyright">Copyright © 2025–2026 LIUZHANGBIN.</p>
         </div>
       </div>
     </footer>

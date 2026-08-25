@@ -1,9 +1,3 @@
-/**
- * 网址导航 · 页面交互脚本
- * ---------------------------------------------------------
- * 各功能模块拆成独立函数，DOMContentLoaded 里只负责按顺序调用它们，
- * 方便以后单独修改某一块而不用通读整个文件。
- */
 document.addEventListener('DOMContentLoaded', () => {
     if (!Array.isArray(navData)) {
         return;
@@ -19,10 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bindBackToTop();
 });
 
-/**
- * 渲染主体的分类卡片网格。
- * 每个分类生成一个 .grid-item，内部再逐条渲染网址链接。
- */
 function renderCategories(navData) {
     const gridContainer = document.querySelector('.grid-container');
     if (!gridContainer) return;
@@ -52,9 +42,6 @@ function renderCategories(navData) {
     gridContainer.appendChild(fragment);
 }
 
-/**
- * 根据单条网址数据，生成一个 .link-block（图标 + 链接文字）。
- */
 function createLinkBlock(link) {
     const linkBlock = document.createElement('div');
     linkBlock.className = 'link-block';
@@ -70,8 +57,6 @@ function createLinkBlock(link) {
         icon.src = link.icon;
         icon.alt = `${link.name}图标`;
         icon.loading = 'lazy';
-        // 图标来自第三方接口：不带 referrer，避免把本站地址和访问者信息
-        // 一并发给对方服务器；同时不影响图标本身的正常加载。
         icon.referrerPolicy = 'no-referrer';
         icon.onerror = () => { icon.style.display = 'none'; };
         anchor.prepend(icon);
@@ -81,9 +66,6 @@ function createLinkBlock(link) {
     return linkBlock;
 }
 
-/**
- * 更新页脚的“分类总数 / 收录网站”统计数字。
- */
 function renderFooterStats(navData) {
     const categoryCount = navData.length;
     const linkCount = navData.reduce((sum, category) => sum + category.links.length, 0);
@@ -94,9 +76,6 @@ function renderFooterStats(navData) {
     if (footerLinkCount) footerLinkCount.textContent = linkCount;
 }
 
-/**
- * 页首的分类快捷导航条：为每个分类生成一个跳转链接。
- */
 function renderHeaderNav(navData) {
     const headerNavInner = document.querySelector('.header-nav-inner');
     if (!headerNavInner) return;
@@ -110,11 +89,6 @@ function renderHeaderNav(navData) {
     });
 }
 
-/**
- * 搜索面板展开/收起：点击页首的放大镜图标，从顶部滑出搜索框
- * （仿 Apple 官网的搜索交互）。点击关闭按钮、按 Esc、或点击面板
- * 外部区域，都会收起面板。
- */
 function bindSearchToggle() {
     const toggleBtn = document.getElementById('search-toggle');
     const closeBtn = document.getElementById('search-close');
@@ -139,7 +113,6 @@ function bindSearchToggle() {
         }
     });
 
-    // 点击面板和搜索图标以外的区域时自动收起
     document.addEventListener('click', (event) => {
         if (panel.hidden) return;
         const clickedInsidePanel = panel.contains(event.target);
@@ -150,10 +123,6 @@ function bindSearchToggle() {
     });
 }
 
-/**
- * 展开搜索面板，并把焦点移到搜索输入框。
- * 单独抽成函数，方便 "/" 快捷键（见 bindSearchInput）复用。
- */
 function openSearchPanel() {
     const toggleBtn = document.getElementById('search-toggle');
     const panel = document.getElementById('search-panel');
@@ -165,9 +134,6 @@ function openSearchPanel() {
     if (searchInput) searchInput.focus();
 }
 
-/**
- * 收起搜索面板，焦点还给放大镜按钮，方便继续用键盘操作。
- */
 function closeSearchPanel() {
     const toggleBtn = document.getElementById('search-toggle');
     const panel = document.getElementById('search-panel');
@@ -180,13 +146,6 @@ function closeSearchPanel() {
     }
 }
 
-/**
- * 搜索引擎切换（Google / Bing / 百度）。
- * 这组按钮语义上是“单选一个选项”，所以用 role="radio" 而不是
- * role="tab"（tab 通常对应会切换内容面板的场景，这里并没有面板切换）。
- * 除了点击，还支持左右方向键在选项之间移动，符合 WAI-ARIA 的
- * radiogroup 键盘交互规范（俗称 roving tabindex）。
- */
 function bindSearchTabs() {
     const tabs = Array.from(document.querySelectorAll('.search-tab'));
     if (tabs.length === 0) return;
@@ -225,12 +184,8 @@ function bindSearchTabs() {
     });
 }
 
-// 当前选中的搜索引擎，供 bindSearchInput() 读取。
 let currentEngine = 'google';
 
-/**
- * 搜索框：只做“跳转到对应搜索引擎的结果页”，不过滤本地网址。
- */
 function bindSearchInput() {
     const searchInput = document.getElementById('site-search');
     if (!searchInput) return;
@@ -241,7 +196,6 @@ function bindSearchInput() {
         baidu: (q) => `https://www.baidu.com/s?wd=${encodeURIComponent(q)}`
     };
 
-    // 回车触发搜索
     searchInput.addEventListener('keydown', (event) => {
         if (event.key !== 'Enter') return;
 
@@ -252,7 +206,6 @@ function bindSearchInput() {
         window.open(buildUrl(query), '_blank');
     });
 
-    // "/" 快速打开并聚焦搜索面板（输入框本身获得焦点时不重复触发）
     document.addEventListener('keydown', (event) => {
         if (event.key === '/' && document.activeElement !== searchInput) {
             event.preventDefault();
@@ -261,11 +214,6 @@ function bindSearchInput() {
     });
 }
 
-/**
- * 页脚“运行时长”计数器：从固定的起始时间累计到现在，每秒刷新一次。
- * 这里用的是访问者本地系统时间（new Date()），不依赖任何网络时间接口，
- * 所以没有额外的网络请求或跨域问题。
- */
 function bindUptimeCounter() {
     const uptimeEl = document.getElementById('footer-uptime');
     if (!uptimeEl) return;
@@ -288,16 +236,6 @@ function bindUptimeCounter() {
     setInterval(updateUptime, 1000);
 }
 
-/**
- * “返回顶部”悬浮按钮：滚动超过 400px 时显示，点击平滑滚动回顶部。
- * scroll 事件触发频率很高，这里用 requestAnimationFrame 做一次节流——
- * 同一帧内无论 scroll 事件触发多少次，只在下一帧真正执行一次判断，
- * 避免不必要的重复计算。
- *
- * 另外，页首左上角的站点 logo（brand-link）现在 href="#"，配合
- * html { scroll-behavior: smooth; } 天然就是一个“随时可点、无需等
- * 滚动 400px 才出现”的快速回顶部入口，不需要额外写 JS。
- */
 function bindBackToTop() {
     const backToTop = document.getElementById('back-to-top');
     if (!backToTop) return;
