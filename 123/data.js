@@ -258,9 +258,9 @@ const navData = [
     ]
   },
   {
-    title: "待定",
+    title: "基准测试",
     links: [
-      { name: "CPU comparison", url: "https://www.cpu-monkey.com/en/", icon: "https://api.xinac.net/icon/?url=https://www.cpu-monkey.com/en/" },
+      { name: "CPU-Monkey", url: "https://www.cpu-monkey.com/en/", icon: "https://api.xinac.net/icon/?url=https://www.cpu-monkey.com/en/" },
       { name: "CPU-Z", url: "https://www.cpuid.com/softwares/cpu-z.html", icon: "https://api.xinac.net/icon/?url=https://www.cpuid.com/softwares/cpu-z.html" },
       { name: "GPU-Z", url: "https://www.techpowerup.com/gpuz/", icon: "https://api.xinac.net/icon/?url=https://www.techpowerup.com/gpuz/" },
       { name: "Cinebench R23", url: "https://www.maxon.net/en/downloads", icon: "https://api.xinac.net/icon/?url=https://www.maxon.net/en/downloads" },
