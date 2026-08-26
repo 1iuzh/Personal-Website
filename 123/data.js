@@ -241,6 +241,9 @@ const navData = [
     links: [
       { name: "Ventoy", url: "https://www.ventoy.net/", icon: "https://api.xinac.net/icon/?url=https://www.ventoy.net/" },
       { name: "rufus", url: "https://rufus.ie/zh/", icon: "https://api.xinac.net/icon/?url=https://rufus.ie/" },
+      { name: "Wireshark", url: "https://www.wireshark.org/", icon: "https://api.xinac.net/icon/?url=https://www.wireshark.org/" },
+      { name: "HotPE", url: "https://www.hotpe.top/", icon: "https://api.xinac.net/icon/?url=https://www.hotpe.top/" },
+      { name: "微PE", url: "https://www.wepe.com.cn/", icon: "https://api.xinac.net/icon/?url=https://www.wepe.com.cn/" },
       { name: "Intel ARK", url: "https://www.intel.cn/content/www/cn/zh/ark.html", icon: "https://api.xinac.net/icon/?url=https://www.intel.cn/" }
     ]
   },
@@ -252,6 +255,19 @@ const navData = [
       { name: "汽车之家", url: "https://www.autohome.com.cn/", icon: "https://api.xinac.net/icon/?url=https://www.autohome.com.cn/" },
       { name: "摩托范", url: "https://www.58moto.com/", icon: "https://api.xinac.net/icon/?url=https://www.58moto.com/" },
       { name: "卡车之家", url: "https://www.360che.com/", icon: "https://api.xinac.net/icon/?url=https://www.360che.com/" }
+    ]
+  },
+  {
+    title: "待定",
+    links: [
+      { name: "CPU comparison", url: "https://www.cpu-monkey.com/en/", icon: "https://api.xinac.net/icon/?url=https://www.cpu-monkey.com/en/" },
+      { name: "CPU-Z", url: "https://www.cpuid.com/softwares/cpu-z.html", icon: "https://api.xinac.net/icon/?url=https://www.cpuid.com/softwares/cpu-z.html" },
+      { name: "GPU-Z", url: "https://www.techpowerup.com/gpuz/", icon: "https://api.xinac.net/icon/?url=https://www.techpowerup.com/gpuz/" },
+      { name: "Cinebench R23", url: "https://www.maxon.net/en/downloads", icon: "https://api.xinac.net/icon/?url=https://www.maxon.net/en/downloads" },
+      { name: "HWiNFO", url: "https://www.hwinfo.com/download/", icon: "https://api.xinac.net/icon/?url=https://www.hwinfo.com/download/" },
+      { name: "AIDA64", url: "https://www.aida64.com/downloads", icon: "https://api.xinac.net/icon/?url=https://www.aida64.com/downloads" },
+      { name: "CrystalDiskInfo", url: "https://crystalmark.info/en/download/#CrystalDiskInfo", icon: "https://api.xinac.net/icon/?url=https://crystalmark.info/en/download/" },
+      { name: "CrystalDiskMark", url: "https://crystalmark.info/en/download/#CrystalDiskMark", icon: "https://api.xinac.net/icon/?url=https://crystalmark.info/en/download/" }
     ]
   },
   {
