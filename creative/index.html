@@ -1,34 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Creative · 实用工具集</title>
 
-    <meta
-        name="description"
-        content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。"
-    >
-
-    <meta
-        name="theme-color"
-        content="#f7f8fa"
-    >
+    <meta name="description" content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。" />
 
     <style>
-
         /* =========================================================
            基础
         ========================================================= */
 
         :root {
-
             --bg: #f7f8fa;
             --surface: #ffffff;
             --surface-hover: #fafafa;
@@ -44,47 +31,14 @@
 
             --header-bg: rgba(247, 248, 250, 0.82);
 
-            --shadow:
-                0 4px 20px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 
-            --shadow-hover:
-                0 16px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08);
 
             --radius: 18px;
 
             --max-width: 1120px;
         }
-
-
-        /* =========================================================
-           深色模式
-        ========================================================= */
-
-        html.dark {
-
-            --bg: #0b0d10;
-
-            --surface: #12161b;
-            --surface-hover: #171c22;
-
-            --text: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-tertiary: #6b7280;
-
-            --border: #242a32;
-
-            --accent: #60a5fa;
-            --accent-soft: #172554;
-
-            --header-bg: rgba(11, 13, 16, 0.82);
-
-            --shadow:
-                0 4px 20px rgba(0, 0, 0, 0.18);
-
-            --shadow-hover:
-                0 16px 40px rgba(0, 0, 0, 0.30);
-        }
-
 
         /* =========================================================
            Reset
@@ -96,68 +50,47 @@
             padding: 0;
         }
 
-
         html {
             scroll-behavior: smooth;
         }
 
-
         body {
-
             font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                "PingFang SC",
-                "Microsoft YaHei",
-                sans-serif;
+                -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                "Microsoft YaHei", sans-serif;
 
             background: var(--bg);
 
             color: var(--text);
 
             line-height: 1.6;
-
-            transition:
-                background-color 0.25s ease,
-                color 0.25s ease;
         }
-
 
         a {
             color: inherit;
             text-decoration: none;
         }
 
-
         button,
         input {
             font: inherit;
         }
-
 
         /* =========================================================
            Container
         ========================================================= */
 
         .container {
-
-            width:
-                min(
-                    var(--max-width),
-                    calc(100% - 40px)
-                );
+            width: min(var(--max-width), calc(100% - 40px));
 
             margin: 0 auto;
         }
-
 
         /* =========================================================
            顶部导航
         ========================================================= */
 
         .topbar {
-
             height: 72px;
 
             display: flex;
@@ -169,9 +102,7 @@
             z-index: 10;
         }
 
-
         .logo {
-
             display: flex;
             align-items: center;
 
@@ -182,9 +113,7 @@
             letter-spacing: -0.5px;
         }
 
-
         .logo-mark {
-
             width: 32px;
             height: 32px;
 
@@ -201,23 +130,18 @@
             font-weight: 800;
         }
 
-
         .logo-text {
             font-size: 16px;
         }
 
-
         .top-actions {
-
             display: flex;
             align-items: center;
 
             gap: 8px;
         }
 
-
         .icon-button {
-
             width: 38px;
             height: 38px;
 
@@ -238,48 +162,32 @@
             transition: 0.2s ease;
         }
 
-
         .icon-button:hover {
-
             color: var(--text);
 
-            border-color:
-                color-mix(
-                    in srgb,
-                    var(--border) 60%,
-                    var(--text)
-                );
+            border-color: color-mix(in srgb, var(--border) 60%, var(--text));
 
             transform: translateY(-1px);
         }
 
-
         .icon-button svg {
-
             width: 17px;
             height: 17px;
         }
-
 
         /* =========================================================
            Hero
         ========================================================= */
 
         .hero {
-
-            padding:
-                72px 0 54px;
+            padding: 72px 0 54px;
         }
 
-
         .hero-content {
-
             max-width: 760px;
         }
 
-
         .eyebrow {
-
             display: inline-flex;
 
             align-items: center;
@@ -290,8 +198,7 @@
 
             padding: 5px 10px;
 
-            border:
-                1px solid var(--border);
+            border: 1px solid var(--border);
 
             border-radius: 999px;
 
@@ -302,9 +209,7 @@
             font-size: 12px;
         }
 
-
         .eyebrow-dot {
-
             width: 6px;
             height: 6px;
 
@@ -313,14 +218,8 @@
             background: #22c55e;
         }
 
-
         .hero h1 {
-
-            font-size: clamp(
-                42px,
-                7vw,
-                72px
-            );
+            font-size: clamp(42px, 7vw, 72px);
 
             line-height: 1.02;
 
@@ -331,15 +230,11 @@
             margin-bottom: 20px;
         }
 
-
         .hero h1 span {
-
             color: var(--text-secondary);
         }
 
-
         .hero-description {
-
             max-width: 580px;
 
             color: var(--text-secondary);
@@ -351,112 +246,11 @@
             margin-bottom: 30px;
         }
 
-
-        /* =========================================================
-           搜索
-        ========================================================= */
-
-        .search-box {
-
-            position: relative;
-
-            max-width: 640px;
-        }
-
-
-        .search-box svg {
-
-            position: absolute;
-
-            left: 17px;
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            width: 19px;
-            height: 19px;
-
-            color: var(--text-tertiary);
-
-            pointer-events: none;
-        }
-
-
-        #search {
-
-            width: 100%;
-
-            height: 56px;
-
-            padding:
-                0 52px 0 48px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 14px;
-
-            outline: none;
-
-            background: var(--surface);
-
-            color: var(--text);
-
-            box-shadow: var(--shadow);
-
-            transition: 0.2s ease;
-        }
-
-
-        #search::placeholder {
-
-            color: var(--text-tertiary);
-        }
-
-
-        #search:focus {
-
-            border-color: #93c5fd;
-
-            box-shadow:
-                0 0 0 4px
-                rgba(37, 99, 235, 0.08),
-                var(--shadow);
-        }
-
-
-        .search-key {
-
-            position: absolute;
-
-            right: 13px;
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            padding: 3px 7px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 6px;
-
-            color: var(--text-tertiary);
-
-            font-size: 11px;
-
-            background: var(--surface);
-        }
-
-
         /* =========================================================
            分类
         ========================================================= */
 
         .filters {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -466,14 +260,10 @@
             margin-bottom: 38px;
         }
 
-
         .filter {
+            padding: 7px 14px;
 
-            padding:
-                7px 14px;
-
-            border:
-                1px solid var(--border);
+            border: 1px solid var(--border);
 
             border-radius: 999px;
 
@@ -488,18 +278,13 @@
             transition: 0.2s ease;
         }
 
-
         .filter:hover {
-
             color: var(--text);
 
-            border-color:
-                var(--text-tertiary);
+            border-color: var(--text-tertiary);
         }
 
-
         .filter.active {
-
             background: var(--text);
 
             color: var(--bg);
@@ -507,19 +292,15 @@
             border-color: var(--text);
         }
 
-
         /* =========================================================
            Section
         ========================================================= */
 
         .section {
-
             margin-bottom: 54px;
         }
 
-
         .section-header {
-
             display: flex;
 
             align-items: center;
@@ -528,9 +309,7 @@
             margin-bottom: 18px;
         }
 
-
         .section-title {
-
             font-size: 18px;
 
             font-weight: 700;
@@ -538,64 +317,29 @@
             letter-spacing: -0.3px;
         }
 
-
         .section-count {
-
             color: var(--text-tertiary);
 
             font-size: 12px;
         }
-
-
-        /* =========================================================
-           Bento
-        ========================================================= */
-
-        .featured-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1.35fr
-                0.85fr
-                0.85fr;
-
-            grid-template-rows:
-                210px
-                170px;
-
-            gap: 14px;
-        }
-
-
-        .featured-grid .tool-card:first-child {
-
-            grid-row:
-                span 2;
-        }
-
 
         /* =========================================================
            普通 Grid
         ========================================================= */
 
         .tools-grid {
-
             display: grid;
 
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
 
             gap: 14px;
         }
-
 
         /* =========================================================
            Tool Card
         ========================================================= */
 
         .tool-card {
-
             position: relative;
 
             display: flex;
@@ -608,8 +352,7 @@
 
             background: var(--surface);
 
-            border:
-                1px solid var(--border);
+            border: 1px solid var(--border);
 
             border-radius: var(--radius);
 
@@ -621,26 +364,15 @@
                 border-color 0.22s ease;
         }
 
-
         .tool-card:hover {
+            transform: translateY(-3px);
 
-            transform:
-                translateY(-3px);
+            box-shadow: var(--shadow-hover);
 
-            box-shadow:
-                var(--shadow-hover);
-
-            border-color:
-                color-mix(
-                    in srgb,
-                    var(--border) 60%,
-                    var(--text)
-                );
+            border-color: color-mix(in srgb, var(--border) 60%, var(--text));
         }
 
-
         .tool-card::after {
-
             content: "";
 
             position: absolute;
@@ -653,24 +385,18 @@
 
             border-radius: 50%;
 
-            background:
-                var(--accent-soft);
+            background: var(--accent-soft);
 
             opacity: 0;
 
-            transition:
-                opacity 0.25s ease;
+            transition: opacity 0.25s ease;
         }
 
-
         .tool-card:hover::after {
-
             opacity: 0.55;
         }
 
-
         .tool-icon {
-
             width: 44px;
             height: 44px;
 
@@ -682,23 +408,17 @@
 
             border-radius: 12px;
 
-            background:
-                var(--accent-soft);
+            background: var(--accent-soft);
 
-            color:
-                var(--accent);
+            color: var(--accent);
         }
 
-
         .tool-icon svg {
-
             width: 21px;
             height: 21px;
         }
 
-
         .tool-name {
-
             font-size: 16px;
 
             font-weight: 680;
@@ -706,11 +426,8 @@
             margin-bottom: 6px;
         }
 
-
         .tool-description {
-
-            color:
-                var(--text-secondary);
+            color: var(--text-secondary);
 
             font-size: 13px;
 
@@ -719,9 +436,7 @@
             max-width: 420px;
         }
 
-
         .tool-meta {
-
             display: flex;
 
             align-items: center;
@@ -733,18 +448,13 @@
             padding-top: 17px;
         }
 
-
         .tool-category {
-
-            color:
-                var(--text-tertiary);
+            color: var(--text-tertiary);
 
             font-size: 11px;
         }
 
-
         .tool-arrow {
-
             display: flex;
 
             align-items: center;
@@ -753,121 +463,50 @@
             width: 28px;
             height: 28px;
 
-            border:
-                1px solid var(--border);
+            border: 1px solid var(--border);
 
             border-radius: 8px;
 
-            color:
-                var(--text-tertiary);
+            color: var(--text-tertiary);
 
-            transition:
-                0.2s ease;
+            transition: 0.2s ease;
         }
 
-
         .tool-arrow svg {
-
             width: 14px;
             height: 14px;
         }
 
-
         .tool-card:hover .tool-arrow {
+            color: var(--accent);
 
-            color:
-                var(--accent);
+            border-color: var(--accent);
 
-            border-color:
-                var(--accent);
-
-            transform:
-                translateX(2px);
+            transform: translateX(2px);
         }
-
-
-        /* =========================================================
-           Featured Card
-        ========================================================= */
-
-        .featured-grid
-        .tool-card:first-child {
-
-            padding: 30px;
-        }
-
-
-        .featured-grid
-        .tool-card:first-child
-        .tool-icon {
-
-            width: 52px;
-            height: 52px;
-
-            border-radius: 14px;
-
-            margin-bottom: 24px;
-        }
-
-
-        .featured-grid
-        .tool-card:first-child
-        .tool-icon svg {
-
-            width: 25px;
-            height: 25px;
-        }
-
-
-        .featured-grid
-        .tool-card:first-child
-        .tool-name {
-
-            font-size: 23px;
-
-            letter-spacing: -0.5px;
-        }
-
-
-        .featured-grid
-        .tool-card:first-child
-        .tool-description {
-
-            font-size: 14px;
-
-            max-width: 400px;
-        }
-
 
         /* =========================================================
            Empty
         ========================================================= */
 
         .empty {
-
             display: none;
 
-            padding:
-                80px 20px;
+            padding: 80px 20px;
 
             text-align: center;
 
-            color:
-                var(--text-secondary);
+            color: var(--text-secondary);
         }
 
-
         .empty svg {
-
             width: 30px;
             height: 30px;
 
             margin-bottom: 12px;
         }
 
-
         .empty-title {
-
             color: var(--text);
 
             font-size: 15px;
@@ -875,632 +514,376 @@
             margin-bottom: 4px;
         }
 
-
         .empty-description {
-
             font-size: 12px;
         }
-
 
         /* =========================================================
            Footer
         ========================================================= */
 
         footer {
+            margin-top: 96px;
 
-            margin-top: 80px;
+            padding-top: 0;
 
-            padding:
-                28px 0 38px;
+            color: var(--text-secondary);
 
-            border-top:
-                1px solid var(--border);
-
-            color:
-                var(--text-tertiary);
-
-            font-size: 12px;
+            font-size: 13px;
         }
 
+        .footer-main {
+            display: flex;
 
-        .footer-inner {
+            align-items: flex-start;
+            justify-content: space-between;
 
+            gap: 48px;
+
+            padding: 38px 0 34px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-brand {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .footer-logo {
             display: flex;
 
             align-items: center;
 
-            justify-content: space-between;
+            gap: 10px;
+
+            color: var(--text);
+
+            font-weight: 700;
+
+            letter-spacing: -0.3px;
         }
 
+        .footer-logo .logo-mark {
+            width: 28px;
+            height: 28px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+        }
+
+        .footer-tagline {
+            margin: 0;
+
+            max-width: 330px;
+
+            color: var(--text-tertiary);
+
+            font-size: 12.5px;
+
+            line-height: 1.75;
+        }
+
+        .footer-nav {
+            display: flex;
+
+            align-items: center;
+
+            gap: 24px;
+
+            padding-top: 5px;
+        }
 
         .footer-link {
+            color: var(--text-tertiary);
 
-            transition:
-                color 0.2s ease;
+            transition: color 0.2s ease;
         }
-
 
         .footer-link:hover {
-
-            color:
-                var(--text);
+            color: var(--text);
         }
 
+        .footer-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 18px 0 34px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--text-tertiary);
+
+            font-size: 11.5px;
+        }
+
+        .footer-note {
+            font-style: italic;
+
+            letter-spacing: 0.1px;
+
+            text-align: right;
+        }
+
+        @media (max-width: 700px) {
+            .footer-main {
+                flex-direction: column;
+
+                gap: 24px;
+
+                padding: 32px 0 28px;
+            }
+
+            .footer-nav {
+                flex-wrap: wrap;
+
+                gap: 12px 20px;
+
+                padding-top: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 8px;
+
+                padding-bottom: 28px;
+            }
+
+            .footer-note {
+                text-align: left;
+            }
+        }
 
         /* =========================================================
            动画
         ========================================================= */
 
         @keyframes cardIn {
-
             from {
-
                 opacity: 0;
 
-                transform:
-                    translateY(8px);
+                transform: translateY(8px);
             }
 
             to {
-
                 opacity: 1;
 
-                transform:
-                    translateY(0);
+                transform: translateY(0);
             }
         }
 
-
         .tool-card {
-
-            animation:
-                cardIn 0.35s ease both;
+            animation: cardIn 0.35s ease both;
         }
-
 
         /* =========================================================
            平板
         ========================================================= */
 
         @media (max-width: 900px) {
-
-            .featured-grid {
-
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                grid-template-rows:
-                    auto;
-            }
-
-
-            .featured-grid
-            .tool-card:first-child {
-
-                grid-row:
-                    auto;
-
-                grid-column:
-                    span 2;
-            }
-
-
             .tools-grid {
-
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
-
 
         /* =========================================================
            手机
         ========================================================= */
 
         @media (max-width: 600px) {
-
             .container {
-
-                width:
-                    calc(100% - 28px);
+                width: calc(100% - 28px);
             }
 
-
             .topbar {
-
                 height: 62px;
             }
 
-
             .hero {
-
-                padding:
-                    52px 0 38px;
+                padding: 52px 0 38px;
             }
 
-
             .hero h1 {
-
                 font-size: 45px;
 
                 letter-spacing: -2.5px;
             }
 
-
             .hero-description {
-
                 font-size: 14px;
             }
 
-
-            .search-key {
-
-                display: none;
-            }
-
-
-            .featured-grid {
-
-                display: grid;
-
-                grid-template-columns: 1fr;
-
-                grid-template-rows: auto;
-
-                gap: 12px;
-            }
-
-
-            .featured-grid
-            .tool-card:first-child {
-
-                grid-column: auto;
-            }
-
-
             .tools-grid {
-
                 grid-template-columns: 1fr;
 
                 gap: 12px;
             }
-
 
             .tool-card {
-
                 min-height: 170px;
             }
-
-
-            .featured-grid
-            .tool-card:first-child {
-
-                min-height: 210px;
-
-                padding: 25px;
-            }
-
-
-            .footer-inner {
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 7px;
-            }
         }
-
     </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================================================
+    <!-- =========================================================
      顶部
 ========================================================= -->
 
-<div class="container">
+    <div class="container">
+        <header class="topbar">
+            <a href="/creative/" class="logo">
+                <div class="logo-mark">C</div>
 
-    <header class="topbar">
-
-        <a
-            href="/creative/"
-            class="logo"
-        >
-
-            <div class="logo-mark">
-                C
-            </div>
-
-            <div class="logo-text">
-                Creative
-            </div>
-
-        </a>
-
-
-        <div class="top-actions">
-
-            <button
-                class="icon-button"
-                id="themeToggle"
-                aria-label="切换主题"
-                title="切换主题"
-            >
-
-                <svg
-                    id="themeIcon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="4"
-                    />
-
-                    <path
-                        d="
-                            M12 2v2
-                            M12 20v2
-                            M4.93 4.93l1.41 1.41
-                            M17.66 17.66l1.41 1.41
-                            M2 12h2
-                            M20 12h2
-                            M4.93 19.07l1.41-1.41
-                            M17.66 6.34l1.41-1.41
-                        "
-                    />
-                </svg>
-
-            </button>
-
-
-            <a
-                class="icon-button"
-                href="https://liuzhangbin.com/"
-                target="_blank"
-                rel="noopener"
-                aria-label="返回主页"
-                title="返回主页"
-            >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-
-                    <path
-                        d="
-                            M3 10.5
-                            L12 3
-                            L21 10.5
-                        "
-                    />
-
-                    <path
-                        d="
-                            M5 9.5
-                            V21
-                            H19
-                            V9.5
-                        "
-                    />
-
-                    <path
-                        d="
-                            M9 21
-                            V14
-                            H15
-                            V21
-                        "
-                    />
-
-                </svg>
-
+                <div class="logo-text">Creative</div>
             </a>
 
-        </div>
+            <div class="top-actions"></div>
+        </header>
+    </div>
 
-    </header>
-
-</div>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      Hero
 ========================================================= -->
 
-<main>
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
 
-    <div class="container">
+                        Personal Tool Collection
+                    </div>
 
-        <section class="hero">
+                    <h1>
+                        Creative
+                        <span>Tools.</span>
+                    </h1>
 
-            <div class="hero-content">
-
-                <div class="eyebrow">
-
-                    <span class="eyebrow-dot"></span>
-
-                    Personal Tool Collection
-
+                    <p class="hero-description">
+                        一些自己做的、常用的实用工具。 简单、直接，不需要复杂的操作。
+                    </p>
                 </div>
+            </section>
 
-
-                <h1>
-
-                    Creative
-                    <span>Tools.</span>
-
-                </h1>
-
-
-                <p class="hero-description">
-
-                    一些自己做的、常用的实用工具。
-                    简单、直接，不需要复杂的操作。
-
-                </p>
-
-
-                <div class="search-box">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-
-                        <circle
-                            cx="11"
-                            cy="11"
-                            r="7"
-                        />
-
-                        <path
-                            d="m20 20-4-4"
-                        />
-
-                    </svg>
-
-
-                    <input
-                        id="search"
-                        type="search"
-                        placeholder="搜索工具……"
-                        autocomplete="off"
-                    >
-
-
-                    <span class="search-key">
-                        /
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
+            <!-- =====================================================
              分类
         ====================================================== -->
 
-        <nav class="filters">
+            <nav class="filters">
+                <button class="filter active" data-category="all">全部</button>
 
-            <button
-                class="filter active"
-                data-category="all"
-            >
-                全部
-            </button>
+                <button class="filter" data-category="system">系统与硬件</button>
 
+                <button class="filter" data-category="network">网络工具</button>
 
-            <button
-                class="filter"
-                data-category="system"
-            >
-                系统与硬件
-            </button>
+                <button class="filter" data-category="security">安全工具</button>
 
+                <button class="filter" data-category="development">开发工具</button>
 
-            <button
-                class="filter"
-                data-category="network"
-            >
-                网络工具
-            </button>
+                <button class="filter" data-category="text">文本工具</button>
+            </nav>
 
-
-            <button
-                class="filter"
-                data-category="security"
-            >
-                安全工具
-            </button>
-
-
-            <button
-                class="filter"
-                data-category="development"
-            >
-                开发工具
-            </button>
-
-
-            <button
-                class="filter"
-                data-category="text"
-            >
-                文本工具
-            </button>
-
-        </nav>
-
-
-
-        <!-- =====================================================
-             精选工具
-        ====================================================== -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <h2 class="section-title">
-                    精选工具
-                </h2>
-
-                <span class="section-count">
-                    常用工具
-                </span>
-
-            </div>
-
-
-            <div
-                class="featured-grid"
-                id="featuredGrid"
-            >
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
+            <!-- =====================================================
              全部工具
         ====================================================== -->
 
-        <section class="section">
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">全部工具</h2>
 
-            <div class="section-header">
-
-                <h2 class="section-title">
-                    全部工具
-                </h2>
-
-                <span
-                    class="section-count"
-                    id="toolCount"
-                >
-                </span>
-
-            </div>
-
-
-            <div
-                class="tools-grid"
-                id="toolsGrid"
-            >
-            </div>
-
-
-            <div
-                class="empty"
-                id="empty"
-            >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-
-                    <circle
-                        cx="11"
-                        cy="11"
-                        r="7"
-                    />
-
-                    <path
-                        d="m20 20-4-4"
-                    />
-
-                </svg>
-
-
-                <div class="empty-title">
-                    没有找到相关工具
+                    <span class="section-count" id="toolCount"> </span>
                 </div>
 
+                <div class="tools-grid" id="toolsGrid"></div>
 
-                <div class="empty-description">
-                    换一个关键词试试看
+                <div class="empty" id="empty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7" />
+
+                        <path d="m20 20-4-4" />
+                    </svg>
+
+                    <div class="empty-title">没有找到相关工具</div>
+
+                    <div class="empty-description">换一个关键词试试看</div>
                 </div>
+            </section>
+        </div>
+    </main>
 
-            </div>
-
-        </section>
-
-    </div>
-
-</main>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      Footer
 ========================================================= -->
 
-<footer>
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-mark">C</div>
 
-    <div class="container">
+                        <span> Creative </span>
+                    </div>
 
-        <div class="footer-inner">
+                    <p class="footer-tagline">
+                        一些自己做的、常用的实用工具。
+                        <br />
+                        简单、直接，持续更新。
+                    </p>
+                </div>
 
-            <span>
-                Creative · liuzhangbin.com
-            </span>
+                <nav class="footer-nav" aria-label="页脚导航">
 
+                    <a class="footer-link" href="/">
+                        首页
+                    </a>
 
-            <a
-                class="footer-link"
-                href="https://liuzhangbin.com/"
-                target="_blank"
-                rel="noopener"
-            >
-                liuzhangbin.com
-            </a>
+                    <a class="footer-link" href="/123/">
+                        网址导航
+                    </a>
 
+                    <a class="footer-link" href="/terms/">
+                        用户协议
+                    </a>
+
+                    <a class="footer-link" href="/contact/">
+                        与我联系
+                    </a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span> © 2022–2026 liuzhangbin.com </span>
+
+                <span class="footer-note">
+                    Made with curiosity · Built with care · Just for myself
+                </span>
+            </div>
         </div>
+    </footer>
 
-    </div>
+    <script>
+        /* =============================================================
+     SVG 图标
+  ============================================================= */
 
-</footer>
-
-
-
-<script>
-
-/* =============================================================
-   SVG 图标
-============================================================= */
-
-const icons = {
-
-    key: `
+        const icons = {
+            key: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1519,8 +902,7 @@ const icons = {
         </svg>
     `,
 
-
-    globe: `
+            globe: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1547,8 +929,7 @@ const icons = {
         </svg>
     `,
 
-
-    package: `
+            package: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1573,8 +954,7 @@ const icons = {
         </svg>
     `,
 
-
-    drive: `
+            drive: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1599,8 +979,7 @@ const icons = {
         </svg>
     `,
 
-
-    hash: `
+            hash: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1619,8 +998,7 @@ const icons = {
         </svg>
     `,
 
-
-    arrow: `
+            arrow: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1633,188 +1011,135 @@ const icons = {
             <path d="m13 6 6 6-6 6"/>
 
         </svg>
-    `
+    `,
+        };
 
-};
+        /* =============================================================
+     工具数据
+     ============================================================= */
 
+        const tools = [
+            {
+                name: "密码生成器",
 
+                description: "生成随机、安全的密码，支持自定义长度与字符类型。",
 
-/* =============================================================
-   工具数据
-   ============================================================= */
+                category: "security",
 
-const tools = [
+                categoryName: "安全工具",
 
-    {
-        name: "密码生成器",
+                icon: "key",
 
-        description:
-            "生成随机、安全的密码，支持自定义长度与字符类型。",
+                url: "/creative/password-generator/",
 
-        category: "security",
+                tags: "密码 password 安全 随机",
 
-        categoryName: "安全工具",
+                featured: true,
+            },
 
-        icon: "key",
+            {
+                name: "高级 DNS 工具",
 
-        url:
-            "/creative/password-generator/",
+                description: "查询 DNS 记录、解析结果以及域名相关网络信息。",
 
-        tags:
-            "密码 password 安全 随机",
+                category: "network",
 
-        featured: true
-    },
+                categoryName: "网络工具",
 
+                icon: "globe",
 
-    {
-        name: "高级 DNS 工具",
+                url: "/creative/nslookup/",
 
-        description:
-            "查询 DNS 记录、解析结果以及域名相关网络信息。",
+                tags: "DNS 域名 网络 nslookup",
 
-        category: "network",
+                featured: true,
+            },
 
-        categoryName: "网络工具",
+            {
+                name: "硬盘容量换算器",
 
-        icon: "globe",
+                description: "快速进行 GB、TB、等存储容量单位换算。",
 
-        url:
-            "/creative/nslookup/",
+                category: "system",
 
-        tags:
-            "DNS 域名 网络 nslookup",
+                categoryName: "系统与硬件",
 
-        featured: true
-    },
+                icon: "drive",
 
+                url: "/creative/hdcalc/",
 
-    {
-        name: "硬盘容量换算器",
+                tags: "硬盘 SSD HDD 容量 GB TB GB",
 
-        description:
-            "快速进行 GB、TB、GiB、TiB 等存储容量单位换算。",
+                featured: true,
+            },
 
-        category: "system",
+            {
+                name: "常用软件清单",
 
-        categoryName: "系统与硬件",
+                description: "Windows 装机、重装系统时的常用软件参考。",
 
-        icon: "drive",
+                category: "system",
 
-        url:
-            "/creative/hdcalc/",
+                categoryName: "系统与硬件",
 
-        tags:
-            "硬盘 SSD HDD 容量 GB TB GiB",
+                icon: "package",
 
-        featured: true
-    },
+                url: "/creative/newbuild/",
 
+                tags: "Windows 软件 装机 重装系统",
 
-    {
-        name: "常用软件清单",
+                featured: true,
+            },
 
-        description:
-            "Windows 装机、重装系统时的常用软件参考。",
+            {
+                name: "Hash Checker",
 
-        category: "system",
+                description: "计算并校验文件的 MD5、SHA-1、SHA-256 等哈希值。",
 
-        categoryName: "系统与硬件",
+                category: "security",
 
-        icon: "package",
+                categoryName: "安全工具",
 
-        url:
-            "/creative/newbuild/",
+                icon: "hash",
 
-        tags:
-            "Windows 软件 装机 重装系统",
+                url: "/creative/hash-checker/",
 
-        featured: true
-    },
+                tags: "Hash MD5 SHA1 SHA256 文件校验",
 
+                featured: false,
+            },
+        ];
 
-    {
-        name: "Hash Checker",
+        /* =============================================================
+     DOM
+     ============================================================= */
 
-        description:
-            "计算并校验文件的 MD5、SHA-1、SHA-256 等哈希值。",
+        const toolsGrid = document.getElementById("toolsGrid");
 
-        category: "security",
+        const empty = document.getElementById("empty");
 
-        categoryName: "安全工具",
+        const toolCount = document.getElementById("toolCount");
 
-        icon: "hash",
+        const filters = document.querySelectorAll(".filter");
 
-        url:
-            "/creative/hash-checker/",
+        /* =============================================================
+     状态
+     ============================================================= */
 
-        tags:
-            "Hash MD5 SHA1 SHA256 文件校验",
+        let currentCategory = "all";
 
-        featured: false
-    }
+        /* =============================================================
+     创建卡片
+     ============================================================= */
 
-];
+        function createToolCard(tool) {
+            const card = document.createElement("a");
 
+            card.className = "tool-card";
 
+            card.href = tool.url;
 
-/* =============================================================
-   DOM
-   ============================================================= */
-
-const searchInput =
-    document.getElementById("search");
-
-const featuredGrid =
-    document.getElementById("featuredGrid");
-
-const toolsGrid =
-    document.getElementById("toolsGrid");
-
-const empty =
-    document.getElementById("empty");
-
-const toolCount =
-    document.getElementById("toolCount");
-
-const filters =
-    document.querySelectorAll(".filter");
-
-const themeToggle =
-    document.getElementById("themeToggle");
-
-const themeIcon =
-    document.getElementById("themeIcon");
-
-
-
-/* =============================================================
-   状态
-   ============================================================= */
-
-let currentCategory = "all";
-
-let currentKeyword = "";
-
-
-
-/* =============================================================
-   创建卡片
-   ============================================================= */
-
-function createToolCard(tool) {
-
-    const card =
-        document.createElement("a");
-
-    card.className =
-        "tool-card";
-
-    card.href =
-        tool.url;
-
-
-    card.innerHTML = `
+            card.innerHTML = `
 
         <div class="tool-icon">
 
@@ -1856,336 +1181,93 @@ function createToolCard(tool) {
 
     `;
 
-
-    return card;
-}
-
-
-
-/* =============================================================
-   筛选
-   ============================================================= */
-
-function filterTools() {
-
-    return tools.filter(tool => {
-
-        const categoryMatch =
-
-            currentCategory === "all" ||
-
-            tool.category ===
-                currentCategory;
-
-
-        const searchText = (
-
-            tool.name +
-            " " +
-            tool.description +
-            " " +
-            tool.tags
-
-        ).toLowerCase();
-
-
-        const keywordMatch =
-
-            !currentKeyword ||
-
-            searchText.includes(
-                currentKeyword.toLowerCase()
-            );
-
-
-        return (
-            categoryMatch &&
-            keywordMatch
-        );
-
-    });
-
-}
-
-
-
-/* =============================================================
-   渲染
-   ============================================================= */
-
-function render() {
-
-    const filtered =
-        filterTools();
-
-
-    /* ---------------------------------------------------------
-       全部工具
-    --------------------------------------------------------- */
-
-    toolsGrid.innerHTML = "";
-
-
-    filtered.forEach(tool => {
-
-        toolsGrid.appendChild(
-            createToolCard(tool)
-        );
-
-    });
-
-
-    toolCount.textContent =
-        `${filtered.length} 个工具`;
-
-
-    /* ---------------------------------------------------------
-       精选工具
-    --------------------------------------------------------- */
-
-    featuredGrid.innerHTML = "";
-
-
-    const featured =
-        filtered.filter(
-            tool => tool.featured
-        );
-
-
-    featured.forEach(tool => {
-
-        featuredGrid.appendChild(
-            createToolCard(tool)
-        );
-
-    });
-
-
-    /*
-     * 没有搜索结果
-     */
-
-    if (filtered.length === 0) {
-
-        empty.style.display =
-            "block";
-
-    } else {
-
-        empty.style.display =
-            "none";
-
-    }
-
-}
-
-
-
-/* =============================================================
-   搜索
-   ============================================================= */
-
-searchInput.addEventListener(
-    "input",
-    event => {
-
-        currentKeyword =
-            event.target.value.trim();
-
-        render();
-
-    }
-);
-
-
-
-/* =============================================================
-   分类
-   ============================================================= */
-
-filters.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            filters.forEach(
-                item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            currentCategory =
-                button.dataset.category;
-
-
-            render();
-
-        }
-    );
-
-});
-
-
-
-/* =============================================================
-   快捷键 /
-   ============================================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "/" &&
-            document.activeElement !== searchInput
-        ) {
-
-            event.preventDefault();
-
-            searchInput.focus();
-
+            return card;
         }
 
+        /* =============================================================
+     筛选
+     ============================================================= */
 
-        if (
-            event.key === "Escape"
-        ) {
-
-            searchInput.value = "";
-
-            currentKeyword = "";
-
-            searchInput.blur();
-
-            render();
-
+        function filterTools() {
+            return tools.filter(
+                (tool) =>
+                    currentCategory === "all" || tool.category === currentCategory,
+            );
         }
 
-    }
-);
+        /* =============================================================
+     渲染
+     ============================================================= */
 
+        function render() {
+            const filtered = filterTools();
 
+            /* ---------------------------------------------------------
+           全部工具
+        --------------------------------------------------------- */
 
-/* =============================================================
-   深色模式
-   ============================================================= */
+            toolsGrid.innerHTML = "";
 
-function updateThemeIcon() {
+            filtered.forEach((tool) => {
+                toolsGrid.appendChild(createToolCard(tool));
+            });
 
-    const dark =
-        document.documentElement
-            .classList.contains("dark");
+            toolCount.textContent = `${filtered.length} 个工具`;
 
+            /*
+             * 没有匹配结果
+             */
 
-    if (dark) {
+            if (filtered.length === 0) {
+                empty.style.display = "block";
+            } else {
+                empty.style.display = "none";
+            }
+        }
 
-        themeIcon.innerHTML = `
+        /* =============================================================
+     初始化分类状态
+     ============================================================= */
 
-            <path
-                d="
-                    M21 12.8
-                    A8.5 8.5 0 1 1
-                    11.2 3
-                    A6.7 6.7 0 0 0
-                    21 12.8z
-                "
-            />
+        function initFilters() {
+            // 默认选中"全部"
+            currentCategory = "all";
+            
+            filters.forEach((btn) => {
+                const isActive = btn.dataset.category === currentCategory;
+                btn.classList.toggle("active", isActive);
+            });
+        }
 
-        `;
+        /* =============================================================
+     分类点击事件
+     ============================================================= */
 
-    } else {
+        filters.forEach((button) => {
+            button.addEventListener("click", () => {
+                filters.forEach((item) => {
+                    item.classList.remove("active");
+                });
 
-        themeIcon.innerHTML = `
+                button.classList.add("active");
 
-            <circle
-                cx="12"
-                cy="12"
-                r="4"
-            />
+                currentCategory = button.dataset.category;
 
-            <path
-                d="
-                    M12 2v2
-                    M12 20v2
-                    M4.93 4.93l1.41 1.41
-                    M17.66 17.66l1.41 1.41
-                    M2 12h2
-                    M20 12h2
-                    M4.93 19.07l1.41-1.41
-                    M17.66 6.34l1.41-1.41
-                "
-            />
+                render();
+            });
+        });
 
-        `;
+        /* =============================================================
+     深色模式（已移除相关代码，保持简洁）
+     ============================================================= */
 
-    }
+        /* =============================================================
+     初始化
+     ============================================================= */
 
-}
-
-
-themeToggle.addEventListener(
-    "click",
-    () => {
-
-        const dark =
-            document.documentElement
-                .classList.toggle("dark");
-
-
-        localStorage.setItem(
-            "creative-theme",
-            dark ? "dark" : "light"
-        );
-
-
-        updateThemeIcon();
-
-    }
-);
-
-
-
-/* =============================================================
-   初始化主题
-   ============================================================= */
-
-const savedTheme =
-    localStorage.getItem(
-        "creative-theme"
-    );
-
-
-if (savedTheme === "dark") {
-
-    document.documentElement
-        .classList.add("dark");
-
-}
-
-
-updateThemeIcon();
-
-
-
-/* =============================================================
-   初始化
-   ============================================================= */
-
-render();
-
-</script>
-
-
+        initFilters();  // 设置默认分类状态
+        render();       // 渲染工具列表
+    </script>
 </body>
+
 </html>
