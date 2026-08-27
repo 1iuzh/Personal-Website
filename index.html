@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.8" />
   <meta name="description" content="个人空间，记录工具、创意、技术与生活。" />
   <meta name="theme-color" content="#dfeee4" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -187,6 +187,7 @@
       box-shadow: 0 0 0 5px rgba(102, 143, 114, 0.13);
     }
 
+    /* ---- 桌面端导航链接 ---- */
     .nav-links {
       display: flex;
 
@@ -229,6 +230,130 @@
 
     .nav-links a:hover::after {
       width: 100%;
+    }
+
+    /* ---- 汉堡菜单按钮（桌面端隐藏） ---- */
+    .menu-toggle {
+      display: none;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 5px;
+
+      width: 42px;
+      height: 42px;
+
+      padding: 0;
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.55);
+
+      backdrop-filter: blur(10px);
+
+      cursor: pointer;
+
+      -webkit-tap-highlight-color: transparent;
+
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.85);
+
+      box-shadow: 0 4px 14px rgba(47, 74, 58, 0.1);
+    }
+
+    .menu-toggle span {
+      display: block;
+
+      width: 20px;
+      height: 2px;
+
+      border-radius: 2px;
+
+      background: var(--green-dark);
+
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ---- 移动端下拉菜单 ---- */
+    .mobile-nav {
+      display: none;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+      margin-top: 14px;
+
+      padding: 14px 18px;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-medium);
+
+      background: rgba(255, 255, 255, 0.72);
+
+      backdrop-filter: blur(16px);
+
+      box-shadow: var(--shadow);
+
+      opacity: 0;
+
+      transform: translateY(-8px);
+
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .mobile-nav a {
+      display: block;
+
+      padding: 10px 14px;
+
+      border-radius: 12px;
+
+      color: var(--text-soft);
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 500;
+
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(102, 143, 114, 0.1);
+
+      color: var(--green-dark);
     }
 
     /* ==================================================
@@ -836,10 +961,17 @@
 
       .navbar {
         margin-bottom: 28px;
+
+        flex-wrap: wrap;
       }
 
+      /* 隐藏桌面端横向导航，显示汉堡按钮 */
       .nav-links {
         display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
       }
 
       .hero {
@@ -1026,6 +1158,7 @@
         LIUZHANGBIN
       </a>
 
+      <!-- 桌面端导航 -->
       <div class="nav-links">
         <a href="123/"> 网址导航 </a>
 
@@ -1033,7 +1166,21 @@
 
         <a href="contact/"> 与我联系 </a>
       </div>
+
+      <!-- 移动端汉堡按钮 -->
+      <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
+
+    <!-- 移动端下拉菜单 -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="123/">网址导航</a>
+      <a href="creative/">创意工坊</a>
+      <a href="contact/">与我联系</a>
+    </div>
 
     <!-- ============================================
              Hero
@@ -1145,6 +1292,39 @@
       </div>
     </footer>
   </main>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+
+      if (!toggle || !mobileNav) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = mobileNav.classList.toggle('open');
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // 点击菜单项后自动收起
+      mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileNav.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // 点击页面其他地方收起菜单
+      document.addEventListener('click', function (e) {
+        if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
