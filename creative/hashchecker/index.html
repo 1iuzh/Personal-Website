@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<title>Hash Checker - 文件哈希校验工具</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+        background: #f5f6f8;
+        color: #2c2c2c;
+        line-height: 1.7;
+    }
+    .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 60px 24px 80px;
+    }
+    header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    header h1 {
+        font-size: 2rem;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+    header p.subtitle {
+        color: #777;
+        font-size: 0.95rem;
+    }
+    .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        margin-bottom: 24px;
+    }
+    .card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 14px;
+        color: #1a1a1a;
+        border-left: 4px solid #3b6ef0;
+        padding-left: 10px;
+    }
+    .card p {
+        color: #444;
+        margin-bottom: 10px;
+    }
+    .features {
+        list-style: none;
+        margin-top: 12px;
+    }
+    .features li {
+        padding: 6px 0 6px 24px;
+        position: relative;
+        color: #444;
+    }
+    .features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #3b6ef0;
+        font-weight: bold;
+    }
+    .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+    }
+    .meta span {
+        background: #eef2ff;
+        color: #3b52d1;
+        font-size: 0.8rem;
+        padding: 4px 12px;
+        border-radius: 999px;
+    }
+    .download-box {
+        text-align: center;
+        padding: 40px 24px;
+    }
+    .download-btn {
+        display: inline-block;
+        background: #3b6ef0;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 14px 40px;
+        border-radius: 8px;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .download-btn:hover {
+        background: #2d57c9;
+        transform: translateY(-1px);
+    }
+    .download-note {
+        margin-top: 14px;
+        font-size: 0.85rem;
+        color: #999;
+    }
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.85rem;
+        color: #999;
+    }
+    footer a {
+        color: #3b6ef0;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <h1>Hash Checker</h1>
+        <p class="subtitle">简单、直观的文件哈希校验工具</p>
+    </header>
+
+    <div class="card">
+        <h2>软件简介</h2>
+        <p>Hash Checker 是一款基于 Python / Tkinter 开发的 Windows 桌面小工具，用于快速计算和校验文件的哈希值，帮助你确认文件的完整性与真实性——无论是核对下载文件是否损坏，还是验证文件是否被篡改。</p>
+        <div class="meta">
+            <span>最新版本 v2.4.3_Build_20260824</span>
+            <span>作者 Liuzh</span>
+            <span>Windows 桌面应用</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>主要功能</h2>
+        <ul class="features">
+            <li>纯绿色软件，即点即用，无需安装，无系统残留</li>
+            <li>支持拖拽文件直接进行哈希计算</li>
+            <li>后台异步扫描，大文件也不卡界面</li>
+            <li>中英双语界面切换</li>
+        </ul>
+    </div>
+
+    <div class="card download-box">
+        <h2 style="border:none; padding-left:0; margin-bottom:20px;">下载 Hash Checker</h2>
+        <a class="download-btn" href="/downloads/HashChecker-v2.4.3.zip" download>
+            下载 v2.4.3（Windows）
+        </a>
+        <p class="download-note">解压后直接运行，无需额外安装依赖</p>
+    </div>
+
+    <footer>
+        <p>问题反馈或建议，欢迎<a href="/contact/">与我联系</a></p>
+    </footer>
+
+</div>
+</body>
+</html>
