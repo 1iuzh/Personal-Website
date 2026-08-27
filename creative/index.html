@@ -1,757 +1,759 @@
 <!doctype html>
 <html lang="zh-CN">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Creative · 实用工具集</title>
 
-    <meta name="description" content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。" />
+    <meta
+      name="description"
+      content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。"
+    />
 
     <style>
-        /* =========================================================
+      /* =========================================================
            基础
         ========================================================= */
 
-        :root {
-            --bg: #f7f8fa;
-            --surface: #ffffff;
-            --surface-hover: #fafafa;
+      :root {
+        --bg: #f7f8fa;
+        --surface: #ffffff;
+        --surface-hover: #fafafa;
 
-            --text: #111827;
-            --text-secondary: #6b7280;
-            --text-tertiary: #9ca3af;
+        --text: #111827;
+        --text-secondary: #6b7280;
+        --text-tertiary: #9ca3af;
 
-            --border: #e5e7eb;
+        --border: #e5e7eb;
 
-            --accent: #2563eb;
-            --accent-soft: #eff6ff;
+        --accent: #2563eb;
+        --accent-soft: #eff6ff;
 
-            --header-bg: rgba(247, 248, 250, 0.82);
+        --header-bg: rgba(247, 248, 250, 0.82);
 
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 
-            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08);
 
-            --radius: 18px;
+        --radius: 18px;
 
-            --max-width: 1120px;
-        }
+        --max-width: 1120px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            Reset
         ========================================================= */
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        body {
-            font-family:
-                -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-                "Microsoft YaHei", sans-serif;
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
 
-            background: var(--bg);
+        background: var(--bg);
 
-            color: var(--text);
+        color: var(--text);
 
-            line-height: 1.6;
-        }
+        line-height: 1.6;
+      }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-        button,
-        input {
-            font: inherit;
-        }
+      button,
+      input {
+        font: inherit;
+      }
 
-        /* =========================================================
+      /* =========================================================
            Container
         ========================================================= */
 
-        .container {
-            width: min(var(--max-width), calc(100% - 40px));
+      .container {
+        width: min(var(--max-width), calc(100% - 40px));
 
-            margin: 0 auto;
-        }
+        margin: 0 auto;
+      }
 
-        /* =========================================================
+      /* =========================================================
            顶部导航
         ========================================================= */
 
-        .topbar {
-            height: 72px;
+      .topbar {
+        height: 72px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-            position: relative;
+        position: relative;
 
-            z-index: 10;
-        }
+        z-index: 10;
+      }
 
-        .logo {
-            display: flex;
-            align-items: center;
+      .logo {
+        display: flex;
+        align-items: center;
 
-            gap: 10px;
+        gap: 10px;
 
-            font-weight: 700;
+        font-weight: 700;
 
-            letter-spacing: -0.5px;
-        }
+        letter-spacing: -0.5px;
+      }
 
-        .logo-mark {
-            width: 32px;
-            height: 32px;
+      .logo-mark {
+        width: 32px;
+        height: 32px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-            border-radius: 9px;
+        border-radius: 9px;
 
-            background: var(--text);
-            color: var(--bg);
+        background: var(--text);
+        color: var(--bg);
 
-            font-size: 14px;
-            font-weight: 800;
-        }
+        font-size: 14px;
+        font-weight: 800;
+      }
 
-        .logo-text {
-            font-size: 16px;
-        }
+      .logo-text {
+        font-size: 16px;
+      }
 
-        .top-actions {
-            display: flex;
-            align-items: center;
+      .top-actions {
+        display: flex;
+        align-items: center;
 
-            gap: 8px;
-        }
+        gap: 8px;
+      }
 
-        .icon-button {
-            width: 38px;
-            height: 38px;
+      .icon-button {
+        width: 38px;
+        height: 38px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-            border: 1px solid var(--border);
+        border: 1px solid var(--border);
 
-            border-radius: 10px;
+        border-radius: 10px;
 
-            background: var(--surface);
+        background: var(--surface);
 
-            color: var(--text-secondary);
+        color: var(--text-secondary);
 
-            cursor: pointer;
+        cursor: pointer;
 
-            transition: 0.2s ease;
-        }
+        transition: 0.2s ease;
+      }
 
-        .icon-button:hover {
-            color: var(--text);
+      .icon-button:hover {
+        color: var(--text);
 
-            border-color: color-mix(in srgb, var(--border) 60%, var(--text));
+        border-color: color-mix(in srgb, var(--border) 60%, var(--text));
 
-            transform: translateY(-1px);
-        }
+        transform: translateY(-1px);
+      }
 
-        .icon-button svg {
-            width: 17px;
-            height: 17px;
-        }
+      .icon-button svg {
+        width: 17px;
+        height: 17px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            Hero
         ========================================================= */
 
-        .hero {
-            padding: 72px 0 54px;
-        }
+      .hero {
+        padding: 72px 0 54px;
+      }
 
-        .hero-content {
-            max-width: 760px;
-        }
+      .hero-content {
+        max-width: 760px;
+      }
 
-        .eyebrow {
-            display: inline-flex;
+      .eyebrow {
+        display: inline-flex;
 
-            align-items: center;
+        align-items: center;
 
-            gap: 7px;
+        gap: 7px;
 
-            margin-bottom: 18px;
+        margin-bottom: 18px;
 
-            padding: 5px 10px;
+        padding: 5px 10px;
 
-            border: 1px solid var(--border);
+        border: 1px solid var(--border);
 
-            border-radius: 999px;
+        border-radius: 999px;
 
-            background: var(--surface);
+        background: var(--surface);
 
-            color: var(--text-secondary);
+        color: var(--text-secondary);
 
-            font-size: 12px;
-        }
+        font-size: 12px;
+      }
 
-        .eyebrow-dot {
-            width: 6px;
-            height: 6px;
+      .eyebrow-dot {
+        width: 6px;
+        height: 6px;
 
-            border-radius: 50%;
+        border-radius: 50%;
 
-            background: #22c55e;
-        }
+        background: #22c55e;
+      }
 
-        .hero h1 {
-            font-size: clamp(42px, 7vw, 72px);
+      .hero h1 {
+        font-size: clamp(42px, 7vw, 72px);
 
-            line-height: 1.02;
+        line-height: 1.02;
 
-            letter-spacing: -4px;
+        letter-spacing: -4px;
 
-            font-weight: 750;
+        font-weight: 750;
 
-            margin-bottom: 20px;
-        }
+        margin-bottom: 20px;
+      }
 
-        .hero h1 span {
-            color: var(--text-secondary);
-        }
+      .hero h1 span {
+        color: var(--text-secondary);
+      }
 
-        .hero-description {
-            max-width: 580px;
+      .hero-description {
+        max-width: 580px;
 
-            color: var(--text-secondary);
+        color: var(--text-secondary);
 
-            font-size: 16px;
+        font-size: 16px;
 
-            line-height: 1.8;
+        line-height: 1.8;
 
-            margin-bottom: 30px;
-        }
+        margin-bottom: 30px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            分类
         ========================================================= */
 
-        .filters {
-            display: flex;
+      .filters {
+        display: flex;
 
-            flex-wrap: wrap;
+        flex-wrap: wrap;
 
-            gap: 8px;
+        gap: 8px;
 
-            margin-bottom: 38px;
-        }
+        margin-bottom: 38px;
+      }
 
-        .filter {
-            padding: 7px 14px;
+      .filter {
+        padding: 7px 14px;
 
-            border: 1px solid var(--border);
+        border: 1px solid var(--border);
 
-            border-radius: 999px;
+        border-radius: 999px;
 
-            background: var(--surface);
+        background: var(--surface);
 
-            color: var(--text-secondary);
+        color: var(--text-secondary);
 
-            font-size: 13px;
+        font-size: 13px;
 
-            cursor: pointer;
+        cursor: pointer;
 
-            transition: 0.2s ease;
-        }
+        transition: 0.2s ease;
+      }
 
-        .filter:hover {
-            color: var(--text);
+      .filter:hover {
+        color: var(--text);
 
-            border-color: var(--text-tertiary);
-        }
+        border-color: var(--text-tertiary);
+      }
 
-        .filter.active {
-            background: var(--text);
+      .filter.active {
+        background: var(--text);
 
-            color: var(--bg);
+        color: var(--bg);
 
-            border-color: var(--text);
-        }
+        border-color: var(--text);
+      }
 
-        /* =========================================================
+      /* =========================================================
            Section
         ========================================================= */
 
-        .section {
-            margin-bottom: 54px;
-        }
+      .section {
+        margin-bottom: 54px;
+      }
 
-        .section-header {
-            display: flex;
+      .section-header {
+        display: flex;
 
-            align-items: center;
-            justify-content: space-between;
+        align-items: center;
+        justify-content: space-between;
 
-            margin-bottom: 18px;
-        }
+        margin-bottom: 18px;
+      }
 
-        .section-title {
-            font-size: 18px;
+      .section-title {
+        font-size: 18px;
 
-            font-weight: 700;
+        font-weight: 700;
 
-            letter-spacing: -0.3px;
-        }
+        letter-spacing: -0.3px;
+      }
 
-        .section-count {
-            color: var(--text-tertiary);
+      .section-count {
+        color: var(--text-tertiary);
 
-            font-size: 12px;
-        }
+        font-size: 12px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            普通 Grid
         ========================================================= */
 
-        .tools-grid {
-            display: grid;
+      .tools-grid {
+        display: grid;
 
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
 
-            gap: 14px;
-        }
+        gap: 14px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            Tool Card
         ========================================================= */
 
-        .tool-card {
-            position: relative;
+      .tool-card {
+        position: relative;
 
-            display: flex;
+        display: flex;
 
-            flex-direction: column;
+        flex-direction: column;
 
-            padding: 23px;
+        padding: 23px;
 
-            overflow: hidden;
+        overflow: hidden;
 
-            background: var(--surface);
+        background: var(--surface);
 
-            border: 1px solid var(--border);
+        border: 1px solid var(--border);
 
-            border-radius: var(--radius);
+        border-radius: var(--radius);
 
-            box-shadow: var(--shadow);
+        box-shadow: var(--shadow);
 
-            transition:
-                transform 0.22s ease,
-                box-shadow 0.22s ease,
-                border-color 0.22s ease;
-        }
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease,
+          border-color 0.22s ease;
+      }
 
-        .tool-card:hover {
-            transform: translateY(-3px);
+      .tool-card:hover {
+        transform: translateY(-3px);
 
-            box-shadow: var(--shadow-hover);
+        box-shadow: var(--shadow-hover);
 
-            border-color: color-mix(in srgb, var(--border) 60%, var(--text));
-        }
+        border-color: color-mix(in srgb, var(--border) 60%, var(--text));
+      }
 
-        .tool-card::after {
-            content: "";
+      .tool-card::after {
+        content: "";
 
-            position: absolute;
+        position: absolute;
 
-            width: 150px;
-            height: 150px;
+        width: 150px;
+        height: 150px;
 
-            right: -80px;
-            bottom: -80px;
+        right: -80px;
+        bottom: -80px;
 
-            border-radius: 50%;
+        border-radius: 50%;
 
-            background: var(--accent-soft);
+        background: var(--accent-soft);
 
-            opacity: 0;
+        opacity: 0;
 
-            transition: opacity 0.25s ease;
-        }
+        transition: opacity 0.25s ease;
+      }
 
-        .tool-card:hover::after {
-            opacity: 0.55;
-        }
+      .tool-card:hover::after {
+        opacity: 0.55;
+      }
 
-        .tool-icon {
-            width: 44px;
-            height: 44px;
+      .tool-icon {
+        width: 44px;
+        height: 44px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-            margin-bottom: 17px;
+        margin-bottom: 17px;
 
-            border-radius: 12px;
+        border-radius: 12px;
 
-            background: var(--accent-soft);
+        background: var(--accent-soft);
 
-            color: var(--accent);
-        }
+        color: var(--accent);
+      }
 
-        .tool-icon svg {
-            width: 21px;
-            height: 21px;
-        }
+      .tool-icon svg {
+        width: 21px;
+        height: 21px;
+      }
 
-        .tool-name {
-            font-size: 16px;
+      .tool-name {
+        font-size: 16px;
 
-            font-weight: 680;
+        font-weight: 680;
 
-            margin-bottom: 6px;
-        }
+        margin-bottom: 6px;
+      }
 
-        .tool-description {
-            color: var(--text-secondary);
+      .tool-description {
+        color: var(--text-secondary);
 
-            font-size: 13px;
+        font-size: 13px;
 
-            line-height: 1.65;
+        line-height: 1.65;
 
-            max-width: 420px;
-        }
+        max-width: 420px;
+      }
 
-        .tool-meta {
-            display: flex;
+      .tool-meta {
+        display: flex;
 
-            align-items: center;
+        align-items: center;
 
-            justify-content: space-between;
+        justify-content: space-between;
 
-            margin-top: auto;
+        margin-top: auto;
 
-            padding-top: 17px;
-        }
+        padding-top: 17px;
+      }
 
-        .tool-category {
-            color: var(--text-tertiary);
+      .tool-category {
+        color: var(--text-tertiary);
 
-            font-size: 11px;
-        }
+        font-size: 11px;
+      }
 
-        .tool-arrow {
-            display: flex;
+      .tool-arrow {
+        display: flex;
 
-            align-items: center;
-            justify-content: center;
+        align-items: center;
+        justify-content: center;
 
-            width: 28px;
-            height: 28px;
+        width: 28px;
+        height: 28px;
 
-            border: 1px solid var(--border);
+        border: 1px solid var(--border);
 
-            border-radius: 8px;
+        border-radius: 8px;
 
-            color: var(--text-tertiary);
+        color: var(--text-tertiary);
 
-            transition: 0.2s ease;
-        }
+        transition: 0.2s ease;
+      }
 
-        .tool-arrow svg {
-            width: 14px;
-            height: 14px;
-        }
+      .tool-arrow svg {
+        width: 14px;
+        height: 14px;
+      }
 
-        .tool-card:hover .tool-arrow {
-            color: var(--accent);
+      .tool-card:hover .tool-arrow {
+        color: var(--accent);
 
-            border-color: var(--accent);
+        border-color: var(--accent);
 
-            transform: translateX(2px);
-        }
+        transform: translateX(2px);
+      }
 
-        /* =========================================================
+      /* =========================================================
            Empty
         ========================================================= */
 
-        .empty {
-            display: none;
+      .empty {
+        display: none;
 
-            padding: 80px 20px;
+        padding: 80px 20px;
 
-            text-align: center;
+        text-align: center;
 
-            color: var(--text-secondary);
-        }
+        color: var(--text-secondary);
+      }
 
-        .empty svg {
-            width: 30px;
-            height: 30px;
+      .empty svg {
+        width: 30px;
+        height: 30px;
 
-            margin-bottom: 12px;
-        }
+        margin-bottom: 12px;
+      }
 
-        .empty-title {
-            color: var(--text);
+      .empty-title {
+        color: var(--text);
 
-            font-size: 15px;
+        font-size: 15px;
 
-            margin-bottom: 4px;
-        }
+        margin-bottom: 4px;
+      }
 
-        .empty-description {
-            font-size: 12px;
-        }
+      .empty-description {
+        font-size: 12px;
+      }
 
-        /* =========================================================
+      /* =========================================================
            Footer
         ========================================================= */
 
-        footer {
-            margin-top: 96px;
+      footer {
+        margin-top: 96px;
 
-            padding-top: 0;
+        padding-top: 0;
 
-            color: var(--text-secondary);
+        color: var(--text-secondary);
 
-            font-size: 13px;
-        }
+        font-size: 13px;
+      }
 
+      .footer-main {
+        display: flex;
+
+        align-items: flex-start;
+        justify-content: space-between;
+
+        gap: 48px;
+
+        padding: 38px 0 34px;
+
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-brand {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+      }
+
+      .footer-logo {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        color: var(--text);
+
+        font-weight: 700;
+
+        letter-spacing: -0.3px;
+      }
+
+      .footer-logo .logo-mark {
+        width: 28px;
+        height: 28px;
+
+        border-radius: 8px;
+
+        font-size: 12px;
+      }
+
+      .footer-tagline {
+        margin: 0;
+
+        max-width: 330px;
+
+        color: var(--text-tertiary);
+
+        font-size: 12.5px;
+
+        line-height: 1.75;
+      }
+
+      .footer-nav {
+        display: flex;
+
+        align-items: center;
+
+        gap: 24px;
+
+        padding-top: 5px;
+      }
+
+      .footer-link {
+        color: var(--text-tertiary);
+
+        transition: color 0.2s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--text);
+      }
+
+      .footer-bottom {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        padding: 18px 0 34px;
+
+        border-top: 1px solid var(--border);
+
+        color: var(--text-tertiary);
+
+        font-size: 11.5px;
+      }
+
+      .footer-note {
+        font-style: italic;
+
+        letter-spacing: 0.1px;
+
+        text-align: right;
+      }
+
+      @media (max-width: 700px) {
         .footer-main {
-            display: flex;
+          flex-direction: column;
 
-            align-items: flex-start;
-            justify-content: space-between;
+          gap: 24px;
 
-            gap: 48px;
-
-            padding: 38px 0 34px;
-
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-brand {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 12px;
-        }
-
-        .footer-logo {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            color: var(--text);
-
-            font-weight: 700;
-
-            letter-spacing: -0.3px;
-        }
-
-        .footer-logo .logo-mark {
-            width: 28px;
-            height: 28px;
-
-            border-radius: 8px;
-
-            font-size: 12px;
-        }
-
-        .footer-tagline {
-            margin: 0;
-
-            max-width: 330px;
-
-            color: var(--text-tertiary);
-
-            font-size: 12.5px;
-
-            line-height: 1.75;
+          padding: 32px 0 28px;
         }
 
         .footer-nav {
-            display: flex;
+          flex-wrap: wrap;
 
-            align-items: center;
+          gap: 12px 20px;
 
-            gap: 24px;
-
-            padding-top: 5px;
-        }
-
-        .footer-link {
-            color: var(--text-tertiary);
-
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--text);
+          padding-top: 0;
         }
 
         .footer-bottom {
-            display: flex;
+          flex-direction: column;
 
-            align-items: center;
-            justify-content: space-between;
+          align-items: flex-start;
 
-            gap: 20px;
+          gap: 8px;
 
-            padding: 18px 0 34px;
-
-            border-top: 1px solid var(--border);
-
-            color: var(--text-tertiary);
-
-            font-size: 11.5px;
+          padding-bottom: 28px;
         }
 
         .footer-note {
-            font-style: italic;
-
-            letter-spacing: 0.1px;
-
-            text-align: right;
+          text-align: left;
         }
+      }
 
-        @media (max-width: 700px) {
-            .footer-main {
-                flex-direction: column;
-
-                gap: 24px;
-
-                padding: 32px 0 28px;
-            }
-
-            .footer-nav {
-                flex-wrap: wrap;
-
-                gap: 12px 20px;
-
-                padding-top: 0;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 8px;
-
-                padding-bottom: 28px;
-            }
-
-            .footer-note {
-                text-align: left;
-            }
-        }
-
-        /* =========================================================
+      /* =========================================================
            动画
         ========================================================= */
 
-        @keyframes cardIn {
-            from {
-                opacity: 0;
+      @keyframes cardIn {
+        from {
+          opacity: 0;
 
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform: translateY(0);
-            }
+          transform: translateY(8px);
         }
 
-        .tool-card {
-            animation: cardIn 0.35s ease both;
-        }
+        to {
+          opacity: 1;
 
-        /* =========================================================
+          transform: translateY(0);
+        }
+      }
+
+      .tool-card {
+        animation: cardIn 0.35s ease both;
+      }
+
+      /* =========================================================
            平板
         ========================================================= */
 
-        @media (max-width: 900px) {
-            .tools-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
+      @media (max-width: 900px) {
+        .tools-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+      }
 
-        /* =========================================================
+      /* =========================================================
            手机
         ========================================================= */
 
-        @media (max-width: 600px) {
-            .container {
-                width: calc(100% - 28px);
-            }
-
-            .topbar {
-                height: 62px;
-            }
-
-            .hero {
-                padding: 52px 0 38px;
-            }
-
-            .hero h1 {
-                font-size: 45px;
-
-                letter-spacing: -2.5px;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-
-                gap: 12px;
-            }
-
-            .tool-card {
-                min-height: 170px;
-            }
+      @media (max-width: 600px) {
+        .container {
+          width: calc(100% - 28px);
         }
-    </style>
-</head>
 
-<body>
+        .topbar {
+          height: 62px;
+        }
+
+        .hero {
+          padding: 52px 0 38px;
+        }
+
+        .hero h1 {
+          font-size: 45px;
+
+          letter-spacing: -2.5px;
+        }
+
+        .hero-description {
+          font-size: 14px;
+        }
+
+        .tools-grid {
+          grid-template-columns: 1fr;
+
+          gap: 12px;
+        }
+
+        .tool-card {
+          min-height: 170px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
     <!-- =========================================================
      顶部
 ========================================================= -->
 
     <div class="container">
-        <header class="topbar">
-            <a href="/creative/" class="logo">
-                <div class="logo-mark">C</div>
+      <header class="topbar">
+        <a href="/creative/" class="logo">
+          <div class="logo-mark">C</div>
 
-                <div class="logo-text">Creative</div>
-            </a>
+          <div class="logo-text">Creative</div>
+        </a>
 
-            <div class="top-actions"></div>
-        </header>
+        <div class="top-actions"></div>
+      </header>
     </div>
 
     <!-- =========================================================
@@ -759,68 +761,73 @@
 ========================================================= -->
 
     <main>
-        <div class="container">
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
+      <div class="container">
+        <section class="hero">
+          <div class="hero-content">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
 
-                        Personal Tool Collection
-                    </div>
+              Personal Tool Collection
+            </div>
 
-                    <h1>
-                        Creative
-                        <span>Tools.</span>
-                    </h1>
+            <h1>
+              Creative
+              <span>Tools.</span>
+            </h1>
+          </div>
+        </section>
 
-                </div>
-            </section>
-
-            <!-- =====================================================
+        <!-- =====================================================
              分类
         ====================================================== -->
 
-            <nav class="filters">
-                <button class="filter active" data-category="all">全部</button>
+        <nav class="filters">
+          <button class="filter active" data-category="all">全部</button>
 
-                <button class="filter" data-category="system">系统与硬件</button>
+          <button class="filter" data-category="system">系统与硬件</button>
 
-                <button class="filter" data-category="network">网络工具</button>
+          <button class="filter" data-category="network">网络工具</button>
 
-                <button class="filter" data-category="security">安全工具</button>
+          <button class="filter" data-category="security">安全工具</button>
 
-                <button class="filter" data-category="development">开发工具</button>
+          <button class="filter" data-category="development">开发工具</button>
 
-                <button class="filter" data-category="text">文本工具</button>
-            </nav>
+          <button class="filter" data-category="text">文本工具</button>
+        </nav>
 
-            <!-- =====================================================
+        <!-- =====================================================
              全部工具
         ====================================================== -->
 
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">全部工具</h2>
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">全部工具</h2>
 
-                    <span class="section-count" id="toolCount"> </span>
-                </div>
+            <span class="section-count" id="toolCount"> </span>
+          </div>
 
-                <div class="tools-grid" id="toolsGrid"></div>
+          <div class="tools-grid" id="toolsGrid"></div>
 
-                <div class="empty" id="empty">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="7" />
+          <div class="empty" id="empty">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="7" />
 
-                        <path d="m20 20-4-4" />
-                    </svg>
+              <path d="m20 20-4-4" />
+            </svg>
 
-                    <div class="empty-title">没有找到相关工具</div>
+            <div class="empty-title">没有找到相关工具</div>
 
-                    <div class="empty-description">换一个关键词试试看</div>
-                </div>
-            </section>
-        </div>
+            <div class="empty-description">换一个关键词试试看</div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!-- =========================================================
@@ -828,59 +835,48 @@
 ========================================================= -->
 
     <footer>
-        <div class="container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <div class="logo-mark">C</div>
+      <div class="container">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <div class="logo-mark">C</div>
 
-                        <span> Creative </span>
-                    </div>
-
-                    <p class="footer-tagline">
-                        一些自己做的、常用的实用工具。
-                        <br />
-                        简单、直接，持续更新。
-                    </p>
-                </div>
-
-                <nav class="footer-nav" aria-label="页脚导航">
-
-                    <a class="footer-link" href="/">
-                        主页
-                    </a>
-
-                    <a class="footer-link" href="/123/">
-                        网址导航
-                    </a>
-
-                    <a class="footer-link" href="/terms/">
-                        用户协议
-                    </a>
-
-                    <a class="footer-link" href="/contact/">
-                        与我联系
-                    </a>
-                </nav>
+              <span> Creative </span>
             </div>
 
-            <div class="footer-bottom">
-                <span> © 2022–2026 liuzhangbin.com </span>
+            <p class="footer-tagline">
+              一些自己做的、常用的实用工具。
+              <br />
+              简单、直接，持续更新。
+            </p>
+          </div>
 
-                <span class="footer-note">
-                    Made with curiosity · Built with care · Just for myself
-                </span>
-            </div>
+          <nav class="footer-nav" aria-label="页脚导航">
+            <a class="footer-link" href="/"> 主页 </a>
+
+            <a class="footer-link" href="/123/"> 网址导航 </a>
+
+            <a class="footer-link" href="/contact/"> 与我联系 </a>
+          </nav>
         </div>
+
+        <div class="footer-bottom">
+          <span> © 2022–2026 liuzhangbin.com </span>
+
+          <span class="footer-note">
+            Made with curiosity · Built with care · Just for myself
+          </span>
+        </div>
+      </div>
     </footer>
 
     <script>
-        /* =============================================================
+      /* =============================================================
      SVG 图标
   ============================================================= */
 
-        const icons = {
-            key: `
+      const icons = {
+        key: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -899,7 +895,7 @@
         </svg>
     `,
 
-            globe: `
+        globe: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -926,7 +922,7 @@
         </svg>
     `,
 
-            package: `
+        package: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -951,7 +947,7 @@
         </svg>
     `,
 
-            drive: `
+        drive: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -976,7 +972,7 @@
         </svg>
     `,
 
-            hash: `
+        hash: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -995,7 +991,7 @@
         </svg>
     `,
 
-            arrow: `
+        arrow: `
         <svg viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -1009,134 +1005,135 @@
 
         </svg>
     `,
-        };
+      };
 
-        /* =============================================================
+      /* =============================================================
      工具数据
      ============================================================= */
 
-        const tools = [
-            {
-                name: "密码生成器",
+      const tools = [
+        
+        {
+          name: "常用软件清单",
 
-                description: "生成随机、安全的密码，支持自定义长度与字符类型。",
+          description: "Windows 装机、重装系统时的常用软件参考。",
 
-                category: "security",
+          category: "system",
 
-                categoryName: "安全工具",
+          categoryName: "系统与硬件",
 
-                icon: "key",
+          icon: "package",
 
-                url: "/creative/password-generator/",
+          url: "/creative/newbuild/",
 
-                tags: "密码 password 安全 随机",
+          tags: "Windows 软件 装机 重装系统",
 
-                featured: true,
-            },
+          featured: true,
+        },
+        {
+          name: "密码生成器",
 
-            {
-                name: "高级 DNS 工具",
+          description: "生成随机、安全的密码，支持自定义长度与字符类型。",
 
-                description: "查询 DNS 记录、解析结果以及域名相关网络信息。",
+          category: "security",
 
-                category: "network",
+          categoryName: "安全工具",
 
-                categoryName: "网络工具",
+          icon: "key",
 
-                icon: "globe",
+          url: "/creative/password-generator/",
 
-                url: "/creative/nslookup/",
+          tags: "密码 password 安全 随机",
 
-                tags: "DNS 域名 网络 nslookup",
+          featured: true,
+        },
 
-                featured: true,
-            },
+        {
+          name: "高级 DNS 工具",
 
-            {
-                name: "硬盘容量换算器",
+          description: "查询 DNS 记录、解析结果以及域名相关网络信息。",
 
-                description: "快速进行 MB、GB、TB 等存储容量在不同工况下的单位换算。",
+          category: "network",
 
-                category: "system",
+          categoryName: "网络工具",
 
-                categoryName: "系统与硬件",
+          icon: "globe",
 
-                icon: "drive",
+          url: "/creative/nslookup/",
 
-                url: "/creative/hdcalc/",
+          tags: "DNS 域名 网络 nslookup",
 
-                tags: "硬盘 SSD HDD 容量 GB TB GB",
+          featured: true,
+        },
 
-                featured: true,
-            },
+        {
+          name: "硬盘容量换算器",
 
-            {
-                name: "常用软件清单",
+          description: "快速进行 MB、GB、TB 等存储容量在不同工况下的单位换算。",
 
-                description: "Windows 装机、重装系统时的常用软件参考。",
+          category: "system",
 
-                category: "system",
+          categoryName: "系统与硬件",
 
-                categoryName: "系统与硬件",
+          icon: "drive",
 
-                icon: "package",
+          url: "/creative/hdcalc/",
 
-                url: "/creative/newbuild/",
+          tags: "硬盘 SSD HDD 容量 GB TB GB",
 
-                tags: "Windows 软件 装机 重装系统",
+          featured: true,
+        },
 
-                featured: true,
-            },
+        {
+          name: "Hash Checker",
 
-            {
-                name: "Hash Checker",
+          description:
+            "计算并校验文件的 MD5、SHA-1、SHA-256、SHA-512 等哈希值。",
 
-                description: "计算并校验文件的 MD5、SHA-1、SHA-256、SHA-512 等哈希值。",
+          category: "security",
 
-                category: "security",
+          categoryName: "安全工具",
 
-                categoryName: "安全工具",
+          icon: "hash",
 
-                icon: "hash",
+          url: "/creative/hash-checker/",
 
-                url: "/creative/hash-checker/",
+          tags: "Hash MD5 SHA1 SHA256 SHA512 文件校验",
 
-                tags: "Hash MD5 SHA1 SHA256 SHA512 文件校验",
+          featured: false,
+        },
+      ];
 
-                featured: false,
-            },
-        ];
-
-        /* =============================================================
+      /* =============================================================
      DOM
      ============================================================= */
 
-        const toolsGrid = document.getElementById("toolsGrid");
+      const toolsGrid = document.getElementById("toolsGrid");
 
-        const empty = document.getElementById("empty");
+      const empty = document.getElementById("empty");
 
-        const toolCount = document.getElementById("toolCount");
+      const toolCount = document.getElementById("toolCount");
 
-        const filters = document.querySelectorAll(".filter");
+      const filters = document.querySelectorAll(".filter");
 
-        /* =============================================================
+      /* =============================================================
      状态
      ============================================================= */
 
-        let currentCategory = "all";
+      let currentCategory = "all";
 
-        /* =============================================================
+      /* =============================================================
      创建卡片
      ============================================================= */
 
-        function createToolCard(tool) {
-            const card = document.createElement("a");
+      function createToolCard(tool) {
+        const card = document.createElement("a");
 
-            card.className = "tool-card";
+        card.className = "tool-card";
 
-            card.href = tool.url;
+        card.href = tool.url;
 
-            card.innerHTML = `
+        card.innerHTML = `
 
         <div class="tool-icon">
 
@@ -1178,93 +1175,92 @@
 
     `;
 
-            return card;
-        }
+        return card;
+      }
 
-        /* =============================================================
+      /* =============================================================
      筛选
      ============================================================= */
 
-        function filterTools() {
-            return tools.filter(
-                (tool) =>
-                    currentCategory === "all" || tool.category === currentCategory,
-            );
-        }
+      function filterTools() {
+        return tools.filter(
+          (tool) =>
+            currentCategory === "all" || tool.category === currentCategory,
+        );
+      }
 
-        /* =============================================================
+      /* =============================================================
      渲染
      ============================================================= */
 
-        function render() {
-            const filtered = filterTools();
+      function render() {
+        const filtered = filterTools();
 
-            /* ---------------------------------------------------------
+        /* ---------------------------------------------------------
            全部工具
         --------------------------------------------------------- */
 
-            toolsGrid.innerHTML = "";
+        toolsGrid.innerHTML = "";
 
-            filtered.forEach((tool) => {
-                toolsGrid.appendChild(createToolCard(tool));
-            });
+        filtered.forEach((tool) => {
+          toolsGrid.appendChild(createToolCard(tool));
+        });
 
-            toolCount.textContent = `${filtered.length} 个工具`;
+        toolCount.textContent = `${filtered.length} 个工具`;
 
-            /*
-             * 没有匹配结果
-             */
+        /*
+         * 没有匹配结果
+         */
 
-            if (filtered.length === 0) {
-                empty.style.display = "block";
-            } else {
-                empty.style.display = "none";
-            }
+        if (filtered.length === 0) {
+          empty.style.display = "block";
+        } else {
+          empty.style.display = "none";
         }
+      }
 
-        /* =============================================================
+      /* =============================================================
      初始化分类状态
      ============================================================= */
 
-        function initFilters() {
-            // 默认选中"全部"
-            currentCategory = "all";
-            
-            filters.forEach((btn) => {
-                const isActive = btn.dataset.category === currentCategory;
-                btn.classList.toggle("active", isActive);
-            });
-        }
+      function initFilters() {
+        // 默认选中"全部"
+        currentCategory = "all";
 
-        /* =============================================================
+        filters.forEach((btn) => {
+          const isActive = btn.dataset.category === currentCategory;
+          btn.classList.toggle("active", isActive);
+        });
+      }
+
+      /* =============================================================
      分类点击事件
      ============================================================= */
 
-        filters.forEach((button) => {
-            button.addEventListener("click", () => {
-                filters.forEach((item) => {
-                    item.classList.remove("active");
-                });
+      filters.forEach((button) => {
+        button.addEventListener("click", () => {
+          filters.forEach((item) => {
+            item.classList.remove("active");
+          });
 
-                button.classList.add("active");
+          button.classList.add("active");
 
-                currentCategory = button.dataset.category;
+          currentCategory = button.dataset.category;
 
-                render();
-            });
+          render();
         });
+      });
 
-        /* =============================================================
+      /* =============================================================
      深色模式（已移除相关代码，保持简洁）
      ============================================================= */
 
-        /* =============================================================
+      /* =============================================================
      初始化
      ============================================================= */
 
-        initFilters();  // 设置默认分类状态
-        render();       // 渲染工具列表
+      initFilters(); // 设置默认分类状态
+      render(); // 渲染工具列表
     </script>
-</body>
-
+  </body>
 </html>
