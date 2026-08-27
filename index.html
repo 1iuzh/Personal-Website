@@ -648,12 +648,179 @@
       font-size: 13px;
     }
 
-    footer span:last-child {
-      opacity: 0.8;
+    .footer-right {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
     }
 
     .footer-tagline {
       font-style: italic;
+
+      opacity: 0.8;
+    }
+
+    /* --------------------------------------------------
+           shields.io 风格版本徽章
+        -------------------------------------------------- */
+
+    .version-badge {
+      position: relative;
+
+      display: inline-flex;
+
+      align-items: stretch;
+
+      height: 20px;
+
+      overflow: hidden;
+
+      text-decoration: none;
+
+      border-radius: 4px;
+
+      box-shadow: 0 1px 2px rgba(37, 55, 44, 0.18);
+
+      cursor: help;
+
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .version-badge:hover {
+      transform: translateY(-1px);
+
+      box-shadow: 0 3px 8px rgba(37, 55, 44, 0.24);
+    }
+
+    .version-badge .vb-label,
+    .version-badge .vb-value {
+      display: inline-flex;
+
+      align-items: center;
+
+      padding: 0 8px;
+
+      font-family: "Segoe UI", Verdana, Arial, sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.2px;
+
+      white-space: nowrap;
+    }
+
+    .version-badge .vb-label {
+      color: #eef4ef;
+
+      background: #5a6b62;
+    }
+
+    .version-badge .vb-value {
+      color: #fff;
+
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+    }
+
+    /* 悬浮时展示的迷你更新记录 */
+
+    .version-history {
+      position: absolute;
+
+      right: 0;
+      bottom: 30px;
+
+      width: 220px;
+
+      padding: 14px 16px;
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      color: var(--text);
+
+      text-align: left;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      background: rgba(255, 255, 255, 0.92);
+
+      box-shadow: var(--shadow-hover);
+
+      backdrop-filter: blur(14px);
+
+      transform: translateY(6px);
+
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+
+      pointer-events: none;
+    }
+
+    .version-badge:hover .version-history,
+    .version-badge:focus-visible .version-history {
+      visibility: visible;
+
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .version-history ul {
+      margin: 8px 0 0;
+
+      padding-left: 16px;
+
+      list-style: none;
+    }
+
+    .version-history li {
+      position: relative;
+
+      margin-bottom: 6px;
+
+      padding-left: 14px;
+
+      color: var(--text-soft);
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    .version-history li::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 7px;
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+    .version-history li b {
+      color: var(--text);
+    }
+
+    .version-history-title {
+      display: block;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: var(--text);
     }
 
     /* ==================================================
@@ -767,13 +934,30 @@
       footer {
         flex-direction: column;
 
-        gap: 8px;
+        gap: 12px;
 
         text-align: center;
 
         margin-top: 50px;
 
         font-size: 12px;
+      }
+
+      .footer-right {
+        flex-direction: column;
+
+        gap: 10px;
+      }
+
+      .version-history {
+        right: 50%;
+
+        transform: translate(50%, 6px);
+      }
+
+      .version-badge:hover .version-history,
+      .version-badge:focus-visible .version-history {
+        transform: translate(50%, 0);
       }
     }
 
@@ -941,7 +1125,24 @@
 
     <footer>
       <span>© 2022–2026 LIUZHANGBIN.</span>
-      <span class="footer-tagline">v4.7.0 · Made with curiosity · Built with care · Just for myself</span>
+
+      <div class="footer-right">
+        <span class="footer-tagline">Made with curiosity · Built with care · Just for myself</span>
+
+        <a href="#" class="version-badge" tabindex="0" aria-describedby="version-history-panel">
+          <span class="vb-label">version</span><span class="vb-value">v4.7.6</span>
+
+          <div class="version-history" id="version-history-panel">
+            <span class="version-history-title">更新记录</span>
+
+            <ul>
+              <li><b>v4.7.6</b> · 页脚版本徽章样式调整</li>
+              <li><b>v4.7.0</b> · 首页整体视觉刷新</li>
+              <li><b>v4.x</b> · 持续小修小补</li>
+            </ul>
+          </div>
+        </a>
+      </div>
     </footer>
   </main>
 </body>
