@@ -1,165 +1,804 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<title>Hash Checker - 文件哈希值校验工具</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="如果你有任何想法、建议或纠错信息，欢迎通过邮箱与我联系。" />
+  <meta name="theme-color" content="#f8fafc" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <title>与我联系 · Liuzhangbin.com</title>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-deep: #eef2f6;
+
+      --text: #17233b;
+      --text-soft: #475467;
+      --text-light: #8a94a6;
+
+      --accent: #2675ed;
+      --accent-dark: #1a5fd0;
+      --accent-light: #eef5ff;
+
+      --white: rgba(255, 255, 255, 0.7);
+
+      --border: #e8edf3;
+
+      --shadow: 0 20px 60px rgba(23, 35, 59, 0.08);
+      --shadow-hover: 0 28px 70px rgba(23, 35, 59, 0.12);
+
+      --radius-large: 22px;
+      --radius-medium: 16px;
+    }
+
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      box-sizing: border-box;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-        font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
-        background: #f5f6f8;
-        color: #2c2c2c;
-        line-height: 1.7;
+      margin: 0;
+
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+      font-size: 16px;
+
+      color: var(--text);
+
+      background: var(--bg);
+
+      line-height: 1.7;
+
+      overflow-x: hidden;
+
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    .container {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 60px 24px 80px;
+
+    a {
+      color: inherit;
     }
-    header {
-        text-align: center;
-        margin-bottom: 40px;
+
+    /* ==================================================
+           背景
+        ================================================== */
+
+    .background {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: -10;
+
+      overflow: hidden;
+
+      pointer-events: none;
     }
-    header h1 {
-        font-size: 2rem;
-        color: #1a1a1a;
-        margin-bottom: 8px;
+
+    .background::before {
+      content: "";
+
+      position: absolute;
+
+      width: 600px;
+      height: 600px;
+
+      top: -250px;
+      left: -180px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(255, 255, 255, 0) 70%);
     }
-    header p.subtitle {
-        color: #777;
-        font-size: 0.95rem;
+
+    .background::after {
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      right: -300px;
+      bottom: -300px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(38, 117, 237, 0.06) 0%,
+          rgba(38, 117, 237, 0) 70%);
     }
-    .card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 32px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        margin-bottom: 24px;
+
+    /* ==================================================
+           页面
+        ================================================== */
+
+    .page {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      width: min(1120px, calc(100% - 48px));
+
+      margin: 0 auto;
+
+      padding: 28px 0 35px;
     }
-    .card h2 {
-        font-size: 1.2rem;
-        margin-bottom: 14px;
-        color: #1a1a1a;
-        border-left: 4px solid #3b6ef0;
-        padding-left: 10px;
+
+    /* ==================================================
+           顶部导航
+        ================================================== */
+
+    .navbar {
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 52px;
     }
-    .card p {
-        color: #444;
-        margin-bottom: 10px;
+
+    .brand {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      font-size: 17px;
+
+      font-weight: 400;
+
+      letter-spacing: 0.5px;
     }
-    .features {
-        list-style: none;
-        margin-top: 12px;
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      box-shadow: 0 0 0 5px var(--accent-light);
     }
-    .features li {
-        padding: 6px 0 6px 24px;
-        position: relative;
-        color: #444;
+
+    .nav-links {
+      display: flex;
+
+      align-items: center;
+
+      gap: 30px;
     }
-    .features li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #3b6ef0;
-        font-weight: bold;
+
+    .nav-links a {
+      position: relative;
+
+      color: var(--text-soft);
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 500;
+
+      transition: color 0.2s ease;
     }
-    .meta {
+
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 2px;
+
+      background: var(--accent);
+
+      border-radius: 2px;
+
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    /* ==================================================
+           移动端菜单按钮（汉堡）
+        ================================================== */
+
+    .menu-toggle {
+      display: none;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      width: 38px;
+      height: 38px;
+
+      padding: 0;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      background: #ffffff;
+
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+
+      width: 17px;
+      height: 2px;
+
+      border-radius: 2px;
+
+      background: var(--text);
+
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==================================================
+           联系卡片
+        ================================================== */
+
+    .contact-main {
+      flex: 1;
+
+      display: flex;
+
+      align-items: center;
+    }
+
+    .contact-card {
+      position: relative;
+
+      width: 100%;
+      min-height: 480px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 72px 40px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-large);
+
+      background: #ffffff;
+
+      box-shadow: var(--shadow);
+    }
+
+    /* ==================================================
+           信封图标
+        ================================================== */
+
+    .icon-wrapper {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 108px;
+      height: 108px;
+
+      margin-bottom: 24px;
+
+      border-radius: 50%;
+
+      background: var(--accent-light);
+    }
+
+    .mail-icon {
+      width: 52px;
+      height: 52px;
+
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ==================================================
+           标题
+        ================================================== */
+
+    .title {
+      position: relative;
+      z-index: 2;
+
+      text-align: center;
+    }
+
+    .title h1 {
+      margin: 0;
+
+      color: var(--text);
+
+      font-size: clamp(32px, 4vw, 44px);
+
+      line-height: 1.25;
+
+      font-weight: 700;
+    }
+
+    .title-line {
+      width: 46px;
+      height: 4px;
+
+      margin: 20px auto 30px;
+
+      background: var(--accent);
+
+      border-radius: 99px;
+    }
+
+    .description {
+      position: relative;
+      z-index: 2;
+
+      max-width: 480px;
+
+      color: var(--text-soft);
+
+      font-size: 17px;
+
+      line-height: 1.9;
+
+      text-align: center;
+    }
+
+    /* ==================================================
+           邮箱链接
+        ================================================== */
+
+    .email-link {
+      position: relative;
+      z-index: 2;
+
+      width: min(560px, 100%);
+
+      margin-top: 34px;
+      padding: 22px 30px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+
+      color: var(--accent);
+
+      text-decoration: none;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-medium);
+
+      background: var(--accent-light);
+
+      font-family: "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+      font-size: clamp(19px, 2.4vw, 24px);
+
+      font-weight: 600;
+
+      letter-spacing: 0.2px;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .email-link:hover,
+    .email-link:focus-visible {
+      background: #e5f0ff;
+
+      border-color: #cfe2ff;
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 24px rgba(38, 117, 237, 0.1);
+    }
+
+    .email-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .email-icon {
+      width: 30px;
+      height: 30px;
+
+      flex-shrink: 0;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ==================================================
+           提示
+        ================================================== */
+
+    .note {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 30px;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      color: var(--text-light);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+    }
+
+    .note-icon {
+      width: 20px;
+      height: 20px;
+
+      flex-shrink: 0;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ==================================================
+           响应式
+        ================================================== */
+
+    @media (max-width: 800px) {
+      .page {
+        width: calc(100% - 28px);
+
+        padding: 18px 0 25px;
+      }
+
+      .navbar {
+        margin-bottom: 28px;
+      }
+
+      .menu-toggle {
         display: flex;
-        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        position: absolute;
+
+        top: calc(100% + 12px);
+        right: 0;
+
+        z-index: 50;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 2px;
+
+        width: 190px;
+
+        padding: 10px;
+
+        border: 1px solid var(--border);
+        border-radius: 14px;
+
+        background: #ffffff;
+
+        box-shadow: var(--shadow);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-6px);
+
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0.2s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        padding: 11px 12px;
+
+        border-radius: 9px;
+
+        font-size: 15px;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible,
+      .nav-links a.active {
+        color: var(--accent);
+
+        background: var(--accent-light);
+      }
+
+      .contact-card {
+        min-height: auto;
+
+        padding: 48px 22px;
+
+        border-radius: 18px;
+      }
+
+      .icon-wrapper {
+        width: 88px;
+        height: 88px;
+      }
+
+      .mail-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+      .title h1 {
+        font-size: 30px;
+      }
+
+      .description {
+        font-size: 15px;
+      }
+
+      .email-link {
+        padding: 18px 18px;
+
+        font-size: 18px;
+
         gap: 10px;
-        margin-top: 16px;
-    }
-    .meta span {
-        background: #eef2ff;
-        color: #3b52d1;
-        font-size: 0.8rem;
-        padding: 4px 12px;
-        border-radius: 999px;
-    }
-    .download-box {
+      }
+
+      .email-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .note {
+        font-size: 13px;
+
         text-align: center;
-        padding: 40px 24px;
+
+        max-width: 280px;
+      }
     }
-    .download-btn {
-        display: inline-block;
-        background: #3b6ef0;
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.05rem;
-        font-weight: 600;
-        padding: 14px 40px;
-        border-radius: 8px;
-        transition: background 0.2s ease, transform 0.2s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before {
+        animation: none !important;
+        transition: none !important;
+      }
     }
-    .download-btn:hover {
-        background: #2d57c9;
-        transform: translateY(-1px);
-    }
-    .download-note {
-        margin-top: 14px;
-        font-size: 0.85rem;
-        color: #999;
-    }
-    footer {
-        text-align: center;
-        margin-top: 40px;
-        font-size: 0.85rem;
-        color: #999;
-    }
-    footer a {
-        color: #3b6ef0;
-        text-decoration: none;
-    }
-</style>
+  </style>
 </head>
+
 <body>
-<div class="container">
+  <!-- 背景 -->
+  <div class="background" aria-hidden="true"></div>
 
-    <header>
-        <h1>Hash Checker</h1>
-        <p class="subtitle">简单、直观的文件哈希校验工具</p>
-    </header>
+  <main class="page">
+    <!-- ============================================
+             顶部导航
+        ============================================= -->
+    <nav class="navbar" aria-label="主导航">
+      <a href="/" class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        LIUZHANGBIN
+      </a>
 
-    <div class="card">
-        <h2>软件简介</h2>
-        <p>HashChecker.exe 是一款基于 Python / Tkinter 开发的 Windows 桌面小工具，用于快速计算和校验文件的哈希值，帮助你确认文件的完整性与真实性——适用于核对下载文件是否损坏，验证文件是否被篡改。</p>
-        <p>本软件适配 Windows 10 及更高版本系统<br>目前已知 Windows 7 系统环境下存在兼容性故障，有空了再改~~</p>
-        <div class="meta">
-            <span>最新版本 v2.4.3_Build_20260824</span>
-            <span>作者 Liuzhangbin</span>
-            <span>Windows 桌面应用</span>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="/123/">网址导航</a>
+        <a href="/creative/">创意工坊</a>
+        <a href="/contact/" class="active">与我联系</a>
+      </div>
+    </nav>
+
+    <!-- ============================================
+             联系卡片
+        ============================================= -->
+    <div class="contact-main">
+      <section class="contact-card">
+        <div class="icon-wrapper">
+          <svg class="mail-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="9" y="15" width="46" height="34" rx="5"></rect>
+            <path d="M11 19l21 17 21-17"></path>
+          </svg>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>主要功能</h2>
-        <ul class="features">
-            <li>纯绿色软件，即点即用，无需安装，无系统残留</li>
-            <li>支持拖拽文件直接进行哈希计算</li>
-            <li>后台异步扫描，大文件也不卡界面</li>
-            <li>中英双语界面切换</li>
-        </ul>
-    </div>
+        <div class="title">
+          <h1>与我联系</h1>
+          <div class="title-line"></div>
+        </div>
 
-    <div class="card download-box">
-        <h2 style="border:none; padding-left:0; margin-bottom:20px;">下载 Hash Checker</h2>
-        <a class="download-btn" href="/downloads/HashChecker-v2.4.3.zip" download>
-            下载 v2.4.3（Windows）
+        <p class="description">
+          任何想法、建议或纠错信息，都欢迎通过邮箱与我联系。
+        </p>
+
+        <a class="email-link" id="contact-email" aria-label="发送邮件联系我">
+          <svg class="email-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M4 7l8 6 8-6"></path>
+          </svg>
+
+          <span id="contact-email-text">加载中…</span>
         </a>
-        <p class="download-note">解压后直接运行，无需额外安装依赖</p>
-        <p class="download-note">MD5：a22e058dd23ccdf9961ce5118c0a8507</p>
+
+        <p class="note">
+          <svg class="note-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3l7 3v5c0 4.5-2.9 7.9-7 10-4.1-2.1-7-5.5-7-10V6l7-3z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+
+          <span>我会尽快查看并回复你的邮件，感谢你的关注与支持。</span>
+        </p>
+      </section>
     </div>
+  </main>
 
-    <footer>
-        <p>问题反馈或建议，欢迎<a href="/contact/">与我联系</a></p>
-    </footer>
+  <script>
+    (function () {
+      var toggle = document.getElementById("menu-toggle");
+      var links = document.getElementById("nav-links");
 
-</div>
+      function closeMenu() {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+
+      function openMenu() {
+        links.classList.add("open");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+
+      if (toggle && links) {
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+
+          if (links.classList.contains("open")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+
+        links.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!links.contains(e.target) && !toggle.contains(e.target)) {
+            closeMenu();
+          }
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            closeMenu();
+          }
+        });
+      }
+    })();
+
+    (function () {
+      var user = "liu.zhangbin";
+      var domain = "qq.com";
+      var address = user + "@" + domain;
+
+      var link = document.getElementById("contact-email");
+      var text = document.getElementById("contact-email-text");
+
+      if (link && text) {
+        link.href = "mailto:" + address;
+        link.setAttribute("aria-label", "发送邮件至 " + address);
+        text.textContent = address;
+      }
+    })();
+  </script>
 </body>
+
 </html>
