@@ -1,103 +1,108 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="个人网址导航：AI 应用、搜索引擎、社交媒体、购物、资讯、工具等常用网站分类合集。" />
-    <title>网址导航</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="123.css" />
-  </head>
 
-  <body>
-        <header>
-      <div class="header-bar">
-        <a href="" class="brand-link">
-          <img src="favicon.png" alt="网址导航" class="brand-logo" />
-        </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="个人网址导航：AI 应用、搜索引擎、社交媒体、购物、资讯、工具等常用网站分类合集。" />
+  <title>网址导航</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="123.css" />
+</head>
 
-                <nav class="header-nav" id="header-nav" aria-label="分类导航">
-          <div class="header-nav-inner">
-                      </div>
-        </nav>
+<body>
+  <header>
+    <div class="header-bar">
+      <a href="" class="brand-link">
+        <img src="favicon.png" alt="网址导航" class="brand-logo" />
+      </a>
 
-        <button
-          type="button"
-          class="search-toggle"
-          id="search-toggle"
-          aria-expanded="false"
-          aria-controls="search-panel"
-          aria-label="打开搜索"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <nav class="header-nav" id="header-nav" aria-label="分类导航">
+        <div class="header-nav-inner">
+        </div>
+      </nav>
+
+      <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel"
+        aria-label="打开搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="search-panel" id="search-panel" hidden>
+      <div class="search-panel-inner">
+        <div class="search-engine-tabs" role="radiogroup" aria-label="选择搜索引擎">
+          <button class="search-tab active" data-engine="google" role="radio" aria-checked="true"
+            tabindex="0">Google</button>
+          <button class="search-tab" data-engine="bing" role="radio" aria-checked="false" tabindex="-1">Bing</button>
+          <button class="search-tab" data-engine="baidu" role="radio" aria-checked="false" tabindex="-1">百度</button>
+        </div>
+        <div class="header-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="7" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
+          <input type="text" id="site-search" placeholder="输入关键词，回车搜索网页…" autocomplete="off" aria-label="搜索网页" />
+        </div>
+        <button type="button" class="search-close" id="search-close" aria-label="关闭搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       </div>
+    </div>
+  </header>
 
-            <div class="search-panel" id="search-panel" hidden>
-        <div class="search-panel-inner">
-          <div class="search-engine-tabs" role="radiogroup" aria-label="选择搜索引擎">
-            <button class="search-tab active" data-engine="google" role="radio" aria-checked="true" tabindex="0">Google</button>
-            <button class="search-tab" data-engine="bing" role="radio" aria-checked="false" tabindex="-1">Bing</button>
-            <button class="search-tab" data-engine="baidu" role="radio" aria-checked="false" tabindex="-1">百度</button>
-          </div>
-          <div class="header-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input type="text" id="site-search" placeholder="输入关键词，回车搜索网页…" autocomplete="off" aria-label="搜索网页" />
-          </div>
-          <button type="button" class="search-close" id="search-close" aria-label="关闭搜索">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
+  <main>
+    <div class="grid-container"></div>
+  </main>
+
+  <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+  </button>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <p class="footer-stats-primary">
+          整理收录 <span id="footer-cat-count">0</span> 个分类 ·
+          <span id="footer-link-count">0</span> 个网站（2026.08）
+        </p>
+
+        <ul class="footer-legal-links">
+          <li><a href="/">首页</a></li>
+          <li><a href="/creative/">创意工坊</a></li>
+          <li><a href="/contact/">与我联系</a></li>
+        </ul>
+
+        <p class="footer-stats-secondary">
+          <a href="./about/" target="_blank" rel="noopener noreferrer"
+            style="display: inline-block; color: #ffffff; background-color: #2563eb; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: bold;">
+            本项目
+          </a>
+          已苟延残喘 <span id="footer-uptime">0 天</span>
+        </p>
       </div>
-    </header>
 
-        <main>
-      <div class="grid-container"></div>
-    </main>
+      <div class="footer-divider"></div>
 
-        <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15" />
-      </svg>
-    </button>
-
-        <footer>
-      <div class="footer-container">
-        <div class="footer-top">
-          <p class="footer-stats-primary">
-            整理收录 <span id="footer-cat-count">0</span> 个分类 ·
-            <span id="footer-link-count">0</span> 个网站（2026.08）
-          </p>
-
-          <ul class="footer-legal-links">
-            <li><a href="/">首页</a></li>
-            <li><a href="/creative/">创意工坊</a></li>
-            <li><a href="/contact/">与我联系</a></li>
-          </ul>
-
-          <p class="footer-stats-secondary">
-            本项目已苟延残喘 <span id="footer-uptime">0 天</span>
-          </p>
-        </div>
-
-        <div class="footer-divider"></div>
-
-        <div class="footer-bottom">
-          <p class="footer-copyright">Copyright © 2025–2026 LIUZHANGBIN.</p>
-        </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">Copyright © 2025–2026 LIUZHANGBIN.</p>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>
