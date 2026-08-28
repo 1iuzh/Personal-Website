@@ -122,7 +122,7 @@ const navData = [
   {
     title: "外语",
     links: [
-      { name: "Google翻译", url: "https://translate.google.com/?sl=en&tl=zh-CN&op=translate", icon: "https://translate.google.com/" },
+      { name: "Google翻译", url: "https://translate.google.com/?sl=en&tl=zh-CN&op=translate", icon: "https://api.xinac.net/icon/?url=https://translate.google.com/" },
       { name: "有道词典", url: "https://www.youdao.com/", icon: "https://api.xinac.net/icon/?url=https://www.youdao.com/" },
       { name: "金山词霸", url: "https://www.iciba.com/", icon: "https://api.xinac.net/icon/?url=https://www.iciba.com/" }
     ]
@@ -177,7 +177,7 @@ const navData = [
       { name: "30 工具网", url: "https://www.30aitool.com/", icon: "https://api.xinac.net/icon/?url=https://www.30aitool.com/" },
       { name: "在线抠图", url: "https://www.remove.bg/zh", icon: "https://api.xinac.net/icon/?url=https://www.remove.bg/zh" },
       { name: "Favicon生成", url: "https://www.logosc.cn/favicon-generator", icon: "https://api.xinac.net/icon/?url=https://www.logosc.cn/favicon-generator" },
-      { name: "密码生成器", url: "https://1password.com/zh-cn/password-generator", icon: "https://1password.com/favicon.ico" },
+      { name: "密码生成器", url: "https://1password.com/zh-cn/password-generator", icon: "https://api.xinac.net/icon/?url=https://1password.com/zh-cn/password-generator" },
       { name: "在线工具", url: "https://d1tools.com/", icon: "https://api.xinac.net/icon/?url=https://d1tools.com/" }
     ]
   },
