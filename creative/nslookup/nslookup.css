@@ -84,21 +84,96 @@ html {
 }
 
 body {
-  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese); /* 设置字体栈，优先等宽，然后西文，最后中文 */
-  line-height: 1.6;                                      /* 设置行高 */
-  background-color: var(--bg-page);                      /* 设置页面背景色 */
-  color: var(--text-primary);                            /* 设置主要文字颜色 */
-  padding: 2rem;                                         /* 设置页面内边距 */
-  min-height: 100vh;                                     /* 最小高度为视口高度 */
-  display: flex;                                         /* 使用 flex 布局 */
-  flex-direction: column;                                /* 垂直排列子元素 */
-  align-items: center;                                   /* 水平居中对齐 */
-  transition: background-color 0.3s, color 0.3s;         /* 背景和颜色过渡效果 */
+  font-family: var(--font-mono), var(--font-sans-base), var(--font-sans-chinese);
+  line-height: 1.6;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- 页首导航（统一站点风格，适配主题） --- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  background: color-mix(in srgb, var(--bg-page) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dots {
+  display: flex;
+  gap: 7px;
+  margin-right: auto;
+}
+
+.nav-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.nav-dots span:nth-child(1) { background: #ff5f57; }
+.nav-dots span:nth-child(2) { background: #febc2e; }
+.nav-dots span:nth-child(3) { background: #28c840; }
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.site-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+.site-nav a::before {
+  content: "/";
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--accent-color);
+}
+
+.site-nav a:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 .container {
-  width: 100%;                                           /* 容器宽度为 100% */
-  max-width: 960px;                                      /* 容器最大宽度 */
+  width: 100%;
+  max-width: 960px;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  flex: 1;
 }
 
 header {
@@ -608,12 +683,19 @@ input::placeholder {
 }
 
 @media (max-width: 768px) {                                /* 针对小屏幕的响应式样式 */
-  body {
-      padding: 1rem;                                     /* 调整页面内边距 */
+  .container {
+      max-width: 100%;
+      margin-top: 1rem;
+      padding: 0 0.75rem;
   }
 
-  .container {
-      max-width: 100%;                                   /* 容器最大宽度适应屏幕 */
+  .nav-inner {
+      padding: 12px 16px;
+  }
+
+  .nav-links {
+      gap: 16px;
+      font-size: 0.9rem;
   }
 
   header {
@@ -704,74 +786,175 @@ input::placeholder {
   animation: fadeIn 0.4s ease-out forwards;              /* 应用淡入动画 */
 }
 
-/* --- 页脚样式 --- */
-footer {
-  font-family: var(--font-sans-base), var(--font-sans-chinese);
-  margin: 40px auto;
-  text-align: center;
-  font-size: 16px;
-  max-width: 100%;
+/* --- 页脚样式（统一站点风格，适配主题） --- */
+.site-footer {
+  width: 100%;
+  background: var(--bg-content);
+  border-top: 1px solid var(--border-color);
+  margin-top: 2.5rem;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
-.footer-nav-dot {
-  display: flex;                                              /* 使用 flex 布局 */
-  gap: 80px;                                                  /* 导航点之间的间距为 80px */
-  justify-content: center;                                    /* 导航点水平居中 */
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 28px 28px;
 }
 
-.footer-nav-dot a {
-  text-decoration: none;                                      /* 去除链接下划线 */
-  color: #555;                                              /* 链接文字颜色 */
-  font-weight: 500;                                           /* 链接文字字体粗细 */
-  position: relative;                                         /* 相对定位，用于伪元素定位 */
-  padding-left: 20px;                                         /* 链接左侧内边距为 20px */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 28px;
 }
 
-.footer-nav-dot a:before {
-  content: "";                                                /* 伪元素内容为空 */
-  position: absolute;                                         /* 绝对定位，相对于父元素 */
-  left: 0;                                                    /* 左侧距离为 0 */
-  top: 50%;                                                   /* 垂直居中 */
-  transform: translateY(-50%);
-  width: 8px;                                                 /* 伪元素宽度为 8px */
-  height: 8px;                                                /* 伪元素高度为 8px */
-  background-color: #4285f4;                                /* 伪元素背景颜色为蓝色 */
-  border-radius: 50%;                                         /* 伪元素边框圆角为 50%，形成圆形 */
-  transition: all 0.3s ease;                                  /* 过渡效果，动画时间为 0.3s，缓动函数为 ease */
-}
-
-.footer-nav-dot a:hover {
-  color: #4285f4;                                           /* 鼠标悬停时链接文字颜色变为蓝色 */
-}
-
-.footer-nav-dot a:hover:before {
-  background-color: #ff7043;                                  /* 鼠标悬停时伪元素背景颜色变为橙色 */
-  transform: translateY(-50%) scale(1.3);                       /* 鼠标悬停时伪元素放大 1.3 倍 */
-}
-
-.footer-copyright {
+.footer-brand .brand-name {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
   display: flex;
-  justify-content: center;
-  color: #555;
+  align-items: center;
+  gap: 10px;
 }
 
-.footer-copyright a {
-  text-decoration: none;                                      /* 去除链接下划线 */
-  color: #555;                                              /* 链接文字颜色 */
-}
-
-.footer-copyright a:hover {
-  color: #4285f4;                                            /* 鼠标悬停时链接文字颜色变为蓝色 */
-}
-
-.footer-copyright span:not(:last-child)::after {
+.footer-brand .brand-name::before {
   content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 60%, transparent);
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  font-family: var(--font-sans-base), var(--font-sans-chinese);
+}
+
+.footer-brand .version-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 28%, transparent);
+  border-radius: 6px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.82rem;
+  color: var(--accent-color);
+}
+
+.footer-col h3 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 10px;
+}
+
+.footer-col a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans-base), var(--font-sans-chinese);
+}
+
+.footer-col a::before {
+  content: "›";
+  color: var(--border-color-light);
+  font-weight: 700;
+  transition: color 0.2s ease, transform 0.2s ease;
   display: inline-block;
-  width: 1px;
-  height: 14px;
-  background-color: #555;
-  margin: 0 8px;
-  vertical-align: middle;
-  position: relative; 
-  bottom: 1px;
+}
+
+.footer-col a:hover,
+.footer-col a:focus-visible {
+  color: var(--accent-color);
+  outline: none;
+}
+
+.footer-col a:hover::before,
+.footer-col a:focus-visible::before {
+  color: var(--accent-color);
+  transform: translateX(2px);
+}
+
+.footer-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin-bottom: 20px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-bottom .copyright {
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+}
+
+.footer-bottom .copyright a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom .copyright a:hover {
+  color: var(--accent-color);
+}
+
+.footer-bottom .powered {
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 24px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+  .footer-inner {
+    padding: 28px 16px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
 }
