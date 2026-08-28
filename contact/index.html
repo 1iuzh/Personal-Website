@@ -265,17 +265,18 @@
     }
 
     /* 汉堡图标的三条线，用两条对角线 + 一条中间线组成，
-       展开时通过位移/旋转/淡出组合成一个「×」 */
+       展开时通过 transform（而非 top）位移+旋转，
+       确保旋转中心始终对齐、不会出现左右不居中的问题 */
     .menu-toggle .icon-line {
       position: absolute;
+      left: 0;
       width: 20px;
       height: 2px;
       border-radius: 2px;
       background: currentColor;
       transition:
         transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.2s ease,
-        top 0.3s ease;
+        opacity 0.2s ease;
     }
 
     .menu-toggle .icon-line-wrap {
@@ -296,10 +297,11 @@
       top: 14px;
     }
 
-    /* aria-expanded="true" 时：上下两条线旋转 45°/-45° 组成「×」，中间线淡出 */
+    /* aria-expanded="true" 时：上下两条线各平移 5px 到中间线的位置，
+       再旋转 45°/-45° 组成「×」，两条线的旋转中心完全重合，
+       中间线同时淡出 */
     .menu-toggle[aria-expanded="true"] .icon-line--top {
-      top: 9px;
-      transform: rotate(45deg);
+      transform: translateY(5px) rotate(45deg);
     }
 
     .menu-toggle[aria-expanded="true"] .icon-line--middle {
@@ -307,8 +309,7 @@
     }
 
     .menu-toggle[aria-expanded="true"] .icon-line--bottom {
-      top: 9px;
-      transform: rotate(-45deg);
+      transform: translateY(-5px) rotate(-45deg);
     }
 
     /* =========================
