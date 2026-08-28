@@ -122,6 +122,7 @@ const navData = [
   {
     title: "外语",
     links: [
+      { name: "Google翻译", url: "https://translate.google.com/?sl=en&tl=zh-CN&op=translate", icon: "https://translate.google.com/" },
       { name: "有道词典", url: "https://www.youdao.com/", icon: "https://api.xinac.net/icon/?url=https://www.youdao.com/" },
       { name: "金山词霸", url: "https://www.iciba.com/", icon: "https://api.xinac.net/icon/?url=https://www.iciba.com/" }
     ]
