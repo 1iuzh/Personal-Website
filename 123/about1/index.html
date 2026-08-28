@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+  <meta name="description" content="网址导航项目的由来与说明。" />
+  <meta name="theme-color" content="#dfeee4" />
+  <link rel="icon" href="../favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" />
+
+  <title>网址导航项目说明</title>
+  <style>
+    :root {
+      --bg: #e8f0e8;
+      --bg-deep: #dbe9de;
+
+      --text: #2d3d34;
+      --text-soft: #6c7972;
+      --text-light: #909d96;
+
+      --green: #668f72;
+      --green-dark: #4e755a;
+      --green-light: #dcebdd;
+
+      --white: rgba(255, 255, 255, 0.62);
+
+      --border: rgba(255, 255, 255, 0.72);
+
+      --shadow: 0 20px 60px rgba(48, 75, 58, 0.1);
+
+      --shadow-hover: 0 28px 70px rgba(48, 75, 58, 0.16);
+
+      --radius-large: 30px;
+      --radius-medium: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family: "M PLUS Rounded 1c", "Microsoft YaHei", "PingFang SC", sans-serif;
+
+      font-size: 17px;
+
+      color: var(--text);
+
+      background: linear-gradient(135deg,
+          #edf4ed 0%,
+          #e4efe6 45%,
+          #dceae0 100%);
+
+      line-height: 1.7;
+
+      overflow-x: hidden;
+
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ==================================================
+           背景
+        ================================================== */
+
+    .background {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: -10;
+
+      overflow: hidden;
+
+      pointer-events: none;
+    }
+
+    .background::before {
+      content: "";
+
+      position: absolute;
+
+      width: 600px;
+      height: 600px;
+
+      top: -250px;
+      left: -180px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0) 70%);
+    }
+
+    .background::after {
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      right: -300px;
+      bottom: -300px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(159, 194, 169, 0.28) 0%,
+          rgba(159, 194, 169, 0) 70%);
+    }
+
+    /* ==================================================
+           页面
+        ================================================== */
+
+    .page {
+      width: min(920px, calc(100% - 48px));
+
+      margin: 0 auto;
+
+      padding: 28px 0 35px;
+    }
+
+    /* ==================================================
+           顶部导航
+        ================================================== */
+
+    .navbar {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 52px;
+    }
+
+    .brand {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.2px;
+    }
+
+    .brand-icon {
+      width: 22px;
+      height: 22px;
+
+      flex-shrink: 0;
+
+      border-radius: 6px;
+
+      object-fit: cover;
+
+      box-shadow: 0 0 0 3px rgba(102, 143, 114, 0.13);
+    }
+
+    /* ---- 桌面端导航链接 ---- */
+    .nav-links {
+      display: flex;
+
+      align-items: center;
+
+      gap: 30px;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      color: var(--text-soft);
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--green);
+
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ---- 汉堡菜单按钮（桌面端隐藏） ---- */
+    .menu-toggle {
+      display: none;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 5px;
+
+      width: 42px;
+      height: 42px;
+
+      padding: 0;
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.55);
+
+      backdrop-filter: blur(10px);
+
+      cursor: pointer;
+
+      -webkit-tap-highlight-color: transparent;
+
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.85);
+
+      box-shadow: 0 4px 14px rgba(47, 74, 58, 0.1);
+    }
+
+    .menu-toggle span {
+      display: block;
+
+      width: 20px;
+      height: 2px;
+
+      border-radius: 2px;
+
+      background: var(--green-dark);
+
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ---- 移动端下拉菜单 ---- */
+    .mobile-nav {
+      display: none;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+      margin-top: 14px;
+
+      padding: 14px 18px;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-medium);
+
+      background: rgba(255, 255, 255, 0.72);
+
+      backdrop-filter: blur(16px);
+
+      box-shadow: var(--shadow);
+
+      opacity: 0;
+
+      transform: translateY(-8px);
+
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .mobile-nav a {
+      display: block;
+
+      padding: 10px 14px;
+
+      border-radius: 12px;
+
+      color: var(--text-soft);
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 500;
+
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(102, 143, 114, 0.1);
+
+      color: var(--green-dark);
+    }
+
+    /* ==================================================
+           关于页 Hero
+        ================================================== */
+
+    .about-hero {
+      position: relative;
+
+      padding: 56px 70px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-large);
+
+      background: rgba(255, 255, 255, 0.47);
+
+      box-shadow: var(--shadow);
+
+      backdrop-filter: blur(18px);
+
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .about-hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 320px;
+      height: 320px;
+
+      right: -140px;
+      top: -160px;
+
+      border-radius: 50%;
+
+      background: rgba(131, 174, 143, 0.12);
+
+      animation: heroFloat 10s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(18px);
+      }
+    }
+
+    .eyebrow {
+      position: relative;
+      z-index: 2;
+
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      color: var(--green);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      letter-spacing: 3px;
+    }
+
+    .about-hero h1 {
+      position: relative;
+      z-index: 2;
+
+      margin: 0;
+
+      color: var(--text);
+
+      font-size: clamp(36px, 5vw, 50px);
+
+      font-weight: 700;
+
+      line-height: 1.2;
+
+      letter-spacing: -1px;
+    }
+
+    /* ==================================================
+           正文卡片
+        ================================================== */
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .about-panel {
+      position: relative;
+
+      padding: 46px 60px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-large);
+
+      background: rgba(255, 255, 255, 0.48);
+
+      box-shadow: 0 14px 42px rgba(47, 74, 58, 0.07);
+
+      backdrop-filter: blur(16px);
+
+      -webkit-backdrop-filter: blur(16px);
+
+      text-align: center;
+    }
+
+    .about-panel::before {
+      content: "";
+
+      position: absolute;
+
+      width: 200px;
+      height: 200px;
+
+      left: -80px;
+      bottom: -90px;
+
+      border-radius: 50%;
+
+      background: rgba(113, 158, 126, 0.09);
+    }
+
+    .about-panel p {
+      position: relative;
+      z-index: 1;
+
+      max-width: 640px;
+
+      margin: 0 auto 20px;
+
+      color: var(--text-soft);
+
+      font-size: 19px;
+
+      line-height: 1.9;
+    }
+
+    .about-panel p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .about-panel p strong {
+      color: var(--text);
+
+      font-weight: 700;
+    }
+
+    .contact-wrapper {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 34px;
+
+      padding-top: 30px;
+
+      border-top: 1px solid rgba(90, 120, 100, 0.14);
+    }
+
+    .btn-contact {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 13px 28px;
+
+      color: #ffffff;
+
+      text-decoration: none;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.3px;
+
+      border-radius: 14px;
+
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+
+      box-shadow: 0 12px 28px rgba(47, 74, 58, 0.2);
+
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-3px);
+
+      box-shadow: 0 16px 34px rgba(47, 74, 58, 0.28);
+    }
+
+    /* ==================================================
+           手机端
+        ================================================== */
+
+    @media (max-width: 800px) {
+      .page {
+        width: calc(100% - 28px);
+
+        padding: 18px 0 25px;
+      }
+
+      .navbar {
+        margin-bottom: 28px;
+
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .about-hero {
+        padding: 42px 26px;
+
+        border-radius: 25px;
+
+        text-align: center;
+      }
+
+      .about-hero h1 {
+        font-size: 34px;
+      }
+
+      .about-panel {
+        padding: 34px 26px;
+
+        border-radius: 25px;
+      }
+
+      .about-panel p {
+        max-width: 100%;
+
+        font-size: 17px;
+
+        line-height: 1.9;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before {
+        animation: none !important;
+
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 背景 -->
+
+  <div class="background" aria-hidden="true"></div>
+
+  <main class="page">
+    <!-- ============================================
+             顶部导航
+        ============================================= -->
+
+    <nav class="navbar" aria-label="主导航">
+      <a href="/123/" class="brand">
+        <img src="../favicon.png" alt="" class="brand-icon" />
+
+        https://liuzhangbin.com/123/
+      </a>
+
+      <!-- 桌面端导航 -->
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/123/">网址导航</a>
+        <a href="/creative/">创意工坊</a>
+        <a href="/contact/">与我联系</a>
+      </div>
+
+      <!-- 移动端汉堡按钮 -->
+      <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- 移动端下拉菜单 -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="/">首页</a>
+      <a href="/123/">网址导航</a>
+      <a href="/creative/">创意工坊</a>
+      <a href="/contact/">与我联系</a>
+    </div>
+
+    <!-- ============================================
+             关于本站 Hero
+        ============================================= -->
+
+    <section class="about-hero">
+      <span class="eyebrow">Something to say.</span>
+
+      <h1>占位符</h1>
+    </section>
+
+    <!-- ============================================
+             正文内容
+        ============================================= -->
+
+    <section class="section">
+      <div class="about-panel">
+        <p>这个网址导航项目，源于几年前整理浏览器书签时的一次突发奇想。</p>
+
+        <p>最初它只是一个部署在本地的纯前端页面，仅供自己日常使用。随着收录的网址越来越多，我也在不断调整分类与结构，结合其他项目，最终决定将它部署到公网分享出来。在保留核心收藏的同时，我也补充了更多通用资源，并剔除了过于私人的网址。</p>
+
+        <p>在部署到公网同时，网址数据做了比较大的调整，目前版本仍处于粗略整理阶段，分类与细节仍有诸多不足。后续有时间我会继续迭代与维护。</p>
+
+        <p>如果你在使用过程中遇到 <strong>网址失效、分类不当、内容有误</strong>，或有任何改善建议，欢迎随时与我联系。感谢你的支持与反馈！</p>
+
+        <div class="contact-wrapper">
+          <a href="/contact/" class="btn-contact">与我联系 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+
+      if (!toggle || !mobileNav) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = mobileNav.classList.toggle('open');
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileNav.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
