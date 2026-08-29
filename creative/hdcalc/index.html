@@ -42,8 +42,8 @@
         <div class="card">
             <h2>输入容量 <span class="tag">// input</span></h2>
             <div class="input-group">
-                <input type="number" id="inputValue" step="any" required
-                    placeholder="输入产品标称容量">
+                <input type="number" id="inputValue" min="0" step="1" inputmode="numeric" required
+                    placeholder="输入产品标称容量（非负整数）">
                 <select id="unit" class="unit">
                     <option value="1000000">MB</option>
                     <option value="1000000000">GB</option>
@@ -161,6 +161,7 @@
     <script>
         // 获取计算按钮
         const calculateBtn = document.getElementById("calculateBtn");
+        const inputValueEl = document.getElementById("inputValue");
 
         // 绑定点击事件
         calculateBtn.addEventListener('click', function () {
@@ -168,9 +169,24 @@
         });
 
         // 绑定回车键事件
-        document.getElementById("inputValue").addEventListener('keypress', function (e) {
+        inputValueEl.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 calculate();
+            }
+        });
+
+        // 禁止输入负号、小数点、科学计数法等非整数字符
+        inputValueEl.addEventListener('keydown', function (e) {
+            if (['-', '+', '.', 'e', 'E'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+
+        // 粘贴内容时同样过滤掉非数字字符
+        inputValueEl.addEventListener('input', function () {
+            const digitsOnly = this.value.replace(/[^0-9]/g, '');
+            if (digitsOnly !== this.value) {
+                this.value = digitsOnly;
             }
         });
 
@@ -178,11 +194,11 @@
             // 获取输入值
             const inputElement = document.getElementById("inputValue");
             const bytesPerUnit = parseInt(document.getElementById("unit").value);
-            const inputValue = parseFloat(inputElement.value);
+            const inputValue = Number(inputElement.value);
 
-            // 验证输入
-            if (isNaN(inputValue)) {
-                alert("请输入有效的数字");
+            // 验证输入：必须是大于等于 0 的整数
+            if (inputElement.value.trim() === "" || isNaN(inputValue) || !Number.isInteger(inputValue) || inputValue < 0) {
+                alert("请输入大于等于 0 的整数");
                 inputElement.focus();
                 return;
             }
