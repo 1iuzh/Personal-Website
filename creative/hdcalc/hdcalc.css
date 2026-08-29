@@ -435,9 +435,9 @@ button:active {
 }
 
 .footer-brand .brand-name {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans-base), var(--font-sans-chinese);
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 500;
     color: #0c1019;
     margin-bottom: 12px;
     display: flex;
