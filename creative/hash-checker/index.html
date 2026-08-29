@@ -15,7 +15,7 @@
         --panel: #ffffff;
         --border: #e2e6ef;
         --border-soft: #ecf0f6;
-        --text: #1a2030;
+        --text: #101113;
         --text-body: #343d4d;
         --text-dim: #687486;
         --accent: #2f6feb;
@@ -30,7 +30,7 @@
 
     html {
         scroll-behavior: smooth;
-        font-size: 18px; /* larger base for 4K / high-DPI clarity */
+        font-size: 16px; /* base size, kept comfortable for 4K / high-DPI clarity */
     }
 
     body {
@@ -53,42 +53,80 @@
         position: sticky;
         top: 0;
         z-index: 20;
-        background: rgba(248,249,252,0.88);
+        background: rgba(248,249,252,0.72);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
-        max-width: 860px;
+        max-width: 1040px;
         margin: 0 auto;
-        padding: 12px 28px;
+        padding: 10px 32px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        gap: 24px;
     }
 
-    .nav-dots {
+    .nav-brand {
         display: flex;
-        gap: 7px;
-        margin-right: auto;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        color: var(--text);
+        text-decoration: none;
     }
 
-    .nav-dots span {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
+    .logo-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--accent) 0%, #5b8def 55%, var(--glow) 130%);
+        box-shadow: 0 6px 16px -6px rgba(47,111,235,0.55);
+        color: #fff;
+        font-family: var(--mono);
+        font-weight: 800;
+        font-size: 0.82rem;
+        letter-spacing: -0.02em;
     }
 
-    .nav-dots span:nth-child(1) { background: #ff5f57; }
-    .nav-dots span:nth-child(2) { background: #febc2e; }
-    .nav-dots span:nth-child(3) { background: #28c840; }
+    .nav-brand-divider {
+        width: 1px;
+        height: 16px;
+        background: var(--border);
+        flex-shrink: 0;
+    }
+
+    .nav-brand-text {
+        font-family: var(--mono);
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--text-dim);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.2s ease;
+    }
+
+    .nav-brand:hover .nav-brand-text,
+    .nav-brand:focus-visible .nav-brand-text {
+        color: var(--accent);
+    }
 
     .nav-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 26px;
-        font-family: var(--mono);
-        font-size: 0.98rem;
-        font-weight: 600;
+        align-items: center;
+        gap: 28px;
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        font-weight: 500;
+        flex-shrink: 0;
     }
 
     .site-nav a {
@@ -100,9 +138,9 @@
         margin: -2px -4px;
     }
 
-    .site-nav a::before {
+    .nav-links a::before {
         content: "/";
-        color: #c7cedb;
+        color: #8a93a6;
         margin-right: 2px;
     }
 
@@ -115,7 +153,7 @@
         color: var(--accent);
     }
 
-    .site-nav a[aria-current="page"]::before {
+    .nav-links a[aria-current="page"]::before {
         color: var(--accent);
     }
 
@@ -128,7 +166,7 @@
 
     /* ---------- layout ---------- */
     .container {
-        max-width: 860px;
+        max-width: 1040px;
         margin: 0 auto;
         padding: 40px 28px 56px;
     }
@@ -203,7 +241,7 @@
         gap: 12px;
         margin-bottom: 12px;
         color: #0c1019;
-        font-family: var(--mono);
+        font-family: var(--sans);
         font-size: 1.28rem;
         font-weight: 700;
         line-height: 1.4;
@@ -211,6 +249,7 @@
 
     .card h2 .tag {
         color: var(--text-dim);
+        font-family: var(--mono);
         font-size: 0.88rem;
         font-weight: 400;
     }
@@ -398,14 +437,15 @@
     }
 
     .footer-inner {
-        max-width: 860px;
+        max-width: 1040px;
         margin: 0 auto;
         padding: 36px 28px 28px;
     }
 
     .footer-grid {
         display: grid;
-        grid-template-columns: 1.6fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
         gap: 36px;
         margin-bottom: 28px;
     }
@@ -450,52 +490,66 @@
         color: #2255c4;
     }
 
-    .footer-col h3 {
-        font-family: var(--mono);
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: var(--text);
-        letter-spacing: 0.06em;
-        margin-bottom: 16px;
-        text-transform: uppercase;
+    .footer-col-support {
+        display: flex;
+        justify-content: flex-end;
     }
 
-    .footer-col ul {
-        list-style: none;
+    .footer-pill-row {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px 12px;
     }
 
-    .footer-col li {
-        margin-bottom: 10px;
-    }
-
-    .footer-col a {
-        color: var(--text-dim);
-        text-decoration: none;
-        font-size: 1.02rem;
-        transition: color 0.2s ease;
-        display: inline-flex;
+    .footer-pill {
+        display: flex;
         align-items: center;
-        gap: 6px;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 16px 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border-soft);
+        background: #f6f8fb;
+        text-decoration: none;
+        color: var(--text-dim);
+        font-size: 0.92rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .footer-col a::before {
-        content: "›";
-        color: var(--border);
-        font-weight: 700;
-        transition: color 0.2s ease, transform 0.2s ease;
-        display: inline-block;
-    }
-
-    .footer-col a:hover,
-    .footer-col a:focus-visible {
+    .footer-pill-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--accent-soft);
         color: var(--accent);
+        flex-shrink: 0;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .footer-pill-icon svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .footer-pill:hover,
+    .footer-pill:focus-visible {
+        background: #ffffff;
+        border-color: #cfe0fb;
+        color: var(--text);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px -10px rgba(47,111,235,0.4);
         outline: none;
     }
 
-    .footer-col a:hover::before,
-    .footer-col a:focus-visible::before {
-        color: var(--accent);
-        transform: translateX(2px);
+    .footer-pill:hover .footer-pill-icon,
+    .footer-pill:focus-visible .footer-pill-icon {
+        background: var(--accent);
+        color: #ffffff;
     }
 
     .footer-divider {
@@ -537,16 +591,19 @@
     /* ---------- responsive ---------- */
     @media (max-width: 768px) {
         .footer-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 32px 24px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
-        .footer-brand {
-            grid-column: 1 / -1;
+        .footer-col-support {
+            justify-content: flex-start;
+        }
+        .footer-pill-row {
+            grid-template-columns: 1fr 1fr;
         }
     }
 
     @media (max-width: 600px) {
-        html { font-size: 16px; }
+        html { font-size: 15px; }
         .container { padding-top: 28px; padding-left: 20px; padding-right: 20px; padding-bottom: 40px; }
         .hero { margin-bottom: 20px; }
         .hero h1 { font-size: 2.1rem; }
@@ -557,11 +614,10 @@
         .features li { font-size: 1.05rem; }
         .download-box { padding: 22px 20px 20px 24px; }
         .download-btn { font-size: 1.05rem; padding: 12px 28px; }
+        .nav-inner { padding: 12px 20px; gap: 14px; }
+        .nav-brand-text { display: none; }
+        .nav-brand-divider { display: none; }
         .nav-links { gap: 16px; font-size: 0.9rem; }
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 22px;
-        }
         .footer-bottom {
             flex-direction: column;
             text-align: center;
@@ -572,7 +628,9 @@
         html { scroll-behavior: auto; }
         .download-btn { transition: none; }
         .checksum-chip .copy-hint { transition: none; }
-        .footer-col a::before { transition: none; }
+        .footer-pill,
+        .footer-pill:hover,
+        .footer-pill-icon { transition: none; transform: none; }
     }
 
     /* ---------- print ---------- */
@@ -604,7 +662,11 @@
 
 <nav class="site-nav" aria-label="主导航">
     <div class="nav-inner">
-        <div class="nav-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <a class="nav-brand" href="/creative/hash-checker/">
+            <span class="logo-mark" aria-hidden="true">H</span>
+            <span class="nav-brand-divider" aria-hidden="true"></span>
+            <span class="nav-brand-text">Hash Checker</span>
+        </a>
         <div class="nav-links">
             <a href="/">首页</a>
             <a href="/123/">网址导航</a>
@@ -670,21 +732,33 @@
                 <p>一款轻量、开源、绿色的 Windows 文件哈希校验工具，让文件完整性验证变得简单直观。</p>
                 <span class="version-tag">最新版本 v2.4.3 · 2026-08-24</span>
             </div>
-            <div class="footer-col">
-                <h3>导航</h3>
-                <ul>
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/123/">网址导航</a></li>
-                    <li><a href="/creative/">创意工坊</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>支持</h3>
-                <ul>
-                    <li><a href="/contact/">联系作者</a></li>
-                    <li><a href="">更新日志</a></li>
-                    <li><a href="">隐私政策</a></li>
-                </ul>
+            <div class="footer-col footer-col-support">
+                <div class="footer-pill-row">
+                    <a class="footer-pill" href="/contact/">
+                        <span class="footer-pill-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+                        </span>
+                        <span>与我联系</span>
+                    </a>
+                    <a class="footer-pill" href="">
+                        <span class="footer-pill-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h6"/></svg>
+                        </span>
+                        <span>更新日志</span>
+                    </a>
+                    <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
+                        <span class="footer-pill-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+                        </span>
+                        <span>GitHub</span>
+                    </a>
+                    <a class="footer-pill" href="">
+                        <span class="footer-pill-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z"/><path d="m9.3 12 1.9 1.9 3.4-3.6"/></svg>
+                        </span>
+                        <span>隐私政策</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-divider"></div>
