@@ -10,7 +10,6 @@
         const providerSelect = document.getElementById('provider');             // 获取 DNS 服务商选择框元素
         const inputHint = document.getElementById('inputHint');                 // 获取输入提示元素
         const initialMessageDiv = document.getElementById('initial-message');   // 获取初始消息提示框元素
-        const themeToggleBtn = document.getElementById('theme-toggle-btn');     // 获取主题切换按钮元素
         
         // --- 全局变量 & 常量 ---
         const cache = new Map();                                        // 前端缓存，存储查询结果
@@ -18,19 +17,15 @@
         let currentController = null;                                   // 当前查询的 AbortController，用于中断 fetch 请求
         let currentQueryValue = '';                                     // 当前查询输入框的值（用于刷新按钮判断）
         const LS_KEYS = {                                               // LocalStorage 键名常量
-            THEME: 'dns_tool_theme',                                    // 主题设置键名
             TYPE: 'dns_tool_last_type',                                 // 上次选择的记录类型键名
             PROVIDER: 'dns_tool_last_provider'                          // 上次选择的服务商键名
         };
-        // 主题切换按钮的 SVG 图标
-        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>`; // 浅色模式图标 (太阳)
-        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>`; // 深色模式图标 (月亮)
         
-        // --- DNS 服务商配置 (图标已省略) ---
+        // --- DNS 服务商配置 ---
         const API_ENDPOINTS = {
-            alidns: { url: 'https://dns.alidns.com/resolve', headers: { 'Accept': 'application/dns-json' }, name: 'Aliyun DNS', icon: `` }, // 阿里云 DNS 配置
-            cloudflare: { url: 'https://cloudflare-dns.com/dns-query', headers: { 'Accept': 'application/dns-json' }, name: 'Cloudflare DNS', icon: `` }, // Cloudflare DNS 配置
-            google: { url: 'https://dns.google/resolve', headers: { 'Accept': 'application/dns-json' }, name: 'Google Public DNS', icon: `` }  // Google DNS 配置
+            alidns: { url: 'https://dns.alidns.com/resolve', headers: { 'Accept': 'application/dns-json' }, name: 'Aliyun DNS', icon: providerIconSvg() }, // 阿里云 DNS 配置
+            cloudflare: { url: 'https://cloudflare-dns.com/dns-query', headers: { 'Accept': 'application/dns-json' }, name: 'Cloudflare DNS', icon: providerIconSvg() }, // Cloudflare DNS 配置
+            google: { url: 'https://dns.google/resolve', headers: { 'Accept': 'application/dns-json' }, name: 'Google Public DNS', icon: providerIconSvg() }  // Google DNS 配置
         };
         
         // --- DNS 状态码映射 ---
@@ -43,49 +38,6 @@
             5: 'REFUSED',    // 拒绝
             // 根据需要添加更多状态码
         };
-        
-        // --- 主题管理 ---
-        /**
-         * 应用指定的主题（'light' 或 'dark'）
-         * @param {string} theme - 要应用的主题 ('light' 或 'dark')
-         */
-        function applyTheme(theme) {
-            document.body.dataset.theme = theme;                                        // 在 body 上设置 data-theme 属性
-            themeToggleBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;           // 更新切换按钮的图标
-            themeToggleBtn.title = theme === 'dark' ? '切换到浅色主题' : '切换到深色主题';   // 更新切换按钮的 title
-            try {
-                localStorage.setItem(LS_KEYS.THEME, theme);                             // 将主题保存到 localStorage
-            } catch (e) {
-                console.warn("LocalStorage 错误:", e);                                   // 处理 localStorage 异常
-            }
-        }
-        
-        /**
-         * 切换当前主题（浅色/深色）
-         */
-        function toggleTheme() {
-            const currentTheme = document.body.dataset.theme;                   // 获取当前主题
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';        // 计算新主题
-            applyTheme(newTheme);                                               // 应用新主题
-        }
-        
-        /**
-         * 加载初始主题（优先从 localStorage 读取，其次根据系统偏好，默认为浅色）
-         */
-         function loadInitialTheme() {
-                    let preferredTheme = 'light'; // Set default to light
-                    try {
-                        const savedTheme = localStorage.getItem(LS_KEYS.THEME);
-                        // If a theme preference is saved in localStorage, use it
-                        if (savedTheme === 'light' || savedTheme === 'dark') {
-                            preferredTheme = savedTheme;
-                        }
-                        // Otherwise, the preferredTheme remains 'light'
-                    } catch (e) {
-                         console.warn("LS Error setting theme:", e);
-                    }
-                    applyTheme(preferredTheme); // Apply the determined theme
-                }
         
         // --- 核心逻辑 ---
         /**
@@ -358,9 +310,13 @@
             // 获取记录类型的友好名称 (例如 'A (IPv4 Address)')
             const typeName = typeSelect.querySelector(`option[value="${recordType}"]`)?.textContent || recordType;
             resultDiv.innerHTML = `
-                        <div class="empty-state fade-in">                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        <div class="empty-state fade-in">
+                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="8.5"/>
+                                <path d="M9.5 9.3a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 1.9-2.4 3.5"/>
+                                <circle cx="12" cy="16.6" r="0.6" fill="currentColor" stroke="none"/>
                              </svg>
-                             <h3>未找到记录</h3>                                   <p>在 ${providerInfo.name} 上查询 "${originalInput}" 的 ${typeName} 记录时，${message}</p> <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">请检查输入或尝试其他选项。</p> </div>
+                             <h3>未找到记录</h3>                                   <p>在 ${providerInfo.name} 上查询 "${originalInput}" 的 ${typeName} 记录时，${message}</p> <p class="empty-note">请检查输入或尝试其他选项。</p> </div>
                     `;
         }
         
@@ -373,10 +329,10 @@
             let iconSvg = '';
             // 根据消息类型选择不同的 SVG 图标
             switch (type) {
-                case 'error': iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>`; break; // 错误图标
-                case 'success': iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`; break; // 成功图标
-                case 'warning': iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>`; break; // 警告图标 (使用与错误相同的图标)
-                case 'info': default: iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>`; break; // 信息图标
+                case 'error': iconSvg = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m9 9 6 6M15 9l-6 6"/></svg>`; break; // 错误图标 (圆圈叉号)
+                case 'success': iconSvg = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.3 12.3 2.4 2.4 4.9-5.2"/></svg>`; break; // 成功图标 (圆圈勾号)
+                case 'warning': iconSvg = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3L12 3.5Z" stroke-linejoin="round"/><path d="M12 10v4"/><circle cx="12" cy="16.6" r="0.6" fill="currentColor" stroke="none"/></svg>`; break; // 警告图标 (三角感叹号)
+                case 'info': default: iconSvg = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg>`; break; // 信息图标 (圆圈 i)
             }
         
             resultDiv.innerHTML = `
@@ -649,14 +605,22 @@
          * @returns {string} SVG HTML 字符串
          */
         function copyIconSvg() {
-            return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg>`;
+            return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="7" width="11" height="13" rx="2"/><path d="M15 7V5.5A1.5 1.5 0 0 0 13.5 4h-6A1.5 1.5 0 0 0 6 5.5V16a1.5 1.5 0 0 0 1.5 1.5H8"/></svg>`;
         }
         /**
          * 返回表示“已复制”的勾号 SVG 图标 HTML
          * @returns {string} SVG HTML 字符串
          */
         function checkIconSvg() {
-            return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="color: var(--accent-color);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
+            return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--success);"><path d="m5 12.5 5 5L19 7"/></svg>`;
+        }
+
+        /**
+         * 返回服务商信息区域使用的小型服务器图标 SVG HTML
+         * @returns {string} SVG HTML 字符串
+         */
+        function providerIconSvg() {
+            return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="6" rx="1.5"/><rect x="3.5" y="14" width="17" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>`;
         }
         
         
@@ -722,11 +686,8 @@
         typeSelect.addEventListener('change', saveSettings);                // 变化时保存设置到 localStorage
         // 监听服务商选择框的变化事件
         providerSelect.addEventListener('change', saveSettings);            // 变化时保存设置到 localStorage
-        // 监听主题切换按钮的点击事件
-        themeToggleBtn.addEventListener('click', toggleTheme);              // 点击时切换主题
         
         // --- 初始化 ---
-        loadInitialTheme();                                                 // 首先加载并应用主题
         typeSelect.value = 'A';
         providerSelect.value = 'alidns';
         
