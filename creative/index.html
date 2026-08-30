@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>创意工坊 · 实用工具集 - Liuzhangbin</title>
 <meta name="description" content="Creative 实用工具集，提供密码生成、DNS 查询、硬盘容量换算、常用软件清单等实用工具。" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -670,7 +671,7 @@
             <a class="nav-brand" href="/creative/">
                 <span class="logo-mark" aria-hidden="true">C</span>
                 <span class="nav-brand-divider" aria-hidden="true"></span>
-                <span class="nav-brand-text">Creative Toolkit</span>
+                <span class="nav-brand-text">Creative Toolkits</span>
             </a>
             <div class="nav-links">
                 <a href="/">首页</a>
@@ -722,7 +723,7 @@
                 <div class="footer-brand">
                     <div class="brand-name">创意工坊</div>
                     <p>一些自己做的、常用的实用工具。简单、直接，持续更新。</p>
-                    <span class="version-tag">Made with curiosity</span>
+                    <span class="version-tag">Made with curiosity · Built with care</span>
                 </div>
                 <div class="footer-col-support">
                     <div class="footer-pill-row">
@@ -838,6 +839,8 @@
         const card = document.createElement("a");
         card.className = "tool-card";
         card.href = tool.url;
+        card.target = "_blank";
+        card.rel = "noopener";
         card.innerHTML = `
             <div class="tool-icon">${icons[tool.icon] || icons.package}</div>
             <div class="tool-name">${tool.name}${tool.featured ? '<span class="tool-featured-dot" title="推荐"></span>' : ''}</div>
