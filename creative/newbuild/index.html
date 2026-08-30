@@ -4,63 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="常用软件清单，精选常用办公、浏览器、系统维护、文件处理等软件。">
-
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-
-    <title>常用软件清单</title>
+    <title>常用软件清单 - Liuzhangbin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* =========================================================
-           Design System
-           ========================================================= */
-
         :root {
-            --primary: #4f46e5;
-            --primary-light: #6366f1;
-            --primary-dark: #3730a3;
+            --font-sans-chinese: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+            --font-sans-base: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
+            --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
 
-            --accent: #06b6d4;
+            --bg: #f8f9fc;
+            --panel: #ffffff;
+            --panel-soft: #f6f8fb;
+            --border: #e2e6ef;
+            --border-soft: #ecf0f6;
+            --text: #101113;
+            --text-body: #343d4d;
+            --text-dim: #687486;
+            --text-muted: #97a1b3;
 
-            --text: #18181b;
-            --text-secondary: #52525b;
-            --text-muted: #a1a1aa;
+            --accent: #4361ee;
+            --accent-soft: #eaefff;
+            --glow: #ffb020;
 
-            --background: #f6f7fb;
-            --surface: rgba(255, 255, 255, 0.86);
-            --surface-solid: #ffffff;
-
-            --border: rgba(24, 24, 27, 0.07);
-            --border-hover: rgba(79, 70, 229, 0.22);
-
-            --shadow-sm:
-                0 1px 2px rgba(0, 0, 0, 0.04);
-
-            --shadow:
-                0 8px 30px rgba(15, 23, 42, 0.06);
-
-            --shadow-hover:
-                0 16px 40px rgba(15, 23, 42, 0.10);
-
-            --radius-sm: 10px;
-            --radius: 16px;
-            --radius-lg: 24px;
-
-            --transition:
-                0.25s cubic-bezier(0.4, 0, 0.2, 1);
-
-            --container: 1280px;
+            --shadow-sm: 0 2px 4px rgba(30, 41, 59, 0.06);
+            --shadow-md: 0 10px 30px -22px rgba(30, 41, 59, 0.18);
+            --shadow-hover: 0 16px 34px -18px rgba(30, 41, 59, 0.22);
+            --radius-sm: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
         }
 
-
-        /* =========================================================
-           Reset
-           ========================================================= */
-
-        *,
-        *::before,
-        *::after {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -68,494 +48,329 @@
 
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
-
+            font-family: var(--font-sans-base), var(--font-sans-chinese);
+            line-height: 1.7;
             color: var(--text);
-
-            font-family:
-                Inter,
-                "SF Pro Display",
-                "PingFang SC",
-                "Microsoft YaHei",
-                sans-serif;
-
-            line-height: 1.6;
-
             background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(99, 102, 241, 0.10),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(6, 182, 212, 0.08),
-                    transparent 25%
-                ),
-                var(--background);
+                radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 176, 32, 0.12), transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(67, 97, 238, 0.06), transparent 40%),
+                var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        a {
-            color: inherit;
+        a { color: inherit; text-decoration: none; }
+        button, input { font: inherit; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+
+        /* ---------- navigation ---------- */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            flex-shrink: 0;
+            background: rgba(248, 249, 252, 0.72);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
-
-        /* =========================================================
-           Scrollbar
-           ========================================================= */
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        .nav-inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 10px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: transparent;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            color: var(--text);
+            text-decoration: none;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #d4d4d8;
-            border-radius: 999px;
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--accent) 0%, #6c8bf5 55%, var(--glow) 130%);
+            box-shadow: 0 6px 16px -6px rgba(67, 97, 238, 0.55);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: -0.02em;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a1a1aa;
+        .nav-brand-divider {
+            width: 1px;
+            height: 16px;
+            background: var(--border);
+            flex-shrink: 0;
         }
 
-
-        /* =========================================================
-           Common
-           ========================================================= */
-
-        .container {
-            width: min(
-                calc(100% - 40px),
-                var(--container)
-            );
-
-            margin-inline: auto;
-        }
-
-
-        /* =========================================================
-           Header
-           ========================================================= */
-
-        .hero {
-            position: relative;
-
+        .nav-brand-text {
+            font-family: var(--font-mono);
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
             overflow: hidden;
-
-            padding: 72px 0 64px;
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #312e81 0%,
-                    #4f46e5 48%,
-                    #2563eb 100%
-                );
+            text-overflow: ellipsis;
+            transition: color 0.2s ease;
         }
 
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 500px;
-            height: 500px;
-
-            top: -280px;
-            left: -120px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255, 255, 255, 0.07);
-
-            filter: blur(2px);
+        .nav-brand:hover .nav-brand-text,
+        .nav-brand:focus-visible .nav-brand-text {
+            color: var(--accent);
         }
 
-        .hero::after {
-            content: "";
-
-            position: absolute;
-
-            width: 600px;
-            height: 600px;
-
-            right: -220px;
-            bottom: -420px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(6, 182, 212, 0.13);
-
-            filter: blur(5px);
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 28px;
+            font-family: var(--font-sans-base), var(--font-sans-chinese);
+            font-size: 0.95rem;
+            font-weight: 500;
+            flex-shrink: 0;
         }
 
-        .hero-inner {
-            position: relative;
+        .site-nav a {
+            color: #4f5969;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 4px;
+            margin: -2px -4px;
+        }
 
-            z-index: 1;
+        .nav-links a::before {
+            content: "/";
+            color: #8a93a6;
+            margin-right: 2px;
+        }
 
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            color: var(--accent);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        /* ---------- page layout ---------- */
+        .page {
+            flex: 1 0 auto;
+            width: 100%;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 56px 28px 24px;
+        }
+
+        /* ---------- hero ---------- */
+        .hero {
+            margin-bottom: 34px;
             text-align: center;
         }
 
-
-        /* =========================================================
-           Hero Badge
-           ========================================================= */
-
-        .hero-badge {
+        .eyebrow {
             display: inline-flex;
-
             align-items: center;
-            gap: 8px;
-
-            padding: 7px 13px;
-
-            margin-bottom: 20px;
-
-            color: rgba(255, 255, 255, 0.92);
-
-            font-size: 13px;
-            font-weight: 500;
-
-            background:
-                rgba(255, 255, 255, 0.10);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.16);
-
-            border-radius: 999px;
-
-            backdrop-filter: blur(10px);
+            gap: 10px;
+            margin-bottom: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #8a5a00;
+            letter-spacing: 0.08em;
         }
 
-        .hero-badge::before {
+        .eyebrow::before {
             content: "";
-
-            width: 6px;
-            height: 6px;
-
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-
-            background: #67e8f9;
-
-            box-shadow:
-                0 0 10px rgba(103, 232, 249, 0.8);
+            background: var(--glow);
+            box-shadow: 0 0 12px var(--glow);
         }
 
-
-        /* =========================================================
-           Hero Title
-           ========================================================= */
-
-        .hero-title {
-            margin-bottom: 14px;
-
-            font-size:
-                clamp(2.2rem, 6vw, 4rem);
-
-            font-weight: 750;
-
-            letter-spacing: -0.04em;
-
-            line-height: 1.1;
+        .hero h1 {
+            font-family: var(--font-sans-chinese);
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+            line-height: 1.15;
+            font-weight: 800;
+            color: #0c1019;
+            margin-bottom: 12px;
         }
 
         .hero-subtitle {
-            max-width: 620px;
-
+            max-width: 520px;
             margin: 0 auto;
-
-            color:
-                rgba(255, 255, 255, 0.78);
-
-            font-size:
-                clamp(0.95rem, 2vw, 1.08rem);
-
-            line-height: 1.7;
+            color: var(--text-dim);
+            font-size: 1.08rem;
         }
 
-
-        /* =========================================================
-           Search
-           ========================================================= */
-
+        /* ---------- search ---------- */
         .search-wrapper {
             position: relative;
-
-            max-width: 620px;
-
-            margin: 32px auto 0;
+            max-width: 560px;
+            margin: 28px auto 0;
         }
 
         .search-icon {
             position: absolute;
-
             top: 50%;
-            left: 20px;
-
+            left: 18px;
             width: 18px;
             height: 18px;
-
             transform: translateY(-50%);
-
-            color: rgba(255, 255, 255, 0.65);
-
+            color: var(--text-muted);
             pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-
-            height: 54px;
-
-            padding:
-                0 20px 0 52px;
-
-            color: #ffffff;
-
-            font-size: 15px;
-
-            background:
-                rgba(255, 255, 255, 0.11);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.18);
-
-            border-radius: 15px;
-
+            height: 50px;
+            padding: 0 18px 0 48px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: var(--font-sans-base), var(--font-sans-chinese);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
             outline: none;
-
-            backdrop-filter: blur(16px);
-
-            transition:
-                background var(--transition),
-                border-color var(--transition),
-                box-shadow var(--transition);
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .search-input::placeholder {
-            color:
-                rgba(255, 255, 255, 0.58);
+            color: var(--text-muted);
         }
 
         .search-input:focus {
-            background:
-                rgba(255, 255, 255, 0.16);
-
-            border-color:
-                rgba(255, 255, 255, 0.35);
-
-            box-shadow:
-                0 0 0 4px rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
-
-        /* =========================================================
-           Main
-           ========================================================= */
-
-        .main {
-            padding: 42px 0 60px;
-        }
-
-
-        /* =========================================================
-           Toolbar
-           ========================================================= */
-
+        /* ---------- toolbar ---------- */
         .toolbar {
             display: flex;
-
-            align-items: center;
+            align-items: baseline;
             justify-content: space-between;
-
-            margin-bottom: 22px;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-soft);
         }
 
         .toolbar-title {
-            color: var(--text);
-
-            font-size: 15px;
-            font-weight: 600;
+            font-family: var(--font-sans-base), var(--font-sans-chinese);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0c1019;
         }
 
         .toolbar-count {
+            font-family: var(--font-mono);
             color: var(--text-muted);
-
-            font-size: 13px;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
-
-        /* =========================================================
-           Software Grid
-           ========================================================= */
-
+        /* ---------- software grid ---------- */
         .software-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fill,
-                    minmax(290px, 1fr)
-                );
-
-            gap: 20px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-
-        /* =========================================================
-           Category Card
-           ========================================================= */
-
+        /* ---------- category card ---------- */
         .category {
             position: relative;
-
             overflow: hidden;
-
-            background:
-                var(--surface);
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                var(--radius);
-
-            box-shadow:
-                var(--shadow);
-
-            backdrop-filter:
-                blur(16px);
-
-            transition:
-                transform var(--transition),
-                box-shadow var(--transition),
-                border-color var(--transition);
-        }
-
-        .category::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 2px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary),
-                    var(--accent)
-                );
-
-            opacity: 0;
-
-            transition:
-                opacity var(--transition);
+            background: var(--panel);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .category:hover {
-            transform:
-                translateY(-4px);
-
-            border-color:
-                var(--border-hover);
-
-            box-shadow:
-                var(--shadow-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: #cfd8f5;
         }
-
-        .category:hover::before {
-            opacity: 1;
-        }
-
-
-        /* =========================================================
-           Category Header
-           ========================================================= */
 
         .category-header {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
-
-            padding: 17px 18px 15px;
-
-            border-bottom:
-                1px solid var(--border);
+            padding: 14px 16px 12px;
+            border-bottom: 1px solid var(--border-soft);
         }
 
         .category-name {
             display: flex;
-
             align-items: center;
             gap: 10px;
-
-            color: var(--text);
-
-            font-size: 15px;
-            font-weight: 650;
+            color: #0c1019;
+            font-size: 0.98rem;
+            font-weight: 700;
         }
 
         .category-icon {
             display: grid;
-
             place-items: center;
-
             width: 30px;
             height: 30px;
-
-            color: var(--primary);
-
-            font-size: 14px;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
             font-weight: 700;
-
-            background:
-                rgba(79, 70, 229, 0.09);
-
-            border-radius:
-                9px;
+            background: var(--accent-soft);
+            border-radius: var(--radius-sm);
         }
 
         .category-count {
-            padding:
-                3px 8px;
-
-            color:
-                var(--text-muted);
-
-            font-size: 11px;
-
-            background:
-                #f4f4f5;
-
-            border-radius:
-                999px;
+            padding: 3px 9px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            background: var(--panel-soft);
+            border-radius: 999px;
         }
 
-
-        /* =========================================================
-           Software List
-           ========================================================= */
-
+        /* ---------- software list ---------- */
         .software-list {
             list-style: none;
-
             padding: 7px;
         }
 
@@ -565,790 +380,469 @@
 
         .software-link {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
-
-            min-height: 48px;
-
-            padding:
-                10px 11px 10px 12px;
-
-            color: var(--text-secondary);
-
-            font-size: 14px;
+            min-height: 42px;
+            padding: 9px 11px 9px 12px;
+            color: var(--text-dim);
+            font-size: 0.92rem;
             font-weight: 500;
-
             text-decoration: none;
-
-            border-radius:
-                var(--radius-sm);
-
-            transition:
-                color var(--transition),
-                background var(--transition),
-                transform var(--transition);
+            border-radius: var(--radius-sm);
+            transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
         }
 
         .software-link:hover {
-            color:
-                var(--primary);
-
-            background:
-                rgba(79, 70, 229, 0.055);
-
-            transform:
-                translateX(3px);
+            color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateX(3px);
         }
 
         .software-link::after {
             content: "↗";
-
-            color:
-                var(--text-muted);
-
-            font-size: 15px;
-
+            color: var(--text-muted);
+            font-size: 0.92rem;
             opacity: 0;
-
-            transform:
-                translateX(-4px);
-
-            transition:
-                opacity var(--transition),
-                transform var(--transition);
+            transform: translateX(-4px);
+            transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
         }
 
         .software-link:hover::after {
             opacity: 1;
-
-            transform:
-                translateX(0);
+            transform: translateX(0);
+            color: var(--accent);
         }
 
-
-        /* =========================================================
-           Empty State
-           ========================================================= */
-
+        /* ---------- empty state ---------- */
         .empty-state {
             display: none;
-
-            padding: 80px 20px;
-
-            color: var(--text-muted);
-
+            padding: 60px 20px;
             text-align: center;
+            color: var(--text-dim);
+            background: var(--panel-soft);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
         }
 
         .empty-state.show {
             display: block;
         }
 
+        .empty-state svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 14px;
+            color: var(--text-muted);
+        }
 
-        /* =========================================================
-           Footer
-           ========================================================= */
+        .empty-state-title {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
 
-        .footer {
-            padding: 36px 0 40px;
+        .empty-state-description {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
 
-            color: #a1a1aa;
-
-            background:
-                #18181b;
+        /* ---------- footer ---------- */
+        .site-footer {
+            flex-shrink: 0;
+            margin-top: 20px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-soft);
         }
 
         .footer-inner {
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 36px 28px 28px;
         }
 
-        .footer-nav {
-            display: flex;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 36px;
+            margin-bottom: 28px;
+        }
 
+        .footer-brand .brand-name {
+            font-family: var(--font-sans-base), var(--font-sans-chinese);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0c1019;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand .brand-name::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--glow);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 1.02rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand .version-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: var(--accent-soft);
+            border: 1px solid #d7e0fb;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: #2a44c4;
+        }
+
+        .footer-col-support {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .footer-pill-row {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px 12px;
+        }
+
+        .footer-pill {
+            display: flex;
             align-items: center;
             justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 24px;
-
-            margin-bottom: 22px;
-        }
-
-        .footer-nav a {
-            color: #d4d4d8;
-
-            font-size: 13px;
-            font-weight: 500;
-
+            gap: 8px;
+            padding: 8px 16px 8px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: #f6f8fb;
             text-decoration: none;
-
-            transition:
-                color var(--transition);
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .footer-nav a:hover {
+        .footer-pill-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            color: var(--accent);
+            flex-shrink: 0;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .footer-pill-icon svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .footer-pill:hover,
+        .footer-pill:focus-visible {
+            background: #ffffff;
+            border-color: #cfd8f5;
+            color: var(--text);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px -10px rgba(67, 97, 238, 0.4);
+            outline: none;
+        }
+
+        .footer-pill:hover .footer-pill-icon,
+        .footer-pill:focus-visible .footer-pill-icon {
+            background: var(--accent);
             color: #ffffff;
         }
 
         .footer-divider {
-            width: 48px;
-            height: 2px;
-
-            margin-bottom: 18px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary-light),
-                    var(--accent)
-                );
-
-            border-radius: 999px;
+            height: 1px;
+            background: var(--border-soft);
+            margin-bottom: 22px;
         }
 
-        .footer-info {
+        .footer-bottom {
             display: flex;
-
-            justify-content: center;
-
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-
-            gap: 10px;
-
-            color: #71717a;
-
-            font-size: 12px;
+            gap: 12px;
         }
 
-        .footer-info a {
-            color: #a5b4fc;
-
-            text-decoration: none;
+        .footer-bottom .copyright {
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
         }
 
+        .footer-bottom .powered {
+            color: #a0aec0;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+        }
 
-        /* =========================================================
-           Mobile
-           ========================================================= */
+        /* ---------- responsive ---------- */
+        @media (max-width: 900px) {
+            .software-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
 
         @media (max-width: 768px) {
-
-            .container {
-                width:
-                    min(
-                        calc(100% - 24px),
-                        var(--container)
-                    );
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
-
-            .hero {
-                padding:
-                    52px 0 44px;
+            .footer-col-support {
+                justify-content: flex-start;
             }
-
-            .main {
-                padding:
-                    28px 0 40px;
+            .footer-pill-row {
+                grid-template-columns: 1fr 1fr;
             }
+        }
 
+        @media (max-width: 600px) {
+            html { font-size: 15px; }
+            .page { padding: 40px 20px 24px; }
             .software-grid {
                 grid-template-columns: 1fr;
-
-                gap: 14px;
+                gap: 12px;
             }
-
-            .category:hover {
-                transform: none;
-            }
-
-            .category::before {
-                display: none;
-            }
-
-            .software-link:hover {
-                transform: none;
+            .nav-inner { padding: 12px 20px; gap: 14px; }
+            .nav-brand-text { display: none; }
+            .nav-brand-divider { display: none; }
+            .nav-links { gap: 16px; font-size: 0.9rem; }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
         }
-
-
-        /* =========================================================
-           Small Mobile
-           ========================================================= */
-
-        @media (max-width: 480px) {
-
-            .hero {
-                padding:
-                    42px 0 36px;
-            }
-
-            .hero-title {
-                font-size:
-                    2.2rem;
-            }
-
-            .hero-subtitle {
-                padding:
-                    0 12px;
-            }
-
-            .search-wrapper {
-                margin-top: 26px;
-            }
-
-            .search-input {
-                height: 50px;
-            }
-
-            .toolbar {
-                margin-bottom: 16px;
-            }
-
-            .category-header {
-                padding:
-                    15px 15px 13px;
-            }
-
-            .software-list {
-                padding: 6px;
-            }
-
-            .footer-nav {
-                gap: 18px;
-            }
-
-            .footer-info {
-                flex-direction:
-                    column;
-
-                align-items: center;
-
-                gap: 3px;
-            }
-        }
-
-
-        /* =========================================================
-           Print
-           ========================================================= */
 
         @media print {
-
-            .hero,
-            .footer,
-            .search-wrapper,
-            .toolbar {
-                display: none;
-            }
-
-            .main {
-                padding: 0;
-            }
-
-            .software-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .category {
-                box-shadow: none;
-
-                break-inside: avoid;
-            }
+            .site-nav, .site-footer, .search-wrapper { display: none; }
+            .page { padding: 0; }
+            .software-grid { grid-template-columns: repeat(2, 1fr); }
+            .category { box-shadow: none; break-inside: avoid; }
         }
 
-
-        /* =========================================================
-           Reduced Motion
-           ========================================================= */
-
         @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-
-                transition:
-                    none !important;
-            }
+            html { scroll-behavior: auto; }
+            .category, .software-link { transition: none; transform: none; }
+            .footer-pill, .footer-pill-icon { transition: none; transform: none; }
         }
     </style>
 </head>
 
-
 <body>
 
-
-    <!-- =========================================================
-         Hero
-         ========================================================= -->
-
-    <header class="hero">
-
-        <div class="container hero-inner">
-
-            <div class="hero-badge">
-                Software Collection
+    <nav class="site-nav" aria-label="主导航">
+        <div class="nav-inner">
+            <a class="nav-brand" href="/creative/newbuild/">
+                <span class="logo-mark" aria-hidden="true">SW</span>
+                <span class="nav-brand-divider" aria-hidden="true"></span>
+                <span class="nav-brand-text">NewBuild</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/123/">网址导航</a>
+                <a href="/creative/">创意工坊</a>
             </div>
+        </div>
+    </nav>
 
-            <h1 class="hero-title">
-                常用软件清单
-            </h1>
+    <main id="main" class="page">
 
-            <p class="hero-subtitle">
-                精选常用软件，整理常见工具，让每一次安装都更简单。
-            </p>
-
-
-            <!-- Search -->
+        <div class="hero">
+            <div class="eyebrow">SOFTWARE COLLECTION</div>
+            <h1>常用软件清单</h1>
+            <p class="hero-subtitle">精选常用软件，整理常见工具，让每一次安装都更简单。</p>
 
             <div class="search-wrapper">
-
-                <svg
-                    class="search-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    aria-hidden="true"
-                >
-                    <circle
-                        cx="11"
-                        cy="11"
-                        r="7"
-                    ></circle>
-
-                    <path
-                        d="m20 20-4-4"
-                    ></path>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="m20 20-4-4"/>
                 </svg>
-
-                <input
-                    id="searchInput"
-                    class="search-input"
-                    type="search"
-                    placeholder="搜索软件，例如：Chrome、Office、截图……"
-                    autocomplete="off"
-                >
-
+                <input id="searchInput" class="search-input" type="search" placeholder="搜索软件，例如：Chrome、Office、截图……" autocomplete="off">
             </div>
-
         </div>
 
-    </header>
+        <div class="toolbar">
+            <div class="toolbar-title">软件分类</div>
+            <div id="softwareCount" class="toolbar-count"></div>
+        </div>
 
+        <div id="softwareCategories" class="software-grid"></div>
 
-    <!-- =========================================================
-         Main
-         ========================================================= -->
-
-    <main class="main">
-
-        <div class="container">
-
-            <div class="toolbar">
-
-                <div class="toolbar-title">
-                    软件分类
-                </div>
-
-                <div
-                    id="softwareCount"
-                    class="toolbar-count"
-                ></div>
-
-            </div>
-
-
-            <div
-                id="softwareCategories"
-                class="software-grid"
-            ></div>
-
-
-            <div
-                id="emptyState"
-                class="empty-state"
-            >
-                没有找到相关软件
-            </div>
-
+        <div id="emptyState" class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="m20 20-4-4"/>
+            </svg>
+            <div class="empty-state-title">没有找到相关软件</div>
+            <div class="empty-state-description">换一个关键词试试看</div>
         </div>
 
     </main>
 
-
-    <!-- =========================================================
-         Footer
-         ========================================================= -->
-
-    <footer class="footer">
-
-        <div class="container footer-inner">
-
-            <nav
-                class="footer-nav"
-                aria-label="页脚导航"
-            >
-
-                <a href="/">
-                    主页
-                </a>
-
-                <a href="/123/">
-                    网址导航
-                </a>
-
-                <a href="/creative/">
-                    创意工坊
-                </a>
-
-            </nav>
-
-
-            <div class="footer-divider"></div>
-
-
-            <div class="footer-info">
-
-                <span>
-                    © 2025
-                    <a href="https://liuzhangbin.com/">
-                        Liuzh
-                    </a>
-                </span>
-
-                <span>
-                    Powered by KFC
-                </span>
-
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-name">常用软件清单</div>
+                    <p>精选常用办公、浏览器、系统维护、文件处理等软件，方便装机、重装系统时快速查找下载地址。</p>
+                    <span class="version-tag">持续更新 · 直达下载</span>
+                </div>
+                <div class="footer-col-support">
+                    <div class="footer-pill-row">
+                        <a class="footer-pill" href="/contact/">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+                            </span>
+                            <span>与我联系</span>
+                        </a>
+                        <a class="footer-pill" href="">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h6"/></svg>
+                            </span>
+                            <span>更新日志</span>
+                        </a>
+                        <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+                            </span>
+                            <span>GitHub</span>
+                        </a>
+                        <a class="footer-pill" href="">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z"/><path d="m9.3 12 1.9 1.9 3.4-3.6"/></svg>
+                            </span>
+                            <span>隐私政策</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
+                <span class="powered">Powered by KFC</span>
+            </div>
         </div>
-
     </footer>
 
-
     <script>
-
-        /* =========================================================
-           Software Data
-           ========================================================= */
-
+        /* ---------------- Software Data ---------------- */
         const softwareCategories = [
-
-            {
-                name: "IM软件",
-                items: [
-                    ["飞书", "https://www.feishu.cn/download"],
-                    ["钉钉", "https://www.dingtalk.com/download"],
-                    ["企业微信", "https://work.weixin.qq.com/#indexDownload"],
-                    ["微信", "https://weixin.qq.com/"],
-                    ["QQ", "https://im.qq.com/"]
-                ]
-            },
-
-            {
-                name: "Office",
-                items: [
-                    ["Office Tool", "https://otp.landian.vip/zh-cn/download.html"],
-                    ["WPS", "https://www.wps.cn/"]
-                ]
-            },
-
-            {
-                name: "PDF查看编辑",
-                items: [
-                    [
-                        "Adobe Acrobat",
-                        "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html"
-                    ],
-                    ["WPS", "https://www.wps.cn/"]
-                ]
-            },
-
-            {
-                name: "翻译词典",
-                items: [
-                    [
-                        "有道词典",
-                        "https://fanyi.youdao.com/download-Windows/"
-                    ],
-                    [
-                        "金山词霸",
-                        "https://cp.iciba.com/"
-                    ]
-                ]
-            },
-
-            {
-                name: "截图",
-                items: [
-                    ["Pixpin", "https://pixpin.cn/"],
-                    ["Snipaste", "https://zh.snipaste.com/"]
-                ]
-            },
-
-            {
-                name: "看图",
-                items: [
-                    [
-                        "Honeyview",
-                        "https://www.bandisoft.com/honeyview/"
-                    ],
-                    ["WPS", "https://www.wps.cn/"]
-                ]
-            },
-
-            {
-                name: "浏览器",
-                items: [
-                    [
-                        "Google Chrome",
-                        "https://www.google.com/chrome/?system=true&standalone=1"
-                    ],
-                    [
-                        "Microsoft Edge",
-                        "https://www.microsoft.com/edge"
-                    ]
-                ]
-            },
-
-            {
-                name: "视频播放",
-                items: [
-                    [
-                        "PotPlayer",
-                        "https://potplayer.tv/"
-                    ],
-                    [
-                        "MPC-BE",
-                        "https://github.com/Aleksoid1978/MPC-BE/releases"
-                    ]
-                ]
-            },
-
-            {
-                name: "视频会议",
-                items: [
-                    [
-                        "腾讯会议",
-                        "https://meeting.tencent.com/"
-                    ],
-                    [
-                        "Zoom",
-                        "https://www.zoom.com/zh-cn"
-                    ]
-                ]
-            },
-
-            {
-                name: "输入法",
-                items: [
-                    [
-                        "微信输入法",
-                        "https://z.weixin.qq.com/"
-                    ],
-                    [
-                        "搜狗输入法",
-                        "https://shurufa.sogou.com/"
-                    ]
-                ]
-            },
-
-            {
-                name: "思维导图",
-                items: [
-                    [
-                        "Xmind",
-                        "https://www.xmind.cn/"
-                    ],
-                    [
-                        "WPS",
-                        "https://www.wps.cn/"
-                    ]
-                ]
-            },
-
-            {
-                name: "网盘",
-                items: [
-                    [
-                        "OneDrive",
-                        "https://www.microsoft.com/zh-cn/microsoft-365/onedrive/online-cloud-storage"
-                    ],
-                    [
-                        "坚果云",
-                        "https://www.jianguoyun.com/"
-                    ],
-                    [
-                        "百度网盘",
-                        "https://pan.baidu.com/"
-                    ]
-                ]
-            },
-
-            {
-                name: "文件检索",
-                items: [
-                    [
-                        "Everything",
-                        "https://www.voidtools.com/zh-cn/downloads/"
-                    ]
-                ]
-            },
-
-            {
-                name: "文件压缩",
-                items: [
-                    [
-                        "WinRAR",
-                        "https://www.rarlab.com/"
-                    ],
-                    [
-                        "7-Zip",
-                        "https://www.7-zip.org/"
-                    ]
-                ]
-            },
-
-            {
-                name: "系统维护",
-                items: [
-                    [
-                        "火绒",
-                        "https://www.huorong.cn/"
-                    ],
-                    [
-                        "Dism++",
-                        "https://github.com/Chuyu-Team/Dism-Multi-language/releases"
-                    ],
-                    [
-                        "CCleaner",
-                        "https://www.ccleaner.com/"
-                    ],
-                    [
-                        "IObit",
-                        "https://www.iobit.com/"
-                    ]
-                ]
-            },
-
-            {
-                name: "驱动",
-                items: [
-                    [
-                        "NVIDIA驱动",
-                        "https://www.nvidia.cn/geforce/drivers/"
-                    ],
-                    [
-                        "AMD驱动",
-                        "https://www.amd.com/zh-cn/support/download/drivers.html"
-                    ],
-                    [
-                        "360驱动大师",
-                        "https://dm.weishi.360.cn/home.html"
-                    ]
-                ]
-            },
-
-            {
-                name: "邮箱客户端",
-                items: [
-                    [
-                        "Foxmail",
-                        "https://www.foxmail.com/"
-                    ],
-                    [
-                        "Outlook",
-                        "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook"
-                    ]
-                ]
-            },
-
-            {
-                name: "协作文档",
-                items: [
-                    [
-                        "腾讯文档",
-                        "https://docs.qq.com/"
-                    ],
-                    [
-                        "石墨文档",
-                        "https://shimo.im/"
-                    ],
-                    [
-                        "金山文档",
-                        "https://www.kdocs.cn/"
-                    ]
-                ]
-            },
-
-            {
-                name: "游戏",
-                items: [
-                    [
-                        "Steam",
-                        "https://store.steampowered.com/about/"
-                    ],
-                    [
-                        "WeGame",
-                        "https://www.wegame.com.cn/home/"
-                    ]
-                ]
-            },
-
-            {
-                name: "其他",
-                items: [
-                    [
-                        "ITELLYOU",
-                        "https://next.itellyou.cn/"
-                    ]
-                ]
-            }
-
+            { name: "IM软件", items: [
+                ["飞书", "https://www.feishu.cn/download"],
+                ["钉钉", "https://www.dingtalk.com/download"],
+                ["企业微信", "https://work.weixin.qq.com/#indexDownload"],
+                ["微信", "https://weixin.qq.com/"],
+                ["QQ", "https://im.qq.com/"]
+            ]},
+            { name: "Office", items: [
+                ["Office Tool", "https://otp.landian.vip/zh-cn/download.html"],
+                ["WPS", "https://www.wps.cn/"]
+            ]},
+            { name: "PDF查看编辑", items: [
+                ["Adobe Acrobat", "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html"],
+                ["WPS", "https://www.wps.cn/"]
+            ]},
+            { name: "翻译词典", items: [
+                ["有道词典", "https://fanyi.youdao.com/download-Windows/"],
+                ["金山词霸", "https://cp.iciba.com/"]
+            ]},
+            { name: "截图", items: [
+                ["Pixpin", "https://pixpin.cn/"],
+                ["Snipaste", "https://zh.snipaste.com/"]
+            ]},
+            { name: "看图", items: [
+                ["Honeyview", "https://www.bandisoft.com/honeyview/"],
+                ["WPS", "https://www.wps.cn/"]
+            ]},
+            { name: "浏览器", items: [
+                ["Google Chrome", "https://www.google.com/chrome/?system=true&standalone=1"],
+                ["Microsoft Edge", "https://www.microsoft.com/edge"]
+            ]},
+            { name: "视频播放", items: [
+                ["PotPlayer", "https://potplayer.tv/"],
+                ["MPC-BE", "https://github.com/Aleksoid1978/MPC-BE/releases"]
+            ]},
+            { name: "视频会议", items: [
+                ["腾讯会议", "https://meeting.tencent.com/"],
+                ["Zoom", "https://www.zoom.com/zh-cn"]
+            ]},
+            { name: "输入法", items: [
+                ["微信输入法", "https://z.weixin.qq.com/"],
+                ["搜狗输入法", "https://shurufa.sogou.com/"]
+            ]},
+            { name: "思维导图", items: [
+                ["Xmind", "https://www.xmind.cn/"],
+                ["WPS", "https://www.wps.cn/"]
+            ]},
+            { name: "网盘", items: [
+                ["OneDrive", "https://www.microsoft.com/zh-cn/microsoft-365/onedrive/online-cloud-storage"],
+                ["坚果云", "https://www.jianguoyun.com/"],
+                ["百度网盘", "https://pan.baidu.com/"]
+            ]},
+            { name: "文件检索", items: [
+                ["Everything", "https://www.voidtools.com/zh-cn/downloads/"]
+            ]},
+            { name: "文件压缩", items: [
+                ["WinRAR", "https://www.rarlab.com/"],
+                ["7-Zip", "https://www.7-zip.org/"]
+            ]},
+            { name: "系统维护", items: [
+                ["火绒", "https://www.huorong.cn/"],
+                ["Dism++", "https://github.com/Chuyu-Team/Dism-Multi-language/releases"],
+                ["CCleaner", "https://www.ccleaner.com/"],
+                ["IObit", "https://www.iobit.com/"]
+            ]},
+            { name: "驱动", items: [
+                ["NVIDIA驱动", "https://www.nvidia.cn/geforce/drivers/"],
+                ["AMD驱动", "https://www.amd.com/zh-cn/support/download/drivers.html"],
+                ["360驱动大师", "https://dm.weishi.360.cn/home.html"]
+            ]},
+            { name: "邮箱客户端", items: [
+                ["Foxmail", "https://www.foxmail.com/"],
+                ["Outlook", "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook"]
+            ]},
+            { name: "协作文档", items: [
+                ["腾讯文档", "https://docs.qq.com/"],
+                ["石墨文档", "https://shimo.im/"],
+                ["金山文档", "https://www.kdocs.cn/"]
+            ]},
+            { name: "游戏", items: [
+                ["Steam", "https://store.steampowered.com/about/"],
+                ["WeGame", "https://www.wegame.com.cn/home/"]
+            ]},
+            { name: "其他", items: [
+                ["ITELLYOU", "https://next.itellyou.cn/"]
+            ]}
         ];
 
+        /* ---------------- DOM ---------------- */
+        const categoryContainer = document.getElementById("softwareCategories");
+        const searchInput = document.getElementById("searchInput");
+        const softwareCount = document.getElementById("softwareCount");
+        const emptyState = document.getElementById("emptyState");
 
-        /* =========================================================
-           DOM
-           ========================================================= */
-
-        const categoryContainer =
-            document.getElementById(
-                "softwareCategories"
-            );
-
-        const searchInput =
-            document.getElementById(
-                "searchInput"
-            );
-
-        const softwareCount =
-            document.getElementById(
-                "softwareCount"
-            );
-
-        const emptyState =
-            document.getElementById(
-                "emptyState"
-            );
-
-
-        /* =========================================================
-           Category Icon
-           
-           使用简单文字图标，避免额外加载图标库。
-           ========================================================= */
-
+        /* ---------------- Category Icon ---------------- */
         const categoryIcons = {
             "IM软件": "IM",
             "Office": "OF",
@@ -1372,244 +866,98 @@
             "其他": "…"
         };
 
-
-        /* =========================================================
-           Create Category
-           ========================================================= */
-
-        function createCategory(
-            category,
-            visibleItems = category.items
-        ) {
-
-            const section =
-                document.createElement("section");
-
+        /* ---------------- Create Category ---------------- */
+        function createCategory(category, visibleItems = category.items) {
+            const section = document.createElement("section");
             section.className = "category";
 
+            const header = document.createElement("div");
+            header.className = "category-header";
 
-            /* Header */
+            const name = document.createElement("h2");
+            name.className = "category-name";
 
-            const header =
-                document.createElement("div");
+            const icon = document.createElement("span");
+            icon.className = "category-icon";
+            icon.textContent = categoryIcons[category.name] || "•";
 
-            header.className =
-                "category-header";
-
-
-            const name =
-                document.createElement("h2");
-
-            name.className =
-                "category-name";
-
-
-            const icon =
-                document.createElement("span");
-
-            icon.className =
-                "category-icon";
-
-            icon.textContent =
-                categoryIcons[category.name] || "•";
-
-
-            const title =
-                document.createElement("span");
-
-            title.textContent =
-                category.name;
-
+            const title = document.createElement("span");
+            title.textContent = category.name;
 
             name.appendChild(icon);
             name.appendChild(title);
 
-
-            const count =
-                document.createElement("span");
-
-            count.className =
-                "category-count";
-
-            count.textContent =
-                `${visibleItems.length}`;
-
+            const count = document.createElement("span");
+            count.className = "category-count";
+            count.textContent = `${visibleItems.length}`;
 
             header.appendChild(name);
             header.appendChild(count);
 
+            const list = document.createElement("ul");
+            list.className = "software-list";
 
-            /* List */
+            visibleItems.forEach(([softwareName, url]) => {
+                const item = document.createElement("li");
+                item.className = "software-item";
 
-            const list =
-                document.createElement("ul");
+                const link = document.createElement("a");
+                link.className = "software-link";
+                link.href = url;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = softwareName;
 
-            list.className =
-                "software-list";
-
-
-            visibleItems.forEach(
-                ([softwareName, url]) => {
-
-                    const item =
-                        document.createElement("li");
-
-                    item.className =
-                        "software-item";
-
-
-                    const link =
-                        document.createElement("a");
-
-                    link.className =
-                        "software-link";
-
-                    link.href =
-                        url;
-
-                    link.target =
-                        "_blank";
-
-                    link.rel =
-                        "noopener noreferrer";
-
-                    link.textContent =
-                        softwareName;
-
-
-                    item.appendChild(link);
-
-                    list.appendChild(item);
-                }
-            );
-
+                item.appendChild(link);
+                list.appendChild(item);
+            });
 
             section.appendChild(header);
             section.appendChild(list);
 
-
             return section;
         }
 
-
-        /* =========================================================
-           Render
-           ========================================================= */
-
-        function renderCategories(
-            keyword = ""
-        ) {
-
-            const query =
-                keyword.trim().toLowerCase();
-
+        /* ---------------- Render ---------------- */
+        function renderCategories(keyword = "") {
+            const query = keyword.trim().toLowerCase();
 
             categoryContainer.innerHTML = "";
-
 
             let total = 0;
             let visibleCategories = 0;
 
+            softwareCategories.forEach(category => {
+                const items = category.items.filter(([name]) => {
+                    if (!query) return true;
+                    return name.toLowerCase().includes(query) || category.name.toLowerCase().includes(query);
+                });
 
-            softwareCategories.forEach(
-                category => {
+                if (items.length === 0) return;
 
-                    const items =
-                        category.items.filter(
-                            ([name]) => {
+                visibleCategories++;
+                total += items.length;
 
-                                if (!query) {
-                                    return true;
-                                }
-
-                                return (
-                                    name
-                                        .toLowerCase()
-                                        .includes(query)
-                                    ||
-                                    category.name
-                                        .toLowerCase()
-                                        .includes(query)
-                                );
-                            }
-                        );
-
-
-                    if (
-                        items.length === 0
-                    ) {
-                        return;
-                    }
-
-
-                    visibleCategories++;
-
-                    total += items.length;
-
-
-                    categoryContainer.appendChild(
-                        createCategory(
-                            category,
-                            items
-                        )
-                    );
-
-                }
-            );
-
-
-            /* Count */
+                categoryContainer.appendChild(createCategory(category, items));
+            });
 
             if (query) {
-
-                softwareCount.textContent =
-                    `找到 ${total} 个软件`;
-
+                softwareCount.textContent = `找到 ${total} 个软件`;
             } else {
-
-                const totalSoftware =
-                    softwareCategories.reduce(
-                        (sum, category) =>
-                            sum + category.items.length,
-                        0
-                    );
-
-                softwareCount.textContent =
-                    `${softwareCategories.length} 个分类 · ${totalSoftware} 个软件`;
+                const totalSoftware = softwareCategories.reduce((sum, category) => sum + category.items.length, 0);
+                softwareCount.textContent = `${softwareCategories.length} 个分类 · ${totalSoftware} 个软件`;
             }
 
-
-            /* Empty */
-
-            emptyState.classList.toggle(
-                "show",
-                visibleCategories === 0
-            );
+            emptyState.classList.toggle("show", visibleCategories === 0);
         }
 
+        /* ---------------- Search ---------------- */
+        searchInput.addEventListener("input", event => {
+            renderCategories(event.target.value);
+        });
 
-        /* =========================================================
-           Search
-           ========================================================= */
-
-        searchInput.addEventListener(
-            "input",
-            event => {
-
-                renderCategories(
-                    event.target.value
-                );
-
-            }
-        );
-
-
-        /* =========================================================
-           Initialize
-           ========================================================= */
-
+        /* ---------------- Initialize ---------------- */
         renderCategories();
-
     </script>
 
 </body>
