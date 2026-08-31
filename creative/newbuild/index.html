@@ -1,965 +1,1259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="常用软件清单，精选常用办公、浏览器、系统维护、文件处理等软件。">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <title>常用软件清单 - Liuzhangbin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --font-sans-chinese: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-                "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
-            --font-sans-base: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
-            --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
-
-            --bg: #f8f9fc;
-            --panel: #ffffff;
-            --panel-soft: #f6f8fb;
-            --border: #e2e6ef;
-            --border-soft: #ecf0f6;
-            --text: #101113;
-            --text-body: #343d4d;
-            --text-dim: #687486;
-            --text-muted: #97a1b3;
-
-            --accent: #4361ee;
-            --accent-soft: #eaefff;
-            --glow: #ffb020;
-
-            --shadow-sm: 0 2px 4px rgba(30, 41, 59, 0.06);
-            --shadow-md: 0 10px 30px -22px rgba(30, 41, 59, 0.18);
-            --shadow-hover: 0 16px 34px -18px rgba(30, 41, 59, 0.22);
-            --radius-sm: 8px;
-            --radius-md: 10px;
-            --radius-lg: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-family: var(--font-sans-base), var(--font-sans-chinese);
-            line-height: 1.7;
-            color: var(--text);
-            background:
-                radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 176, 32, 0.12), transparent 60%),
-                radial-gradient(circle at 90% 10%, rgba(67, 97, 238, 0.06), transparent 40%),
-                var(--bg);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-        a { color: inherit; text-decoration: none; }
-        button, input { font: inherit; }
-
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
-
-        /* ---------- navigation ---------- */
-        .site-nav {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            flex-shrink: 0;
-            background: rgba(248, 249, 252, 0.72);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-inner {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 10px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 0;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .logo-mark {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, var(--accent) 0%, #6c8bf5 55%, var(--glow) 130%);
-            box-shadow: 0 6px 16px -6px rgba(67, 97, 238, 0.55);
-            color: #fff;
-            font-family: var(--font-mono);
-            font-weight: 800;
-            font-size: 0.78rem;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-brand-divider {
-            width: 1px;
-            height: 16px;
-            background: var(--border);
-            flex-shrink: 0;
-        }
-
-        .nav-brand-text {
-            font-family: var(--font-mono);
-            font-size: 0.92rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: color 0.2s ease;
-        }
-
-        .nav-brand:hover .nav-brand-text,
-        .nav-brand:focus-visible .nav-brand-text {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 28px;
-            font-family: var(--font-sans-base), var(--font-sans-chinese);
-            font-size: 0.95rem;
-            font-weight: 500;
-            flex-shrink: 0;
-        }
-
-        .site-nav a {
-            color: #4f5969;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            border-radius: 4px;
-            padding: 2px 4px;
-            margin: -2px -4px;
-        }
-
-        .nav-links a::before {
-            content: "/";
-            color: #8a93a6;
-            margin-right: 2px;
-        }
-
-        .site-nav a:hover,
-        .site-nav a:focus-visible {
-            color: var(--accent);
-        }
-
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 3px;
-        }
-
-        /* ---------- page layout ---------- */
-        .page {
-            flex: 1 0 auto;
-            width: 100%;
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 56px 28px 24px;
-        }
-
-        /* ---------- hero ---------- */
-        .hero {
-            margin-bottom: 34px;
-            text-align: center;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #8a5a00;
-            letter-spacing: 0.08em;
-        }
-
-        .eyebrow::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--glow);
-            box-shadow: 0 0 12px var(--glow);
-        }
-
-        .hero h1 {
-            font-family: var(--font-sans-chinese);
-            font-size: clamp(2rem, 4.5vw, 2.6rem);
-            line-height: 1.15;
-            font-weight: 800;
-            color: #0c1019;
-            margin-bottom: 12px;
-        }
-
-        .hero-subtitle {
-            max-width: 520px;
-            margin: 0 auto;
-            color: var(--text-dim);
-            font-size: 1.08rem;
-        }
-
-        /* ---------- search ---------- */
-        .search-wrapper {
-            position: relative;
-            max-width: 560px;
-            margin: 28px auto 0;
-        }
-
-        .search-icon {
-            position: absolute;
-            top: 50%;
-            left: 18px;
-            width: 18px;
-            height: 18px;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
-        .search-input {
-            width: 100%;
-            height: 50px;
-            padding: 0 18px 0 48px;
-            color: var(--text);
-            font-size: 1rem;
-            font-family: var(--font-sans-base), var(--font-sans-chinese);
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            outline: none;
-            box-shadow: var(--shadow-sm);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-soft);
-        }
-
-        /* ---------- toolbar ---------- */
-        .toolbar {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 18px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border-soft);
-        }
-
-        .toolbar-title {
-            font-family: var(--font-sans-base), var(--font-sans-chinese);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0c1019;
-        }
-
-        .toolbar-count {
-            font-family: var(--font-mono);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        /* ---------- software grid ---------- */
-        .software-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        /* ---------- category card ---------- */
-        .category {
-            position: relative;
-            overflow: hidden;
-            background: var(--panel);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .category:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            border-color: #cfd8f5;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px 12px;
-            border-bottom: 1px solid var(--border-soft);
-        }
-
-        .category-name {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #0c1019;
-            font-size: 0.98rem;
-            font-weight: 700;
-        }
-
-        .category-icon {
-            display: grid;
-            place-items: center;
-            width: 30px;
-            height: 30px;
-            flex-shrink: 0;
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            font-weight: 700;
-            background: var(--accent-soft);
-            border-radius: var(--radius-sm);
-        }
-
-        .category-count {
-            padding: 3px 9px;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            background: var(--panel-soft);
-            border-radius: 999px;
-        }
-
-        /* ---------- software list ---------- */
-        .software-list {
-            list-style: none;
-            padding: 7px;
-        }
-
-        .software-item {
-            position: relative;
-        }
-
-        .software-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 42px;
-            padding: 9px 11px 9px 12px;
-            color: var(--text-dim);
-            font-size: 0.92rem;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: var(--radius-sm);
-            transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .software-link:hover {
-            color: var(--accent);
-            background: var(--accent-soft);
-            transform: translateX(3px);
-        }
-
-        .software-link::after {
-            content: "↗";
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            opacity: 0;
-            transform: translateX(-4px);
-            transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-        }
-
-        .software-link:hover::after {
-            opacity: 1;
-            transform: translateX(0);
-            color: var(--accent);
-        }
-
-        /* ---------- empty state ---------- */
-        .empty-state {
-            display: none;
-            padding: 60px 20px;
-            text-align: center;
-            color: var(--text-dim);
-            background: var(--panel-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-        }
-
-        .empty-state.show {
-            display: block;
-        }
-
-        .empty-state svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 14px;
-            color: var(--text-muted);
-        }
-
-        .empty-state-title {
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .empty-state-description {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-
-        /* ---------- footer ---------- */
-        .site-footer {
-            flex-shrink: 0;
-            margin-top: 20px;
-            background: #ffffff;
-            border-top: 1px solid var(--border-soft);
-        }
-
-        .footer-inner {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 36px 28px 28px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 36px;
-            margin-bottom: 28px;
-        }
-
-        .footer-brand .brand-name {
-            font-family: var(--font-sans-base), var(--font-sans-chinese);
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #0c1019;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-brand .brand-name::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--glow);
-            box-shadow: 0 0 10px var(--glow);
-        }
-
-        .footer-brand p {
-            color: var(--text-dim);
-            font-size: 1.02rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .footer-brand .version-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            background: var(--accent-soft);
-            border: 1px solid #d7e0fb;
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.88rem;
-            color: #2a44c4;
-        }
-
-        .footer-col-support {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .footer-pill-row {
-            display: grid;
-            grid-template-columns: auto auto;
-            gap: 10px 12px;
-        }
-
-        .footer-pill {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 8px 16px 8px 10px;
-            border-radius: 999px;
-            border: 1px solid var(--border-soft);
-            background: #f6f8fb;
-            text-decoration: none;
-            color: var(--text-dim);
-            font-size: 0.92rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .footer-pill-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: var(--accent-soft);
-            color: var(--accent);
-            flex-shrink: 0;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-
-        .footer-pill-icon svg {
-            width: 13px;
-            height: 13px;
-        }
-
-        .footer-pill:hover,
-        .footer-pill:focus-visible {
-            background: #ffffff;
-            border-color: #cfd8f5;
-            color: var(--text);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 18px -10px rgba(67, 97, 238, 0.4);
-            outline: none;
-        }
-
-        .footer-pill:hover .footer-pill-icon,
-        .footer-pill:focus-visible .footer-pill-icon {
-            background: var(--accent);
-            color: #ffffff;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: var(--border-soft);
-            margin-bottom: 22px;
-        }
-
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-bottom .copyright {
-            color: var(--text-dim);
-            font-family: var(--font-mono);
-            font-size: 0.88rem;
-        }
-
-        .footer-bottom .powered {
-            color: #a0aec0;
-            font-family: var(--font-mono);
-            font-size: 0.86rem;
-        }
-
-        /* ---------- responsive ---------- */
-        @media (max-width: 900px) {
-            .software-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="常用软件清单，精选常用办公、浏览器、系统维护、文件处理等软件。" />
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <title>常用软件清单 - Liuzhangbin</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --font-sans-chinese:
+                    system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                    "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+                --font-sans-base: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
+                --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
+
+                --bg: #f8f9fc;
+                --panel: #ffffff;
+                --panel-soft: #f6f8fb;
+                --border: #e2e6ef;
+                --border-soft: #ecf0f6;
+                --text: #101113;
+                --text-body: #343d4d;
+                --text-dim: #687486;
+                --text-muted: #97a1b3;
+
+                --accent: #4361ee;
+                --accent-soft: #eaefff;
+                --glow: #ffb020;
+
+                --shadow-sm: 0 2px 4px rgba(30, 41, 59, 0.06);
+                --shadow-md: 0 10px 30px -22px rgba(30, 41, 59, 0.18);
+                --shadow-hover: 0 16px 34px -18px rgba(30, 41, 59, 0.22);
+                --radius-sm: 8px;
+                --radius-md: 10px;
+                --radius-lg: 12px;
             }
-        }
 
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
-            .footer-col-support {
-                justify-content: flex-start;
-            }
-            .footer-pill-row {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
 
-        @media (max-width: 600px) {
-            html { font-size: 15px; }
-            .page { padding: 40px 20px 24px; }
-            .software-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            html {
+                scroll-behavior: smooth;
+                font-size: 16px;
             }
-            .nav-inner { padding: 12px 20px; gap: 14px; }
-            .nav-brand-text { display: none; }
-            .nav-brand-divider { display: none; }
-            .nav-links { gap: 16px; font-size: 0.9rem; }
-            .footer-bottom {
+
+            body {
+                display: flex;
                 flex-direction: column;
+                min-height: 100vh;
+                font-family: var(--font-sans-base), var(--font-sans-chinese);
+                line-height: 1.7;
+                color: var(--text);
+                background:
+                    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 176, 32, 0.12), transparent 60%),
+                    radial-gradient(circle at 90% 10%, rgba(67, 97, 238, 0.06), transparent 40%), var(--bg);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            button,
+            input {
+                font: inherit;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #d4d4d8;
+                border-radius: 999px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a1a1aa;
+            }
+
+            /* ---------- navigation ---------- */
+            .site-nav {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                flex-shrink: 0;
+                background: rgba(248, 249, 252, 0.72);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-inner {
+                max-width: 1040px;
+                margin: 0 auto;
+                padding: 10px 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 24px;
+            }
+
+            .nav-brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-width: 0;
+                color: var(--text);
+                text-decoration: none;
+            }
+
+            .logo-mark {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                border-radius: 9px;
+                flex-shrink: 0;
+                background: linear-gradient(135deg, var(--accent) 0%, #6c8bf5 55%, var(--glow) 130%);
+                box-shadow: 0 6px 16px -6px rgba(67, 97, 238, 0.55);
+                color: #fff;
+                font-family: var(--font-mono);
+                font-weight: 800;
+                font-size: 0.78rem;
+                letter-spacing: -0.02em;
+            }
+
+            .nav-brand-divider {
+                width: 1px;
+                height: 16px;
+                background: var(--border);
+                flex-shrink: 0;
+            }
+
+            .nav-brand-text {
+                font-family: var(--font-mono);
+                font-size: 0.92rem;
+                font-weight: 600;
+                color: var(--text-dim);
+                letter-spacing: 0.02em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: color 0.2s ease;
+            }
+
+            .nav-brand:hover .nav-brand-text,
+            .nav-brand:focus-visible .nav-brand-text {
+                color: var(--accent);
+            }
+
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 28px;
+                font-family: var(--font-sans-base), var(--font-sans-chinese);
+                font-size: 0.95rem;
+                font-weight: 500;
+                flex-shrink: 0;
+            }
+
+            .site-nav a {
+                color: #4f5969;
+                text-decoration: none;
+                transition: color 0.2s ease;
+                border-radius: 4px;
+                padding: 2px 4px;
+                margin: -2px -4px;
+            }
+
+            .nav-links a::before {
+                content: "/";
+                color: #8a93a6;
+                margin-right: 2px;
+            }
+
+            .site-nav a:hover,
+            .site-nav a:focus-visible {
+                color: var(--accent);
+            }
+
+            a:focus-visible,
+            button:focus-visible,
+            input:focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+            }
+
+            /* ---------- page layout ---------- */
+            .page {
+                flex: 1 0 auto;
+                width: 100%;
+                max-width: 1040px;
+                margin: 0 auto;
+                padding: 56px 28px 24px;
+            }
+
+            /* ---------- hero ---------- */
+            .hero {
+                margin-bottom: 34px;
                 text-align: center;
             }
-        }
 
-        @media print {
-            .site-nav, .site-footer, .search-wrapper { display: none; }
-            .page { padding: 0; }
-            .software-grid { grid-template-columns: repeat(2, 1fr); }
-            .category { box-shadow: none; break-inside: avoid; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .category, .software-link { transition: none; transform: none; }
-            .footer-pill, .footer-pill-icon { transition: none; transform: none; }
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav class="site-nav" aria-label="主导航">
-        <div class="nav-inner">
-            <a class="nav-brand" href="/creative/newbuild/">
-                <span class="logo-mark" aria-hidden="true">SW</span>
-                <span class="nav-brand-divider" aria-hidden="true"></span>
-                <span class="nav-brand-text">NewBuild</span>
-            </a>
-            <div class="nav-links">
-                <a href="/">首页</a>
-                <a href="/123/">网址导航</a>
-                <a href="/creative/">创意工坊</a>
-            </div>
-        </div>
-    </nav>
-
-    <main id="main" class="page">
-
-        <div class="hero">
-            <div class="eyebrow">SOFTWARE COLLECTION</div>
-            <h1>常用软件清单</h1>
-            <p class="hero-subtitle">精选常用软件，整理常见工具，让每一次安装都更简单。</p>
-
-            <div class="search-wrapper">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="11" cy="11" r="7"/>
-                    <path d="m20 20-4-4"/>
-                </svg>
-                <input id="searchInput" class="search-input" type="search" placeholder="搜索软件，例如：Chrome、Office、截图……" autocomplete="off">
-            </div>
-        </div>
-
-        <div class="toolbar">
-            <div class="toolbar-title">软件分类</div>
-            <div id="softwareCount" class="toolbar-count"></div>
-        </div>
-
-        <div id="softwareCategories" class="software-grid"></div>
-
-        <div id="emptyState" class="empty-state">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="m20 20-4-4"/>
-            </svg>
-            <div class="empty-state-title">没有找到相关软件</div>
-            <div class="empty-state-description">换一个关键词试试看</div>
-        </div>
-
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="brand-name">常用软件清单</div>
-                    <p>精选常用办公、浏览器、系统维护、文件处理等软件，方便装机、重装系统时快速查找下载地址。</p>
-                    <span class="version-tag">持续更新 · 直达下载</span>
-                </div>
-                <div class="footer-col-support">
-                    <div class="footer-pill-row">
-                        <a class="footer-pill" href="/contact/">
-                            <span class="footer-pill-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
-                            </span>
-                            <span>与我联系</span>
-                        </a>
-                        <a class="footer-pill" href="">
-                            <span class="footer-pill-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h6"/></svg>
-                            </span>
-                            <span>更新日志</span>
-                        </a>
-                        <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
-                            <span class="footer-pill-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
-                            </span>
-                            <span>GitHub</span>
-                        </a>
-                        <a class="footer-pill" href="">
-                            <span class="footer-pill-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z"/><path d="m9.3 12 1.9 1.9 3.4-3.6"/></svg>
-                            </span>
-                            <span>隐私政策</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-divider"></div>
-            <div class="footer-bottom">
-                <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
-                <span class="powered">Powered by KFC</span>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        /* ---------------- Software Data ---------------- */
-        const softwareCategories = [
-            { name: "IM软件", items: [
-                ["飞书", "https://www.feishu.cn/download"],
-                ["钉钉", "https://www.dingtalk.com/download"],
-                ["企业微信", "https://work.weixin.qq.com/#indexDownload"],
-                ["微信", "https://weixin.qq.com/"],
-                ["QQ", "https://im.qq.com/"]
-            ]},
-            { name: "Office", items: [
-                ["Office Tool", "https://otp.landian.vip/zh-cn/download.html"],
-                ["WPS", "https://www.wps.cn/"]
-            ]},
-            { name: "PDF查看编辑", items: [
-                ["Adobe Acrobat", "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html"],
-                ["WPS", "https://www.wps.cn/"]
-            ]},
-            { name: "翻译词典", items: [
-                ["有道词典", "https://fanyi.youdao.com/download-Windows/"],
-                ["金山词霸", "https://cp.iciba.com/"]
-            ]},
-            { name: "截图", items: [
-                ["Pixpin", "https://pixpin.cn/"],
-                ["Snipaste", "https://zh.snipaste.com/"]
-            ]},
-            { name: "看图", items: [
-                ["Honeyview", "https://www.bandisoft.com/honeyview/"],
-                ["WPS", "https://www.wps.cn/"]
-            ]},
-            { name: "浏览器", items: [
-                ["Google Chrome", "https://www.google.com/chrome/?system=true&standalone=1"],
-                ["Microsoft Edge", "https://www.microsoft.com/edge"]
-            ]},
-            { name: "视频播放", items: [
-                ["PotPlayer", "https://potplayer.tv/"],
-                ["MPC-BE", "https://github.com/Aleksoid1978/MPC-BE/releases"]
-            ]},
-            { name: "视频会议", items: [
-                ["腾讯会议", "https://meeting.tencent.com/"],
-                ["Zoom", "https://www.zoom.com/zh-cn"]
-            ]},
-            { name: "输入法", items: [
-                ["微信输入法", "https://z.weixin.qq.com/"],
-                ["搜狗输入法", "https://shurufa.sogou.com/"]
-            ]},
-            { name: "思维导图", items: [
-                ["Xmind", "https://www.xmind.cn/"],
-                ["WPS", "https://www.wps.cn/"]
-            ]},
-            { name: "网盘", items: [
-                ["OneDrive", "https://www.microsoft.com/zh-cn/microsoft-365/onedrive/online-cloud-storage"],
-                ["坚果云", "https://www.jianguoyun.com/"],
-                ["百度网盘", "https://pan.baidu.com/"]
-            ]},
-            { name: "文件检索", items: [
-                ["Everything", "https://www.voidtools.com/zh-cn/downloads/"]
-            ]},
-            { name: "文件压缩", items: [
-                ["WinRAR", "https://www.rarlab.com/"],
-                ["7-Zip", "https://www.7-zip.org/"]
-            ]},
-            { name: "系统维护", items: [
-                ["火绒", "https://www.huorong.cn/"],
-                ["Dism++", "https://github.com/Chuyu-Team/Dism-Multi-language/releases"],
-                ["CCleaner", "https://www.ccleaner.com/"],
-                ["IObit", "https://www.iobit.com/"]
-            ]},
-            { name: "驱动", items: [
-                ["NVIDIA驱动", "https://www.nvidia.cn/geforce/drivers/"],
-                ["AMD驱动", "https://www.amd.com/zh-cn/support/download/drivers.html"],
-                ["360驱动大师", "https://dm.weishi.360.cn/home.html"]
-            ]},
-            { name: "邮箱客户端", items: [
-                ["Foxmail", "https://www.foxmail.com/"],
-                ["Outlook", "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook"]
-            ]},
-            { name: "协作文档", items: [
-                ["腾讯文档", "https://docs.qq.com/"],
-                ["石墨文档", "https://shimo.im/"],
-                ["金山文档", "https://www.kdocs.cn/"]
-            ]},
-            { name: "游戏", items: [
-                ["Steam", "https://store.steampowered.com/about/"],
-                ["WeGame", "https://www.wegame.com.cn/home/"]
-            ]},
-            { name: "其他", items: [
-                ["ITELLYOU", "https://next.itellyou.cn/"]
-            ]}
-        ];
-
-        /* ---------------- DOM ---------------- */
-        const categoryContainer = document.getElementById("softwareCategories");
-        const searchInput = document.getElementById("searchInput");
-        const softwareCount = document.getElementById("softwareCount");
-        const emptyState = document.getElementById("emptyState");
-
-        /* ---------------- Category Icon ---------------- */
-        const categoryIcons = {
-            "IM软件": "IM",
-            "Office": "OF",
-            "PDF查看编辑": "PDF",
-            "翻译词典": "译",
-            "截图": "截",
-            "看图": "图",
-            "浏览器": "网",
-            "视频播放": "▶",
-            "视频会议": "会",
-            "输入法": "文",
-            "思维导图": "思",
-            "网盘": "盘",
-            "文件检索": "搜",
-            "文件压缩": "压",
-            "系统维护": "维",
-            "驱动": "驱",
-            "邮箱客户端": "邮",
-            "协作文档": "协",
-            "游戏": "游",
-            "其他": "…"
-        };
-
-        /* ---------------- Create Category ---------------- */
-        function createCategory(category, visibleItems = category.items) {
-            const section = document.createElement("section");
-            section.className = "category";
-
-            const header = document.createElement("div");
-            header.className = "category-header";
-
-            const name = document.createElement("h2");
-            name.className = "category-name";
-
-            const icon = document.createElement("span");
-            icon.className = "category-icon";
-            icon.textContent = categoryIcons[category.name] || "•";
-
-            const title = document.createElement("span");
-            title.textContent = category.name;
-
-            name.appendChild(icon);
-            name.appendChild(title);
-
-            const count = document.createElement("span");
-            count.className = "category-count";
-            count.textContent = `${visibleItems.length}`;
-
-            header.appendChild(name);
-            header.appendChild(count);
-
-            const list = document.createElement("ul");
-            list.className = "software-list";
-
-            visibleItems.forEach(([softwareName, url]) => {
-                const item = document.createElement("li");
-                item.className = "software-item";
-
-                const link = document.createElement("a");
-                link.className = "software-link";
-                link.href = url;
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.textContent = softwareName;
-
-                item.appendChild(link);
-                list.appendChild(item);
-            });
-
-            section.appendChild(header);
-            section.appendChild(list);
-
-            return section;
-        }
-
-        /* ---------------- Render ---------------- */
-        function renderCategories(keyword = "") {
-            const query = keyword.trim().toLowerCase();
-
-            categoryContainer.innerHTML = "";
-
-            let total = 0;
-            let visibleCategories = 0;
-
-            softwareCategories.forEach(category => {
-                const items = category.items.filter(([name]) => {
-                    if (!query) return true;
-                    return name.toLowerCase().includes(query) || category.name.toLowerCase().includes(query);
-                });
-
-                if (items.length === 0) return;
-
-                visibleCategories++;
-                total += items.length;
-
-                categoryContainer.appendChild(createCategory(category, items));
-            });
-
-            if (query) {
-                softwareCount.textContent = `找到 ${total} 个软件`;
-            } else {
-                const totalSoftware = softwareCategories.reduce((sum, category) => sum + category.items.length, 0);
-                softwareCount.textContent = `${softwareCategories.length} 个分类 · ${totalSoftware} 个软件`;
+            .eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 16px;
+                font-family: var(--font-mono);
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: #8a5a00;
+                letter-spacing: 0.08em;
             }
 
-            emptyState.classList.toggle("show", visibleCategories === 0);
-        }
+            .eyebrow::before {
+                content: "";
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--glow);
+                box-shadow: 0 0 12px var(--glow);
+            }
 
-        /* ---------------- Search ---------------- */
-        searchInput.addEventListener("input", event => {
-            renderCategories(event.target.value);
-        });
+            .hero h1 {
+                font-family: var(--font-sans-chinese);
+                font-size: clamp(2rem, 4.5vw, 2.6rem);
+                line-height: 1.15;
+                font-weight: 800;
+                color: #0c1019;
+                margin-bottom: 12px;
+            }
 
-        /* ---------------- Initialize ---------------- */
-        renderCategories();
-    </script>
+            .hero-subtitle {
+                max-width: 520px;
+                margin: 0 auto;
+                color: var(--text-dim);
+                font-size: 1.08rem;
+            }
 
-</body>
+            /* ---------- search ---------- */
+            .search-wrapper {
+                position: relative;
+                max-width: 560px;
+                margin: 28px auto 0;
+            }
 
+            .search-icon {
+                position: absolute;
+                top: 50%;
+                left: 18px;
+                width: 18px;
+                height: 18px;
+                transform: translateY(-50%);
+                color: var(--text-muted);
+                pointer-events: none;
+            }
+
+            .search-input {
+                width: 100%;
+                height: 50px;
+                padding: 0 18px 0 48px;
+                color: var(--text);
+                font-size: 1rem;
+                font-family: var(--font-sans-base), var(--font-sans-chinese);
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-md);
+                outline: none;
+                box-shadow: var(--shadow-sm);
+                transition:
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .search-input::placeholder {
+                color: var(--text-muted);
+            }
+
+            .search-input:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 3px var(--accent-soft);
+            }
+
+            /* ---------- toolbar ---------- */
+            .toolbar {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 18px;
+                padding-bottom: 14px;
+                border-bottom: 1px solid var(--border-soft);
+            }
+
+            .toolbar-title {
+                font-family: var(--font-sans-base), var(--font-sans-chinese);
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #0c1019;
+            }
+
+            .toolbar-count {
+                font-family: var(--font-mono);
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            /* ---------- software grid ---------- */
+            .software-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            /* ---------- category card ---------- */
+            .category {
+                position: relative;
+                overflow: hidden;
+                background: var(--panel);
+                border: 1px solid var(--border-soft);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-md);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .category:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+                border-color: #cfd8f5;
+            }
+
+            .category-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 16px 12px;
+                border-bottom: 1px solid var(--border-soft);
+            }
+
+            .category-name {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #0c1019;
+                font-size: 0.98rem;
+                font-weight: 700;
+            }
+
+            .category-icon {
+                display: grid;
+                place-items: center;
+                width: 30px;
+                height: 30px;
+                flex-shrink: 0;
+                color: var(--accent);
+                font-family: var(--font-mono);
+                font-size: 0.76rem;
+                font-weight: 700;
+                background: var(--accent-soft);
+                border-radius: var(--radius-sm);
+            }
+
+            .category-count {
+                padding: 3px 9px;
+                color: var(--text-muted);
+                font-family: var(--font-mono);
+                font-size: 0.74rem;
+                background: var(--panel-soft);
+                border-radius: 999px;
+            }
+
+            /* ---------- software list ---------- */
+            .software-list {
+                list-style: none;
+                padding: 7px;
+            }
+
+            .software-item {
+                position: relative;
+            }
+
+            .software-link {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 42px;
+                padding: 9px 11px 9px 12px;
+                color: var(--text-dim);
+                font-size: 0.92rem;
+                font-weight: 500;
+                text-decoration: none;
+                border-radius: var(--radius-sm);
+                transition:
+                    color 0.2s ease,
+                    background-color 0.2s ease,
+                    transform 0.2s ease;
+            }
+
+            .software-link:hover {
+                color: var(--accent);
+                background: var(--accent-soft);
+                transform: translateX(3px);
+            }
+
+            .software-link::after {
+                content: "↗";
+                color: var(--text-muted);
+                font-size: 0.92rem;
+                opacity: 0;
+                transform: translateX(-4px);
+                transition:
+                    opacity 0.2s ease,
+                    transform 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            .software-link:hover::after {
+                opacity: 1;
+                transform: translateX(0);
+                color: var(--accent);
+            }
+
+            /* ---------- empty state ---------- */
+            .empty-state {
+                display: none;
+                padding: 60px 20px;
+                text-align: center;
+                color: var(--text-dim);
+                background: var(--panel-soft);
+                border: 1px solid var(--border-soft);
+                border-radius: var(--radius-lg);
+            }
+
+            .empty-state.show {
+                display: block;
+            }
+
+            .empty-state svg {
+                width: 32px;
+                height: 32px;
+                margin-bottom: 14px;
+                color: var(--text-muted);
+            }
+
+            .empty-state-title {
+                color: var(--text);
+                font-weight: 600;
+                font-size: 1rem;
+                margin-bottom: 4px;
+            }
+
+            .empty-state-description {
+                font-size: 0.88rem;
+                color: var(--text-muted);
+            }
+
+            /* ---------- footer ---------- */
+            .site-footer {
+                flex-shrink: 0;
+                margin-top: 20px;
+                background: #ffffff;
+                border-top: 1px solid var(--border-soft);
+            }
+
+            .footer-inner {
+                max-width: 1040px;
+                margin: 0 auto;
+                padding: 36px 28px 28px;
+            }
+
+            .footer-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+                gap: 36px;
+                margin-bottom: 28px;
+            }
+
+            .footer-brand .brand-name {
+                font-family: var(--font-sans-base), var(--font-sans-chinese);
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: #0c1019;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .footer-brand .brand-name::before {
+                content: "";
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--glow);
+                box-shadow: 0 0 10px var(--glow);
+            }
+
+            .footer-brand p {
+                color: var(--text-dim);
+                font-size: 1.02rem;
+                line-height: 1.7;
+                margin-bottom: 16px;
+            }
+
+            .footer-brand .version-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 5px 12px;
+                background: var(--accent-soft);
+                border: 1px solid #d7e0fb;
+                border-radius: 6px;
+                font-family: var(--font-mono);
+                font-size: 0.88rem;
+                color: #2a44c4;
+            }
+
+            .footer-col-support {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .footer-pill-row {
+                display: grid;
+                grid-template-columns: auto auto;
+                gap: 10px 12px;
+            }
+
+            .footer-pill {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 8px 16px 8px 10px;
+                border-radius: 999px;
+                border: 1px solid var(--border-soft);
+                background: #f6f8fb;
+                text-decoration: none;
+                color: var(--text-dim);
+                font-size: 0.92rem;
+                font-weight: 500;
+                white-space: nowrap;
+                transition:
+                    background 0.2s ease,
+                    border-color 0.2s ease,
+                    color 0.2s ease,
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .footer-pill-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: var(--accent-soft);
+                color: var(--accent);
+                flex-shrink: 0;
+                transition:
+                    background 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            .footer-pill-icon svg {
+                width: 13px;
+                height: 13px;
+            }
+
+            .footer-pill:hover,
+            .footer-pill:focus-visible {
+                background: #ffffff;
+                border-color: #cfd8f5;
+                color: var(--text);
+                transform: translateY(-1px);
+                box-shadow: 0 8px 18px -10px rgba(67, 97, 238, 0.4);
+                outline: none;
+            }
+
+            .footer-pill:hover .footer-pill-icon,
+            .footer-pill:focus-visible .footer-pill-icon {
+                background: var(--accent);
+                color: #ffffff;
+            }
+
+            .footer-divider {
+                height: 1px;
+                background: var(--border-soft);
+                margin-bottom: 22px;
+            }
+
+            .footer-bottom {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .footer-bottom .copyright {
+                color: var(--text-dim);
+                font-family: var(--font-mono);
+                font-size: 0.88rem;
+            }
+
+            .footer-bottom .powered {
+                color: #a0aec0;
+                font-family: var(--font-mono);
+                font-size: 0.86rem;
+            }
+
+            /* ---------- responsive ---------- */
+            @media (max-width: 900px) {
+                .software-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 768px) {
+                .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+
+                .footer-col-support {
+                    justify-content: flex-start;
+                }
+
+                .footer-pill-row {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            @media (max-width: 600px) {
+                html {
+                    font-size: 15px;
+                }
+
+                .page {
+                    padding: 40px 20px 24px;
+                }
+
+                .software-grid {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
+
+                .nav-inner {
+                    padding: 12px 20px;
+                    gap: 14px;
+                }
+
+                .nav-brand-text {
+                    display: none;
+                }
+
+                .nav-brand-divider {
+                    display: none;
+                }
+
+                .nav-links {
+                    gap: 16px;
+                    font-size: 0.9rem;
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
+            @media print {
+                .site-nav,
+                .site-footer,
+                .search-wrapper {
+                    display: none;
+                }
+
+                .page {
+                    padding: 0;
+                }
+
+                .software-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .category {
+                    box-shadow: none;
+                    break-inside: avoid;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+
+                .category,
+                .software-link {
+                    transition: none;
+                    transform: none;
+                }
+
+                .footer-pill,
+                .footer-pill-icon {
+                    transition: none;
+                    transform: none;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="site-nav" aria-label="主导航">
+            <div class="nav-inner">
+                <a class="nav-brand" href="/creative/newbuild/">
+                    <span class="logo-mark" aria-hidden="true">SW</span>
+                    <span class="nav-brand-divider" aria-hidden="true"></span>
+                    <span class="nav-brand-text">NewBuild</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/">首页</a>
+                    <a href="/123/">网址导航</a>
+                    <a href="/creative/">创意工坊</a>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main" class="page">
+            <div class="hero">
+                <div class="eyebrow">SOFTWARE COLLECTION</div>
+                <h1>常用软件清单</h1>
+                <p class="hero-subtitle">精选常用软件，整理常见工具，让每一次安装都更简单。</p>
+
+                <div class="search-wrapper">
+                    <svg
+                        class="search-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="m20 20-4-4" />
+                    </svg>
+                    <input
+                        id="searchInput"
+                        class="search-input"
+                        type="search"
+                        placeholder="搜索软件，例如：Chrome、Office、截图……"
+                        autocomplete="off"
+                    />
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <div class="toolbar-title">软件分类</div>
+                <div id="softwareCount" class="toolbar-count"></div>
+            </div>
+
+            <div id="softwareCategories" class="software-grid"></div>
+
+            <div id="emptyState" class="empty-state">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m20 20-4-4" />
+                </svg>
+                <div class="empty-state-title">没有找到相关软件</div>
+                <div class="empty-state-description">换一个关键词试试看</div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="brand-name">常用软件清单</div>
+                        <p>精选常用办公、浏览器、系统维护、文件处理等软件，方便装机、重装系统时快速查找下载地址。</p>
+                        <span class="version-tag">持续更新 · 直达下载</span>
+                    </div>
+                    <div class="footer-col-support">
+                        <div class="footer-pill-row">
+                            <a class="footer-pill" href="/contact/">
+                                <span class="footer-pill-icon" aria-hidden="true">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+                                        <path d="m4 7 8 6 8-6" />
+                                    </svg>
+                                </span>
+                                <span>与我联系</span>
+                            </a>
+                            <a class="footer-pill" href="">
+                                <span class="footer-pill-icon" aria-hidden="true">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z" />
+                                        <path d="M9 9h6M9 13h6" />
+                                    </svg>
+                                </span>
+                                <span>更新日志</span>
+                            </a>
+                            <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
+                                <span class="footer-pill-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                        <path
+                                            d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"
+                                        />
+                                    </svg>
+                                </span>
+                                <span>GitHub</span>
+                            </a>
+                            <a class="footer-pill" href="">
+                                <span class="footer-pill-icon" aria-hidden="true">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z" />
+                                        <path d="m9.3 12 1.9 1.9 3.4-3.6" />
+                                    </svg>
+                                </span>
+                                <span>隐私政策</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-divider"></div>
+                <div class="footer-bottom">
+                    <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
+                    <span class="powered">Powered by KFC & 牛杂面 & 小笼包 & 瑞幸 & 蜜雪冰城</span>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            /* ---------------- Software Data ---------------- */
+            const softwareCategories = [
+                {
+                    name: "安全",
+                    items: [
+                        ["火绒", "https://www.huorong.cn/"],
+                        ["360", "https://www.360.cn/"],
+                    ],
+                },
+                {
+                    name: "笔记软件",
+                    items: [
+                        ["OneNote", "https://www.microsoft.com/zh-cn/microsoft-365/onenote/digital-note-taking-app"],
+                        ["Obsidian", "https://obsidian.md/zh/download"],
+                        ["Notion", "https://www.notion.com/zh-cn/download"],
+                        ["有道云笔记", "https://note.youdao.com/"],
+                    ],
+                },
+                {
+                    name: "翻译词典",
+                    items: [
+                        ["有道词典", "https://fanyi.youdao.com/download-Windows/"],
+                        ["金山词霸", "https://cp.iciba.com/"],
+                    ],
+                },
+                {
+                    name: "格式转换",
+                    items: [["格式工厂", "https://www.pcfreetime.com/formatfactory/cn/index.html"]],
+                },
+                {
+                    name: "IM软件",
+                    items: [
+                        ["钉钉", "https://www.dingtalk.com/download"],
+                        ["飞书", "https://www.feishu.cn/download"],
+                        ["企业微信", "https://work.weixin.qq.com/#indexDownload"],
+                        ["QQ", "https://im.qq.com/"],
+                        ["微信", "https://weixin.qq.com/"],
+                    ],
+                },
+                {
+                    name: "截图",
+                    items: [
+                        ["Pixpin", "https://pixpin.cn/"],
+                        ["Snipaste", "https://zh.snipaste.com/"],
+                    ],
+                },
+                {
+                    name: "看图",
+                    items: [
+                        ["Honeyview", "https://www.bandisoft.com/honeyview/"],
+                        ["WPS", "https://www.wps.cn/"],
+                    ],
+                },
+                {
+                    name: "浏览器",
+                    items: [
+                        ["Google Chrome", "https://www.google.com/chrome/?system=true&standalone=1"],
+                        ["Mozilla Firefox", "https://www.firefox.com/zh-CN/"],
+                        ["Microsoft Edge", "https://www.microsoft.com/edge"],
+                        ["夸克浏览器", "https://www.quark.cn/"],
+                    ],
+                },
+                {
+                    name: "密码管理",
+                    items: [["Bitwarden", "https://bitwarden.com/download/"]],
+                },
+                {
+                    name: "Office",
+                    items: [
+                        ["Office Tool", "https://otp.landian.vip/zh-cn/download.html"],
+                        ["WPS", "https://www.wps.cn/"],
+                    ],
+                },
+                {
+                    name: "PDF查看编辑",
+                    items: [
+                        ["WPS", "https://www.wps.cn/"],
+                        ["迅捷PDF转换器", "https://www.xunjiepdf.com/"],
+                        [
+                            "Adobe Acrobat",
+                            "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html",
+                        ],
+                    ],
+                },
+                {
+                    name: "驱动",
+                    items: [
+                        ["AMD驱动", "https://www.amd.com/zh-cn/support/download/drivers.html"],
+                        ["NVIDIA驱动", "https://www.nvidia.cn/geforce/drivers/"],
+                        ["360驱动大师", "https://dm.weishi.360.cn/home.html"],
+                        ["驱动精灵", "https://www.drivergenius.com/"],
+                        ["驱动人生", "https://www.160.com/"],
+                    ],
+                },
+                {
+                    name: "视频播放",
+                    items: [
+                        ["VLC", "https://www.videolan.org/"],
+                        ["PotPlayer", "https://potplayer.tv/"],
+                        ["MPC-BE", "https://github.com/Aleksoid1978/MPC-BE/releases"],
+                    ],
+                },
+                {
+                    name: "视频会议",
+                    items: [
+                        ["腾讯会议", "https://meeting.tencent.com/download/"],
+                        ["Zoom", "https://zoom.us/zh-cn/download"],
+                    ],
+                },
+                {
+                    name: "视频剪辑",
+                    items: [["剪映", "https://www.capcut.cn/"]],
+                },
+                {
+                    name: "输入法",
+                    items: [
+                        ["微信输入法", "https://z.weixin.qq.com/"],
+                        ["豆包输入法", "https://shurufa.doubao.com/pc"],
+                        ["千问输入法", "https://ime.qianwen.com/"],
+                        ["搜狗输入法", "https://shurufa.sogou.com/"],
+                    ],
+                },
+                {
+                    name: "思维导图",
+                    items: [
+                        ["Xmind", "https://www.xmind.cn/"],
+                        ["WPS", "https://www.wps.cn/"],
+                    ],
+                },
+                {
+                    name: "图片处理",
+                    items: [["美图秀秀", "https://xiuxiu.meitu.com/"]],
+                },
+                {
+                    name: "网盘",
+                    items: [
+                        ["坚果云", "https://www.jianguoyun.com/"],
+                        ["百度网盘", "https://pan.baidu.com/"],
+                        ["夸克网盘", "https://pan.quark.cn/"],
+                        ["阿里云盘", "https://www.alipan.com/"],
+                        ["OneDrive", "https://www.microsoft.com/zh-cn/microsoft-365/onedrive/online-cloud-storage"],
+                    ],
+                },
+                {
+                    name: "文档扫描",
+                    items: [["扫描全能王", "https://www.intsig.com/personal-camscanner"]],
+                },
+                {
+                    name: "文件检索",
+                    items: [["Everything", "https://www.voidtools.com/zh-cn/downloads/"]],
+                },
+                {
+                    name: "文件压缩",
+                    items: [
+                        ["7-Zip", "https://www.7-zip.org/"],
+                        ["WinRAR", "https://www.rarlab.com/"],
+                    ],
+                },
+                {
+                    name: "Windows系统下载",
+                    items: [["ITELLYOU", "https://next.itellyou.cn/"]],
+                },
+                {
+                    name: "效率待办",
+                    items: [
+                        ["滴答清单", "https://www.dida365.com/"],
+                        ["Microsoft To Do", "https://to-do.office.com/tasks/"],
+                    ],
+                },
+                {
+                    name: "下载工具",
+                    items: [
+                        ["迅雷", "https://www.xunlei.com/"],
+                        ["IDM", "https://www.internetdownloadmanager.com/"],
+                    ],
+                },
+                {
+                    name: "协作文档",
+                    items: [
+                        ["腾讯文档", "https://docs.qq.com/"],
+                        ["金山文档", "https://www.kdocs.cn/"],
+                        ["石墨文档", "https://shimo.im/"],
+                    ],
+                },
+                {
+                    name: "系统维护",
+                    items: [
+                        ["Dism++", "https://github.com/Chuyu-Team/Dism-Multi-language/releases"],
+                        ["CCleaner", "https://www.ccleaner.com/"],
+                        ["IObit", "https://www.iobit.com/"],
+                        ["鲁大师", "https://www.ludashi.com/"],
+                    ],
+                },
+                {
+                    name: "音乐播放",
+                    items: [
+                        ["QQ音乐", "https://y.qq.com/"],
+                        ["网易云音乐", "https://music.163.com/"],
+                    ],
+                },
+                {
+                    name: "游戏",
+                    items: [
+                        ["Steam", "https://store.steampowered.com/about/"],
+                        ["WeGame", "https://www.wegame.com.cn/home/"],
+                    ],
+                },
+                {
+                    name: "邮箱客户端",
+                    items: [
+                        ["Foxmail", "https://www.foxmail.com/"],
+                        [
+                            "Outlook",
+                            "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook",
+                        ],
+                        ["网易邮箱大师", "https://dashi.163.com/"],
+                    ],
+                },
+                {
+                    name: "远程控制",
+                    items: [
+                        ["AnyDesk", "https://anydesk.com/zhs/downloads/windows"],
+                        ["ToDesk", "https://www.todesk.com/download.html"],
+                        ["向日葵", "https://sunlogin.oray.com/download/"],
+                    ],
+                },
+                {
+                    name: "待定",
+                    items: [["GitHub", "https://github.com/"]],
+                },
+            ];
+
+            /* ---------------- DOM ---------------- */
+            const categoryContainer = document.getElementById("softwareCategories");
+            const searchInput = document.getElementById("searchInput");
+            const softwareCount = document.getElementById("softwareCount");
+            const emptyState = document.getElementById("emptyState");
+
+            /* ---------------- Category Icon ---------------- */
+            const categoryIcons = {
+                IM软件: "IM",
+                Office: "OF",
+                PDF查看编辑: "PDF",
+                翻译词典: "译",
+                截图: "截",
+                看图: "图",
+                浏览器: "网",
+                视频播放: "▶",
+                视频会议: "会",
+                输入法: "文",
+                思维导图: "思",
+                网盘: "盘",
+                文件检索: "搜",
+                文件压缩: "压",
+                安全: "安",
+                系统维护: "维",
+                驱动: "驱",
+                邮箱客户端: "邮",
+                协作文档: "协",
+                游戏: "游",
+                Windows系统下载: "系",
+                密码管理: "密",
+                笔记软件: "笔",
+                下载工具: "载",
+                远程控制: "远",
+                音乐播放: "乐",
+                格式转换: "换",
+                视频剪辑: "剪",
+                效率待办: "办",
+                图片处理: "片",
+                文档扫描: "扫",
+                其他: "…",
+            };
+
+            /* ---------------- Create Category ---------------- */
+            function createCategory(category, visibleItems = category.items) {
+                const section = document.createElement("section");
+                section.className = "category";
+
+                const header = document.createElement("div");
+                header.className = "category-header";
+
+                const name = document.createElement("h2");
+                name.className = "category-name";
+
+                const icon = document.createElement("span");
+                icon.className = "category-icon";
+                icon.textContent = categoryIcons[category.name] || "•";
+
+                const title = document.createElement("span");
+                title.textContent = category.name;
+
+                name.appendChild(icon);
+                name.appendChild(title);
+
+                const count = document.createElement("span");
+                count.className = "category-count";
+                count.textContent = `${visibleItems.length}`;
+
+                header.appendChild(name);
+                header.appendChild(count);
+
+                const list = document.createElement("ul");
+                list.className = "software-list";
+
+                visibleItems.forEach(([softwareName, url]) => {
+                    const item = document.createElement("li");
+                    item.className = "software-item";
+
+                    const link = document.createElement("a");
+                    link.className = "software-link";
+                    link.href = url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = softwareName;
+
+                    item.appendChild(link);
+                    list.appendChild(item);
+                });
+
+                section.appendChild(header);
+                section.appendChild(list);
+
+                return section;
+            }
+
+            /* ---------------- Render ---------------- */
+            function renderCategories(keyword = "") {
+                const query = keyword.trim().toLowerCase();
+
+                categoryContainer.innerHTML = "";
+
+                let total = 0;
+                let visibleCategories = 0;
+
+                softwareCategories.forEach((category) => {
+                    const items = category.items.filter(([name]) => {
+                        if (!query) return true;
+                        return name.toLowerCase().includes(query) || category.name.toLowerCase().includes(query);
+                    });
+
+                    if (items.length === 0) return;
+
+                    visibleCategories++;
+                    total += items.length;
+
+                    categoryContainer.appendChild(createCategory(category, items));
+                });
+
+                if (query) {
+                    softwareCount.textContent = `找到 ${total} 个软件`;
+                } else {
+                    const totalSoftware = softwareCategories.reduce((sum, category) => sum + category.items.length, 0);
+                    softwareCount.textContent = `${softwareCategories.length} 个分类 · ${totalSoftware} 个软件`;
+                }
+
+                emptyState.classList.toggle("show", visibleCategories === 0);
+            }
+
+            /* ---------------- Search ---------------- */
+            searchInput.addEventListener("input", (event) => {
+                renderCategories(event.target.value);
+            });
+
+            /* ---------------- Initialize ---------------- */
+            renderCategories();
+        </script>
+    </body>
 </html>
