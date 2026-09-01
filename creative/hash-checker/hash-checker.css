@@ -47,7 +47,6 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    /* base size, kept comfortable for 4K / high-DPI clarity */
 }
 
 body {
