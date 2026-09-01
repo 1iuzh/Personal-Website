@@ -1,797 +1,151 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Hash Checker - 简单直观的 Windows 文件哈希校验工具，支持 MD5/SHA 等算法，拖拽计算，后台异步扫描，中英双语界面。">
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<title>Hash Checker - 文件哈希值校验工具 - Liuzhangbin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --bg: #f8f9fc;
-        --panel: #ffffff;
-        --border: #e2e6ef;
-        --border-soft: #ecf0f6;
-        --text: #101113;
-        --text-body: #343d4d;
-        --text-dim: #687486;
-        --accent: #2f6feb;
-        --accent-soft: #eaf1ff;
-        --ok: #17a673;
-        --glow: #ffb020;
-        --mono: 'JetBrains Mono', 'Consolas', monospace;
-        --sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-        scroll-behavior: smooth;
-        font-size: 16px; /* base size, kept comfortable for 4K / high-DPI clarity */
-    }
-
-    body {
-        min-height: 100vh;
-        font-family: var(--sans);
-        color: var(--text);
-        background:
-            radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255,176,32,0.14), transparent 60%),
-            radial-gradient(circle at 90% 10%, rgba(47,111,235,0.06), transparent 40%),
-            var(--bg);
-        line-height: 1.75;
-        font-size: 1.05rem;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-    }
-
-    /* ---------- navigation ---------- */
-    .site-nav {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: rgba(248,249,252,0.72);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 10px 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-    }
-
-    .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 0;
-        color: var(--text);
-        text-decoration: none;
-    }
-
-    .logo-mark {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
-        flex-shrink: 0;
-        background: linear-gradient(135deg, var(--accent) 0%, #5b8def 55%, var(--glow) 130%);
-        box-shadow: 0 6px 16px -6px rgba(47,111,235,0.55);
-        color: #fff;
-        font-family: var(--mono);
-        font-weight: 800;
-        font-size: 0.82rem;
-        letter-spacing: -0.02em;
-    }
-
-    .nav-brand-divider {
-        width: 1px;
-        height: 16px;
-        background: var(--border);
-        flex-shrink: 0;
-    }
-
-    .nav-brand-text {
-        font-family: var(--mono);
-        font-size: 0.92rem;
-        font-weight: 600;
-        color: var(--text-dim);
-        letter-spacing: 0.02em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: color 0.2s ease;
-    }
-
-    .nav-brand:hover .nav-brand-text,
-    .nav-brand:focus-visible .nav-brand-text {
-        color: var(--accent);
-    }
-
-    .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 28px;
-        font-family: var(--sans);
-        font-size: 0.95rem;
-        font-weight: 500;
-        flex-shrink: 0;
-    }
-
-    .site-nav a {
-        color: #4f5969;
-        text-decoration: none;
-        transition: color 0.2s ease;
-        border-radius: 4px;
-        padding: 2px 4px;
-        margin: -2px -4px;
-    }
-
-    .nav-links a::before {
-        content: "/";
-        color: #8a93a6;
-        margin-right: 2px;
-    }
-
-    .site-nav a:hover,
-    .site-nav a:focus-visible {
-        color: var(--accent);
-    }
-
-    .site-nav a[aria-current="page"] {
-        color: var(--accent);
-    }
-
-    .nav-links a[aria-current="page"]::before {
-        color: var(--accent);
-    }
-
-    /* ---------- focus styles ---------- */
-    a:focus-visible,
-    .download-btn:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 3px;
-    }
-
-    /* ---------- layout ---------- */
-    .container {
-        max-width: 920px;
-        margin: 0 auto;
-        padding: 40px 28px 56px;
-    }
-
-    /* ---------- hero ---------- */
-    .hero { margin-bottom: 28px; text-align: center; }
-
-    .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 12px;
-        font-family: var(--mono);
-        font-size: 0.92rem;
-        font-weight: 600;
-        color: #8a5a00;
-        letter-spacing: 0.08em;
-    }
-
-    .eyebrow::before {
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--glow);
-        box-shadow: 0 0 12px var(--glow);
-    }
-
-    .hero h1 {
-        margin-bottom: 6px;
-        color: #0c1019;
-        font-family: var(--mono);
-        font-size: 2.75rem;
-        font-weight: 800;
-        line-height: 1.22;
-        letter-spacing: -0.02em;
-    }
-
-    .hero .subtitle {
-        margin-bottom: 0;
-        color: var(--text-dim);
-        font-size: 1.28rem;
-        font-weight: 500;
-    }
-
-    /* ---------- cards ---------- */
-    .card {
-        position: relative;
-        margin-bottom: 18px;
-        padding: 22px 28px 22px 32px;
-        background: var(--panel);
-        border: 1px solid var(--border-soft);
-        border-radius: 12px;
-        box-shadow: 0 10px 30px -22px rgba(30,41,59,0.15);
-    }
-
-    /* left accent bar */
-    .card::before {
-        content: "";
-        position: absolute;
-        top: 14px;
-        bottom: 14px;
-        left: 0;
-        width: 4px;
-        border-radius: 0 4px 4px 0;
-        background: linear-gradient(180deg, var(--accent) 0%, #5b8def 70%, #a8c4f5 100%);
-    }
-
-    .card h2 {
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        margin-bottom: 12px;
-        color: #0c1019;
-        font-family: var(--sans);
-        font-size: 1.28rem;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-
-    .card h2 .tag {
-        color: var(--text-dim);
-        font-family: var(--mono);
-        font-size: 0.88rem;
-        font-weight: 400;
-    }
-
-    .card p {
-        margin-bottom: 8px;
-        color: var(--text-body);
-        font-size: 1.12rem;
-        line-height: 1.7;
-    }
-
-    .card p:last-child { margin-bottom: 0; }
-
-    .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 14px;
-    }
-
-    .meta span {
-        padding: 5px 12px;
-        color: #2255c4;
-        background: var(--accent-soft);
-        border: 1px solid #d7e4fb;
-        border-radius: 6px;
-        font-family: var(--mono);
-        font-size: 0.9rem;
-    }
-
-    .features {
-        list-style: none;
-        margin-top: 2px;
-    }
-
-    .features li {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 0;
-        color: var(--text-body);
-        border-bottom: 1px dashed var(--border-soft);
-        font-size: 1.12rem;
-        line-height: 1.65;
-    }
-
-    .features li:last-child { border-bottom: none; }
-
-    .features li::before {
-        content: "[x]";
-        flex-shrink: 0;
-        width: 2.2em;
-        color: var(--ok);
-        font-family: var(--mono);
-        font-size: 0.98rem;
-        font-weight: 700;
-        line-height: 1;
-    }
-
-    /* ---------- download ---------- */
-    .download-box {
-        padding: 28px 28px 26px 32px;
-        text-align: center;
-    }
-
-    .download-box h2 {
-        justify-content: center;
-        margin-bottom: 18px;
-    }
-
-    .download-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 14px 36px;
-        color: #fff;
-        background: var(--accent);
-        border-radius: 10px;
-        box-shadow: 0 10px 26px -8px rgba(47,111,235,0.55);
-        font-family: var(--mono);
-        font-size: 1.12rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .download-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 32px -8px rgba(47,111,235,0.65);
-    }
-
-    .download-btn::before {
-        content: "↓";
-        font-weight: 700;
-    }
-
-    .download-meta {
-        margin-top: 10px;
-        color: var(--text-dim);
-        font-family: var(--mono);
-        font-size: 0.92rem;
-    }
-
-    .download-meta span {
-        display: inline-block;
-        padding: 0 10px;
-    }
-
-    .download-meta span:not(:last-child) {
-        border-right: 1px solid var(--border);
-    }
-
-    .download-note {
-        margin-top: 8px;
-        color: var(--text-dim);
-        font-size: 1rem;
-    }
-
-    .checksum-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        max-width: 100%;
-        margin-top: 12px;
-        padding: 8px 14px;
-        color: #4a5568;
-        background: #f5f7fb;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        font-family: var(--mono);
-        font-size: 0.92rem;
-        word-break: break-all;
-        cursor: pointer;
-        transition: background 0.15s ease, border-color 0.15s ease;
-        position: relative;
-    }
-
-    .checksum-chip:hover {
-        background: #eef1f8;
-        border-color: #c7cedb;
-    }
-
-    .checksum-chip .k {
-        color: #8a5a00;
-        font-weight: 700;
-        flex-shrink: 0;
-    }
-
-    .checksum-chip .copy-hint {
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%) scale(0.9);
-        padding: 5px 12px;
-        background: #1a2030;
-        color: #fff;
-        font-size: 0.85rem;
-        border-radius: 4px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        white-space: nowrap;
-    }
-
-    .checksum-chip .copy-hint.show {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-    }
-
-    .checksum-chip .copy-hint::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 4px solid transparent;
-        border-top-color: #1a2030;
-    }
-
-    /* ---------- footer (redesigned) ---------- */
-    .site-footer {
-        background: #ffffff;
-        border-top: 1px solid var(--border-soft);
-    }
-
-    .footer-inner {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 36px 28px 28px;
-    }
-
-    .footer-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        gap: 36px;
-        margin-bottom: 28px;
-    }
-
-    .footer-brand .brand-name {
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: #0c1019;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .footer-brand .brand-name::before {
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--glow);
-        box-shadow: 0 0 10px var(--glow);
-    }
-
-    .footer-brand p {
-        color: var(--text-dim);
-        font-size: 1.02rem;
-        line-height: 1.7;
-        margin-bottom: 16px;
-    }
-
-    .footer-brand .version-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 5px 12px;
-        background: var(--accent-soft);
-        border: 1px solid #d7e4fb;
-        border-radius: 6px;
-        font-family: var(--mono);
-        font-size: 0.88rem;
-        color: #2255c4;
-    }
-
-    .footer-col-support {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .footer-pill-row {
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 10px 12px;
-    }
-
-    .footer-pill {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 8px 16px 8px 10px;
-        border-radius: 999px;
-        border: 1px solid var(--border-soft);
-        background: #f6f8fb;
-        text-decoration: none;
-        color: var(--text-dim);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont;
-        font-size: 0.92rem   ;
-        font-weight: 500;
-        white-space: nowrap;
-        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .footer-pill-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        background: var(--accent-soft);
-        color: var(--accent);
-        flex-shrink: 0;
-        transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .footer-pill-icon svg {
-        width: 13px;
-        height: 13px;
-    }
-
-    .footer-pill:hover,
-    .footer-pill:focus-visible {
-        background: #ffffff;
-        border-color: #cfe0fb;
-        color: var(--text);
-        transform: translateY(-1px);
-        box-shadow: 0 8px 18px -10px rgba(47,111,235,0.4);
-        outline: none;
-    }
-
-    .footer-pill:hover .footer-pill-icon,
-    .footer-pill:focus-visible .footer-pill-icon {
-        background: var(--accent);
-        color: #ffffff;
-    }
-
-    .footer-divider {
-        height: 1px;
-        background: var(--border-soft);
-        margin-bottom: 22px;
-    }
-
-    .footer-bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .footer-bottom .copyright {
-        color: var(--text-dim);
-        font-family: var(--mono);
-        font-size: 0.88rem;
-    }
-
-    .footer-bottom .powered {
-        color: #a0aec0;
-        font-family: var(--mono);
-        font-size: 0.86rem;
-    }
-
-    .footer-bottom .powered a {
-        color: var(--text-dim);
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .footer-bottom .powered a:hover {
-        color: var(--accent);
-    }
-
-    /* ---------- responsive ---------- */
-    @media (max-width: 768px) {
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        .footer-col-support {
-            justify-content: flex-start;
-        }
-        .footer-pill-row {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-
-    @media (max-width: 600px) {
-        html { font-size: 15px; }
-        .container { padding-top: 28px; padding-left: 20px; padding-right: 20px; padding-bottom: 40px; }
-        .hero { margin-bottom: 20px; }
-        .hero h1 { font-size: 2.1rem; }
-        .hero .subtitle { font-size: 1.12rem; }
-        .card { padding: 18px 20px 18px 24px; margin-bottom: 14px; }
-        .card h2 { font-size: 1.18rem; margin-bottom: 10px; }
-        .card p,
-        .features li { font-size: 1.05rem; }
-        .download-box { padding: 22px 20px 20px 24px; }
-        .download-btn { font-size: 1.05rem; padding: 12px 28px; }
-        .nav-inner { padding: 12px 20px; gap: 14px; }
-        .nav-brand-text { display: none; }
-        .nav-brand-divider { display: none; }
-        .nav-links { gap: 16px; font-size: 0.9rem; }
-        .footer-bottom {
-            flex-direction: column;
-            text-align: center;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .download-btn { transition: none; }
-        .checksum-chip .copy-hint { transition: none; }
-        .footer-pill,
-        .footer-pill:hover,
-        .footer-pill-icon { transition: none; transform: none; }
-    }
-
-    /* ---------- print ---------- */
-    @media print {
-        body {
-            background: #fff !important;
-        }
-        .site-nav,
-        .download-btn,
-        .checksum-chip {
-            display: none !important;
-        }
-        .card {
-            box-shadow: none;
-            border: 1px solid #ddd;
-            break-inside: avoid;
-        }
-        .card::before {
-            display: none;
-        }
-        .site-footer {
-            background: #fff;
-            border-top: 1px solid #ddd;
-        }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hash Checker - 简单直观的 Windows 文件哈希校验工具，支持 MD5/SHA 等算法，拖拽计算，后台异步扫描，中英双语界面。">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>Hash Checker - 文件哈希值校验工具 - Liuzhangbin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="hash-checker-style.css">
 </head>
+
 <body>
 
-<nav class="site-nav" aria-label="主导航">
-    <div class="nav-inner">
-        <a class="nav-brand" href="/creative/hash-checker/">
-            <span class="logo-mark" aria-hidden="true">HC</span>
-            <span class="nav-brand-divider" aria-hidden="true"></span>
-            <span class="nav-brand-text">Hash Checker</span>
-        </a>
-        <div class="nav-links">
-            <a href="/">首页</a>
-            <a href="/123/">网址导航</a>
-            <a href="/creative/">创意工坊</a>
-        </div>
-    </div>
-</nav>
-
-<main id="main" class="container">
-
-    <div class="hero">
-        <div class="eyebrow">TOOL · WINDOWS DESKTOP</div>
-        <h1>Hash Checker</h1>
-        <p class="subtitle">简单、直观的文件哈希校验工具</p>
-    </div>
-
-    <div class="card">
-        <h2>软件简介 <span class="tag">// about</span></h2>
-        <p>HashChecker.exe 是一款基于 Python / Tkinter 开发的 Windows 桌面小工具，用于快速计算和校验文件的哈希值，帮助你确认文件的完整性与真实性——适用于核对下载文件是否损坏，验证文件是否被篡改。</p>
-        <p>本软件适配 Windows 10 及更高版本系统。<br>目前已知 Windows 7 系统环境下存在兼容性故障，有空了再改~~</p>
-        <div class="meta">
-            <span>最新版本 v2.4.6_Build_20260830</span>
-            <span>作者 Liuzhangbin</span>
-            <span>Windows Desktop</span>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>主要功能 <span class="tag">// features</span></h2>
-        <ul class="features">
-            <li>纯绿色软件，即点即用，无需安装，无系统残留</li>
-            <li>支持拖拽文件直接进行哈希计算</li>
-            <li>后台异步扫描，大文件也不卡界面</li>
-            <li>中英双语界面切换</li>
-        </ul>
-    </div>
-
-    <div class="card download-box">
-        <h2>下载 Hash Checker <span class="tag">// release</span></h2>
-        <a class="download-btn" href="/downloads/HashChecker-v2.4.6.zip" download type="application/zip">
-            下载 v2.4.6（Windows）
-        </a>
-        <div class="download-meta">
-            <span>ZIP 格式</span>
-            <span>约 14 MB</span>
-            <span>Windows 10+</span>
-        </div>
-        <p class="download-note">解压后直接运行，无需额外安装依赖</p>
-        <div class="checksum-chip" role="button" tabindex="0" aria-label="点击复制 MD5 校验值" onclick="copyChecksum(this)" onkeydown="if(event.key==='Enter'||event.key===' ')copyChecksum(this)">
-            <span class="copy-hint" aria-hidden="true">已复制</span>
-            <span class="k">MD5</span>
-            <span class="v">a86819af9c03b439019fb5f1c106fa92</span>
-        </div>
-    </div>
-
-</main>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div class="brand-name">Hash Checker</div>
-                <p>一款轻量、绿色的 Windows 文件哈希值计算与校验工具，让文件完整性验证变得简单直观。</p>
-                <span class="version-tag">最新版本 v2.4.6 · 2026-08-30</span>
+    <!-- ============================================================
+    导航栏
+    ============================================================ -->
+    <nav class="site-nav" aria-label="主导航">
+        <div class="nav-inner">
+            <a class="nav-brand" href="/creative/hash-checker/">
+                <span class="logo-mark" aria-hidden="true">HC</span>
+                <span class="nav-brand-divider" aria-hidden="true"></span>
+                <span class="nav-brand-text">Hash Checker</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/123/">网址导航</a>
+                <a href="/creative/">创意工坊</a>
             </div>
-            <div class="footer-col footer-col-support">
-                <div class="footer-pill-row">
-                    <a class="footer-pill" href="/contact/">
-                        <span class="footer-pill-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
-                        </span>
-                        <span>与我联系</span>
-                    </a>
-                    <a class="footer-pill" href="">
-                        <span class="footer-pill-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h6"/></svg>
-                        </span>
-                        <span>更新日志</span>
-                    </a>
-                    <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
-                        <span class="footer-pill-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
-                        </span>
-                        <span>GitHub</span>
-                    </a>
-                    <a class="footer-pill" href="">
-                        <span class="footer-pill-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z"/><path d="m9.3 12 1.9 1.9 3.4-3.6"/></svg>
-                        </span>
-                        <span>隐私政策</span>
-                    </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    主内容
+    ============================================================ -->
+    <main id="main" class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+            <div class="eyebrow">TOOL · WINDOWS DESKTOP</div>
+            <h1>Hash Checker</h1>
+            <p class="subtitle">简单、直观的文件哈希校验工具</p>
+        </div>
+
+        <div class="card">
+            <h2>软件简介 <span class="tag">// about</span></h2>
+            <p>HashChecker.exe 是一款基于 Python / Tkinter 开发的 Windows 桌面小工具，用于快速计算和校验文件的哈希值，帮助你确认文件的完整性与真实性——适用于核对下载文件是否损坏，验证文件是否被篡改。</p>
+            <p>本软件适配 Windows 10 及更高版本系统。<br>目前已知 Windows 7 系统环境下存在兼容性故障，有空了再改~~</p>
+            <div class="meta">
+                <span>最新版本 v2.4.6_Build_20260830</span>
+                <span>作者 Liuzhangbin</span>
+                <span>Windows Desktop</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>主要功能 <span class="tag">// features</span></h2>
+            <ul class="features">
+                <li>纯绿色软件，即点即用，无需安装，无系统残留</li>
+                <li>支持拖拽文件直接进行哈希计算</li>
+                <li>后台异步扫描，大文件也不卡界面</li>
+                <li>中英双语界面切换</li>
+            </ul>
+        </div>
+
+        <div class="card download-box">
+            <h2>下载 Hash Checker <span class="tag">// release</span></h2>
+            <a class="download-btn" href="/downloads/HashChecker-v2.4.6.zip" download type="application/zip">
+                下载 v2.4.6（Windows）
+            </a>
+            <div class="download-meta">
+                <span>ZIP 格式</span>
+                <span>约 14 MB</span>
+                <span>Windows 10+</span>
+            </div>
+            <p class="download-note">解压后直接运行，无需额外安装依赖</p>
+            <div class="checksum-chip" role="button" tabindex="0" aria-label="点击复制 MD5 校验值" onclick="copyChecksum(this)" onkeydown="if(event.key==='Enter'||event.key===' ')copyChecksum(this)">
+                <span class="copy-hint" aria-hidden="true">已复制</span>
+                <span class="k">MD5</span>
+                <span class="v">a86819af9c03b439019fb5f1c106fa92</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================================
+    页脚
+    ============================================================ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-name">Hash Checker</div>
+                    <p>一款轻量、绿色的 Windows 文件哈希值计算与校验工具，让文件完整性验证变得简单直观。</p>
+                    <span class="version-tag">最新版本 v2.4.6 · 2026-08-30</span>
+                </div>
+                <div class="footer-col footer-col-support">
+                    <div class="footer-pill-row">
+                        <a class="footer-pill" href="/contact/">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+                                    <path d="m4 7 8 6 8-6" />
+                                </svg>
+                            </span>
+                            <span>与我联系</span>
+                        </a>
+                        <a class="footer-pill" href="">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z" />
+                                    <path d="M9 9h6M9 13h6" />
+                                </svg>
+                            </span>
+                            <span>更新日志</span>
+                        </a>
+                        <a class="footer-pill" href="https://github.com/" target="_blank" rel="noopener">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                    <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z" />
+                                </svg>
+                            </span>
+                            <span>GitHub</span>
+                        </a>
+                        <a class="footer-pill" href="">
+                            <span class="footer-pill-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3.5 5 6v6c0 4.5 3 7.2 7 8.5 4-1.3 7-4 7-8.5V6l-7-2.5Z" />
+                                    <path d="m9.3 12 1.9 1.9 3.4-3.6" />
+                                </svg>
+                            </span>
+                            <span>隐私政策</span>
+                        </a>
+                    </div>
                 </div>
             </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
+            </div>
         </div>
-        <div class="footer-divider"></div>
-        <div class="footer-bottom">
-            <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
-            <span class="powered">Powered by KFC</span>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    function copyChecksum(el) {
-        const value = el.querySelector('.v').textContent.trim();
-        navigator.clipboard.writeText(value).then(() => {
-            const hint = el.querySelector('.copy-hint');
-            hint.classList.add('show');
-            setTimeout(() => hint.classList.remove('show'), 1800);
-        }).catch(() => {
-            // fallback
-            const ta = document.createElement('textarea');
-            ta.value = value;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            const hint = el.querySelector('.copy-hint');
-            hint.classList.add('show');
-            setTimeout(() => hint.classList.remove('show'), 1800);
-        });
-    }
-</script>
+    <script src="hash-checker-script.js"></script>
 
 </body>
+
 </html>
