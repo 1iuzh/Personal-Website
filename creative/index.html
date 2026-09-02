@@ -8,14 +8,33 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
     :root {
-        --font-sans-chinese: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-            "Microsoft JhengHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
-        --font-sans-base: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial";
-        --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
+        /* 无衬线字体栈：系统字体优先，中文兜底到常见系统黑体 */
+        --font-sans:
+            system-ui,
+            -apple-system, BlinkMacSystemFont,
+            "Microsoft YaHei",
+            "PingFang SC",
+            "Source Han Sans SC","Noto Sans SC",
+            "HarmonyOS Sans",
+            "Hiragino Sans GB",
+            "WenQuanYi Micro Hei",
+            sans-serif;
+
+        /* 等宽字体栈：用于版本号、校验值等代码感文字 */
+        --font-mono:
+            ui-monospace,
+            "SF Mono",
+            "Cascadia Code","Consolas",
+            "JetBrains Mono",
+            "Roboto Mono",
+            "Sarasa Mono SC",
+            "Microsoft YaHei","PingFang SC","Noto Sans SC",
+            "WenQuanYi Zen Hei Mono",
+            monospace;
 
         --bg: #f8f9fc;
         --panel: #ffffff;
@@ -53,7 +72,7 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
+        font-family: var(--font-sans);
         line-height: 1.7;
         color: var(--text);
         background:
@@ -144,7 +163,7 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 28px;
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
+        font-family: var(--font-sans);
         font-size: 0.95rem;
         font-weight: 500;
         flex-shrink: 0;
@@ -221,7 +240,7 @@
     }
 
     .hero h1 {
-        font-family: var(--font-sans-chinese);
+        font-family: var(--font-sans);
         font-size: clamp(2.2rem, 5vw, 3.1rem);
         line-height: 1.15;
         letter-spacing: 0;
@@ -258,7 +277,7 @@
         border-radius: 999px;
         background: var(--panel);
         color: var(--text-dim);
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
+        font-family: var(--font-sans);
         font-size: 0.9rem;
         font-weight: 500;
         cursor: pointer;
@@ -294,7 +313,7 @@
     }
 
     .section-title {
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
+        font-family: var(--font-sans);
         font-size: 1.2rem;
         font-weight: 700;
         color: #0c1019;
@@ -492,7 +511,7 @@
     }
 
     .footer-brand .brand-name {
-        font-family: var(--font-sans-base), var(--font-sans-chinese);
+        font-family: var(--font-sans);
         font-size: 1.2rem;
         font-weight: 500;
         color: #0c1019;
@@ -553,7 +572,7 @@
         background: #f6f8fb;
         text-decoration: none;
         color: var(--text-dim);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont;
+        font-family: var(--font-sans);
         font-size: 0.92rem;
         font-weight: 500;
         white-space: nowrap;
@@ -603,21 +622,17 @@
     .footer-bottom {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
+        justify-content: center;
+        text-align: center;
+        padding-top: 4px;
     }
 
     .footer-bottom .copyright {
         color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.88rem;
-    }
-
-    .footer-bottom .powered {
-        color: #a0aec0;
-        font-family: var(--font-mono);
-        font-size: 0.86rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+        line-height: 1.6;
     }
 
     /* ---------- responsive ---------- */
@@ -651,16 +666,29 @@
         .nav-brand-text { display: none; }
         .nav-brand-divider { display: none; }
         .nav-links { gap: 16px; font-size: 0.9rem; }
-        .footer-bottom {
-            flex-direction: column;
-            text-align: center;
-        }
+        .footer-bottom .copyright { font-size: 0.78rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         .tool-card { animation: none; transition: none; }
         .filter, .footer-pill, .footer-pill-icon { transition: none; transform: none; }
+    }
+
+    /* ---------- 打印样式 ---------- */
+    @media print {
+        body { background: #fff !important; }
+        .site-nav,
+        .filters { display: none !important; }
+        .tool-card {
+            box-shadow: none;
+            border: 1px solid #ddd;
+            break-inside: avoid;
+        }
+        .site-footer {
+            background: #fff;
+            border-top: 1px solid #ddd;
+        }
     }
 </style>
 </head>
@@ -758,7 +786,6 @@
             <div class="footer-divider"></div>
             <div class="footer-bottom">
                 <span class="copyright">Copyright © 2025–2026 LIUZHANGBIN.</span>
-                <span class="powered">Powered by KFC</span>
             </div>
         </div>
     </footer>
