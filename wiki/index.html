@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="更多内容正在建设中。" />
+  <meta name="theme-color" content="#dfeee4" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" />
+
+  <title>Coming Soon ~</title>
+  <style>
+    :root {
+      --bg: #e8f0e8;
+      --text: #2d3d34;
+      --text-soft: #6c7972;
+      --text-light: #909d96;
+
+      --green: #668f72;
+      --green-dark: #4e755a;
+
+      --border: rgba(255, 255, 255, 0.72);
+
+      --shadow: 0 20px 60px rgba(48, 75, 58, 0.1);
+
+      --radius-large: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-family: "M PLUS Rounded 1c", "Microsoft YaHei", "PingFang SC", sans-serif;
+
+      color: var(--text);
+
+      background: linear-gradient(135deg,
+          #edf4ed 0%,
+          #e4efe6 45%,
+          #dceae0 100%);
+
+      line-height: 1.7;
+
+      overflow-x: hidden;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .background {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: -10;
+
+      overflow: hidden;
+
+      pointer-events: none;
+    }
+
+    .background::before {
+      content: "";
+
+      position: absolute;
+
+      width: 600px;
+      height: 600px;
+
+      top: -250px;
+      left: -180px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0) 70%);
+    }
+
+    .background::after {
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      right: -300px;
+      bottom: -300px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle,
+          rgba(159, 194, 169, 0.28) 0%,
+          rgba(159, 194, 169, 0) 70%);
+    }
+
+    .panel {
+      position: relative;
+
+      width: min(560px, calc(100% - 40px));
+
+      padding: 70px 55px;
+
+      text-align: center;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-large);
+
+      background: rgba(255, 255, 255, 0.5);
+
+      box-shadow: var(--shadow);
+
+      backdrop-filter: blur(18px);
+
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .icon {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 74px;
+      height: 74px;
+
+      margin: 0 auto 26px;
+
+      border-radius: 22px;
+
+      color: var(--green-dark);
+
+      background: rgba(102, 143, 114, 0.12);
+
+      font-size: 30px;
+
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .eyebrow {
+      display: inline-block;
+
+      margin-bottom: 14px;
+
+      color: var(--green);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(32px, 5vw, 42px);
+
+      font-weight: 700;
+
+      letter-spacing: -1px;
+    }
+
+    p {
+      max-width: 400px;
+
+      margin: 18px auto 0;
+
+      color: var(--text-soft);
+
+      font-size: 15px;
+    }
+
+    .dots {
+      display: inline-flex;
+
+      gap: 5px;
+
+      margin-top: 6px;
+    }
+
+    .dots span {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      opacity: 0.35;
+
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.35;
+
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+
+        transform: scale(1.3);
+      }
+    }
+
+    .back {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 36px;
+
+      padding: 11px 22px;
+
+      color: #fff;
+
+      text-decoration: none;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      border-radius: 999px;
+
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+
+      box-shadow: 0 10px 24px rgba(78, 117, 90, 0.28);
+
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .back:hover {
+      transform: translateY(-2px);
+
+      box-shadow: 0 14px 30px rgba(78, 117, 90, 0.34);
+    }
+
+    @media (max-width: 480px) {
+      .panel {
+        padding: 50px 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      * {
+        animation: none !important;
+
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background" aria-hidden="true"></div>
+
+  <div class="panel">
+    <div class="icon" aria-hidden="true">◌</div>
+
+    <span class="eyebrow">COMING SOON</span>
+
+    <h1>正在建设中</h1>
+
+    <p>
+      这里还是一片空地，一些想法正在慢慢生长。
+      <br />
+      不着急，等它们准备好了再和你见面。
+    </p>
+
+    <div class="dots" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+
+    <br />
+
+    <a href="../" class="back">← 返回首页</a>
+  </div>
+</body>
+
+</html>
