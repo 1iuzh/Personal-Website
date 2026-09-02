@@ -35,6 +35,31 @@
 
       --radius-large: 30px;
       --radius-medium: 22px;
+
+            /* 无衬线字体栈：系统字体优先，中文兜底到常见系统黑体 */
+      --font-sans:
+        system-ui,
+        -apple-system, BlinkMacSystemFont,
+        "Microsoft YaHei",
+        "PingFang SC",
+        "Source Han Sans SC", "Noto Sans SC",
+        "HarmonyOS Sans",
+        "Hiragino Sans GB",
+        "WenQuanYi Micro Hei",
+        sans-serif;
+
+      /* 等宽字体栈：用于版本号、校验值等代码感文字 */
+      --font-mono:
+        ui-monospace,
+        "SF Mono",
+        "Cascadia Code", "Consolas",
+        "JetBrains Mono",
+        "Roboto Mono",
+        "Sarasa Mono SC",
+        "Microsoft YaHei", "PingFang SC", "Noto Sans SC",
+        "WenQuanYi Zen Hei Mono",
+        monospace;
+
     }
 
     * {
@@ -163,13 +188,15 @@
 
       gap: 12px;
 
-      color: var(--text);
-
       text-decoration: none;
 
-      font-size: 18px;
+      font-family: var(--font-mono);
 
-      font-weight: 700;
+      font-size: 1.2rem;
+
+      font-weight: 600;
+
+      color: rgb(83, 133, 232);
 
       letter-spacing: 0.2px;
     }
