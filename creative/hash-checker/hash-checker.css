@@ -1,3 +1,4 @@
+/* 全局设计变量：配色 + 字体栈 */
 :root {
     --bg: #f8f9fc;
     --panel: #ffffff;
@@ -11,33 +12,34 @@
     --ok: #17a673;
     --glow: #ffb020;
 
+    /* 无衬线字体栈：系统字体优先，中文兜底到常见系统黑体 */
     --font-sans:
-        system-ui, 
-        -apple-system, BlinkMacSystemFont, 
+        system-ui,
+        -apple-system, BlinkMacSystemFont,
         "PingFang SC",
-        "Microsoft YaHei", 
-        "Source Han Sans SC", 
-        "Noto Sans SC", 
-        "HarmonyOS Sans",
-        "Hiragino Sans GB", 
-        "WenQuanYi Micro Hei", 
+        "Microsoft YaHei",
+        "Source Han Sans SC",
+        "Noto Sans SC",
+        "Hiragino Sans GB",
+        "WenQuanYi Micro Hei",
         sans-serif;
 
+    /* 等宽字体栈：用于版本号、校验值等代码感文字 */
     --font-mono:
-        ui-monospace, 
-        "SF Mono", 
-        "Cascadia Code", 
-        "Consolas", 
-        "Sarasa Mono SC",
-        "JetBrains Mono", 
-        "Roboto Mono", 
-        "WenQuanYi Zen Hei Mono", 
+        ui-monospace,
+        "SF Mono",
+        "Cascadia Code",
+        "Consolas",
+        "JetBrains Mono",
+        "Roboto Mono",
+        "WenQuanYi Zen Hei Mono",
         "PingFang SC",
-        "Microsoft YaHei", 
-        "Noto Sans SC", 
+        "Microsoft YaHei",
+        "Noto Sans SC",
         monospace;
 }
 
+/* 基础重置 */
 * {
     margin: 0;
     padding: 0;
@@ -54,12 +56,8 @@ body {
     font-family: var(--font-sans);
     color: var(--text);
     background:
-        radial-gradient(ellipse 900px 500px at 50% -10%,
-            rgba(255, 176, 32, 0.14),
-            transparent 60%),
-        radial-gradient(circle at 90% 10%,
-            rgba(47, 111, 235, 0.06),
-            transparent 40%),
+        radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 176, 32, 0.14), transparent 60%),
+        radial-gradient(circle at 90% 10%, rgba(47, 111, 235, 0.06), transparent 40%),
         var(--bg);
     line-height: 1.75;
     font-size: 1.05rem;
@@ -68,6 +66,7 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* 顶部导航 */
 .site-nav {
     position: sticky;
     top: 0;
@@ -104,10 +103,7 @@ body {
     height: 32px;
     border-radius: 9px;
     flex-shrink: 0;
-    background: linear-gradient(135deg,
-            var(--accent) 0%,
-            #5b8def 55%,
-            var(--glow) 130%);
+    background: linear-gradient(135deg, var(--accent) 0%, #5b8def 55%, var(--glow) 130%);
     box-shadow: 0 6px 16px -6px rgba(47, 111, 235, 0.55);
     color: #fff;
     font-family: var(--font-mono);
@@ -191,6 +187,7 @@ a:focus-visible,
     padding: 40px 28px 56px;
 }
 
+/* Hero 区域 */
 .hero {
     margin-bottom: 28px;
     text-align: center;
@@ -234,6 +231,7 @@ a:focus-visible,
     font-weight: 500;
 }
 
+/* 通用卡片（简介 / 功能 / 下载共用） */
 .card {
     position: relative;
     margin-bottom: 18px;
@@ -252,10 +250,7 @@ a:focus-visible,
     left: 0;
     width: 4px;
     border-radius: 0 4px 4px 0;
-    background: linear-gradient(180deg,
-            var(--accent) 0%,
-            #5b8def 70%,
-            #a8c4f5 100%);
+    background: linear-gradient(180deg, var(--accent) 0%, #5b8def 70%, #a8c4f5 100%);
 }
 
 .card h2 {
@@ -336,6 +331,7 @@ a:focus-visible,
     line-height: 1;
 }
 
+/* 下载区：按钮 + 校验值胶囊 */
 .download-box {
     padding: 28px 28px 26px 32px;
     text-align: center;
@@ -359,9 +355,7 @@ a:focus-visible,
     font-size: 1.12rem;
     font-weight: 700;
     text-decoration: none;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .download-btn:hover {
@@ -411,9 +405,7 @@ a:focus-visible,
     font-size: 0.92rem;
     word-break: break-all;
     cursor: pointer;
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease;
     position: relative;
 }
 
@@ -428,6 +420,7 @@ a:focus-visible,
     flex-shrink: 0;
 }
 
+/* 复制成功提示气泡：默认隐藏，JS 点击后临时添加 .show 类显示 */
 .checksum-chip .copy-hint {
     position: absolute;
     top: -30px;
@@ -440,9 +433,7 @@ a:focus-visible,
     border-radius: 4px;
     opacity: 0;
     pointer-events: none;
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
 }
 
@@ -461,6 +452,7 @@ a:focus-visible,
     border-top-color: #1a2030;
 }
 
+/* 页脚 */
 .site-footer {
     background: #ffffff;
     border-top: 1px solid var(--border-soft);
@@ -546,12 +538,7 @@ a:focus-visible,
     font-size: 0.92rem;
     font-weight: 500;
     white-space: nowrap;
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .footer-pill-icon {
@@ -564,9 +551,7 @@ a:focus-visible,
     background: var(--accent-soft);
     color: var(--accent);
     flex-shrink: 0;
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
 .footer-pill-icon svg {
@@ -612,6 +597,7 @@ a:focus-visible,
     line-height: 1.6;
 }
 
+/* 响应式：平板及以下，页脚双栏改单栏 */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;
@@ -627,6 +613,7 @@ a:focus-visible,
     }
 }
 
+/* 响应式：手机屏幕，整体缩小字号与间距 */
 @media (max-width: 600px) {
     html {
         font-size: 15px;
@@ -698,6 +685,7 @@ a:focus-visible,
     }
 }
 
+/* 无障碍：用户设置了“减少动画”时关闭过渡效果 */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -719,6 +707,7 @@ a:focus-visible,
     }
 }
 
+/* 打印样式：隐藏导航/按钮，卡片改为简洁边框 */
 @media print {
     body {
         background: #fff !important;
