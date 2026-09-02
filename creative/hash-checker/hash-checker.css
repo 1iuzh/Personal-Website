@@ -16,10 +16,10 @@
     --font-sans:
         system-ui,
         -apple-system, BlinkMacSystemFont,
-        "PingFang SC",
         "Microsoft YaHei",
-        "Source Han Sans SC",
-        "Noto Sans SC",
+        "PingFang SC",
+        "Source Han Sans SC","Noto Sans SC",
+        "HarmonyOS Sans",
         "Hiragino Sans GB",
         "WenQuanYi Micro Hei",
         sans-serif;
@@ -32,10 +32,9 @@
         "Consolas",
         "JetBrains Mono",
         "Roboto Mono",
+        "Sarasa Mono SC",
+        "Microsoft YaHei","PingFang SC","Noto Sans SC",
         "WenQuanYi Zen Hei Mono",
-        "PingFang SC",
-        "Microsoft YaHei",
-        "Noto Sans SC",
         monospace;
 }
 
