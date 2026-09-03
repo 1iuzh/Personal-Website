@@ -119,6 +119,21 @@ const navData = [
       { name: "国语辞典", url: "https://dict.revised.moe.edu.tw/search.jsp?md=1", icon: "https://api.xinac.net/icon/?url=https://dict.revised.moe.edu.tw/" }
     ]
   },
+      {
+    title: "文档与笔记",
+    links: [
+      { name: "腾讯文档", url: "https://docs.qq.com/", icon: "https://api.xinac.net/icon/?url=https://docs.qq.com/" },
+      { name: "飞书文档", url: "https://docs.feishu.cn/", icon: "https://api.xinac.net/icon/?url=https://docs.feishu.cn/" },
+      { name: "金山文档", url: "https://www.kdocs.cn/", icon: "https://api.xinac.net/icon/?url=https://www.kdocs.cn/" },
+      { name: "石墨文档", url: "https://shimo.im/", icon: "https://api.xinac.net/icon/?url=https://shimo.im/" },
+      { name: "语雀", url: "https://www.yuque.com/", icon: "https://api.xinac.net/icon/?url=https://www.yuque.com/" },
+      { name: "Notion", url: "https://www.notion.com/zh-cn", icon: "https://api.xinac.net/icon/?url=https://www.notion.com/zh-cn" },
+      { name: "Obsidian", url: "https://obsidian.md/zh/", icon: "https://api.xinac.net/icon/?url=https://obsidian.md/zh/" },
+      { name: "SimpleNote", url: "https://simplenote.com/", icon: "https://api.xinac.net/icon/?url=https://simplenote.com/" },
+      { name: "OneNote", url: "https://onenote.cloud.microsoft/zh-hans/", icon: "https://api.xinac.net/icon/?url=https://onenote.cloud.microsoft/zh-hans/" },
+      { name: "Joplin", url: "https://joplinapp.org/", icon: "https://api.xinac.net/icon/?url=https://joplinapp.org/" }
+    ]
+  },
   {
     title: "外语",
     links: [
@@ -269,21 +284,6 @@ const navData = [
       { name: "AIDA64", url: "https://www.aida64.com/downloads", icon: "https://api.xinac.net/icon/?url=https://www.aida64.com/downloads" },
       { name: "CrystalDiskInfo", url: "https://crystalmark.info/en/download/#CrystalDiskInfo", icon: "https://api.xinac.net/icon/?url=https://crystalmark.info/en/download/" },
       { name: "CrystalDiskMark", url: "https://crystalmark.info/en/download/#CrystalDiskMark", icon: "https://api.xinac.net/icon/?url=https://crystalmark.info/en/download/" }
-    ]
-  },
-    {
-    title: "文档与笔记",
-    links: [
-      { name: "腾讯文档", url: "https://docs.qq.com/", icon: "https://api.xinac.net/icon/?url=https://docs.qq.com/" },
-      { name: "飞书文档", url: "https://docs.feishu.cn/", icon: "https://api.xinac.net/icon/?url=https://docs.feishu.cn/" },
-      { name: "金山文档", url: "https://www.kdocs.cn/", icon: "https://api.xinac.net/icon/?url=https://www.kdocs.cn/" },
-      { name: "石墨文档", url: "https://shimo.im/", icon: "https://api.xinac.net/icon/?url=https://shimo.im/" },
-      { name: "语雀", url: "https://www.yuque.com/", icon: "https://api.xinac.net/icon/?url=https://www.yuque.com/" },
-      { name: "Notion", url: "https://www.notion.com/zh-cn", icon: "https://api.xinac.net/icon/?url=https://www.notion.com/zh-cn" },
-      { name: "Obsidian", url: "https://obsidian.md/zh/", icon: "https://api.xinac.net/icon/?url=https://obsidian.md/zh/" },
-      { name: "SimpleNote", url: "https://simplenote.com/", icon: "https://api.xinac.net/icon/?url=https://simplenote.com/" },
-      { name: "OneNote", url: "https://onenote.cloud.microsoft/zh-hans/", icon: "https://api.xinac.net/icon/?url=https://onenote.cloud.microsoft/zh-hans/" },
-      { name: "Joplin", url: "https://joplinapp.org/", icon: "https://api.xinac.net/icon/?url=https://joplinapp.org/" }
     ]
   },
   {
