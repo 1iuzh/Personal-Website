@@ -99,8 +99,8 @@ const navData = [
       },
       {
         name: "ITEM",
-        url: "https://item-typecho.item.ink/",
-        icon: "https://api.xinac.net/icon/?url=https://item.ink/",
+        url: "https://www.item.ink/",
+        icon: "https://api.xinac.net/icon/?url=https://www.item.ink/",
       },
     ],
   },
