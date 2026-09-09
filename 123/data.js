@@ -1010,6 +1010,31 @@ const navData = [
     ],
   },
   {
+    title: "官网直达",
+    links: [
+      {
+        name: "NVIDIA 驱动",
+        url: "https://www.nvidia.cn/drivers/",
+        icon: "https://api.xinac.net/icon/?url=https://www.nvidia.cn/drivers/",
+      },
+      {
+        name: "AMD 驱动",
+        url: "https://www.amd.com/zh-cn/support/download/drivers.html",
+        icon: "https://api.xinac.net/icon/?url=https://www.amd.com/zh-cn/support/download/drivers.html",
+      },
+      {
+        name: "Intel 驱动",
+        url: "https://www.intel.cn/content/www/cn/zh/download-center/home.html",
+        icon: "https://api.xinac.net/icon/?url=https://www.intel.cn/content/www/cn/zh/download-center/home.html",
+      },
+      {
+        name: "Steam",
+        url: "https://store.steampowered.com/about/",
+        icon: "https://api.xinac.net/icon/?url=https://store.steampowered.com/about/",
+      },
+    ],
+  },
+  {
     title: "待定",
     links: [
       {
