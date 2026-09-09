@@ -913,6 +913,11 @@ const navData = [
         icon: "https://api.xinac.net/icon/?url=https://www.wireshark.org/",
       },
       {
+        name: "ITSK PE",
+        url: "https://pe.itsk.com/",
+        icon: "https://api.xinac.net/icon/?url=https://pe.itsk.com/",
+      },
+      {
         name: "HotPE",
         url: "https://www.hotpe.top/",
         icon: "https://api.xinac.net/icon/?url=https://www.hotpe.top/",
