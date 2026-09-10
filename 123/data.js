@@ -872,6 +872,11 @@ const navData = [
         url: "https://otp.landian.vip/zh-cn/",
         icon: "https://api.xinac.net/icon/?url=https://otp.landian.vip/",
       },
+      {
+        name: "Geek Uninstaller",
+        url: "https://geekuninstaller.com/download",
+        icon: "https://api.xinac.net/icon/?url=https://geekuninstaller.com/download",
+      },
     ],
   },
   {
@@ -1031,6 +1036,11 @@ const navData = [
         name: "Steam",
         url: "https://store.steampowered.com/about/",
         icon: "https://api.xinac.net/icon/?url=https://store.steampowered.com/about/",
+      },
+      {
+        name: "常用软件下载",
+        url: "https://liuzhangbin.com/creative/newbuild/",
+        icon: "https://api.xinac.net/icon/?url=https://liuzhangbin.com/creative/newbuild/",
       },
     ],
   },
