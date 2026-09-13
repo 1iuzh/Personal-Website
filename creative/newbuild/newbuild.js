@@ -76,10 +76,7 @@ const softwareCategories = [
         items: [
             ["WPS", "https://www.wps.cn/"],
             ["迅捷PDF转换器", "https://www.xunjiepdf.com/"],
-            [
-                "Adobe Acrobat",
-                "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html",
-            ],
+            ["Adobe Acrobat", "https://helpx.adobe.com/cn/download-install/apps/system-requirements/download-availability.html"],
         ],
     },
     {
@@ -209,10 +206,7 @@ const softwareCategories = [
         name: "邮箱客户端",
         items: [
             ["Foxmail", "https://www.foxmail.com/"],
-            [
-                "Outlook",
-                "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook",
-            ],
+            ["Outlook", "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook"],
             ["网易邮箱大师", "https://dashi.163.com/"],
         ],
     },
@@ -226,7 +220,12 @@ const softwareCategories = [
     },
     {
         name: "待定",
-        items: [["GitHub", "https://github.com/"]],
+        items: [
+            ["GitHub", "https://github.com/"],
+            ["FileZilla", "https://filezilla-project.org/"],
+            ["Notepad++", "https://notepad-plus-plus.org/downloads/"],
+            ["Xshell", "https://www.xshell.com/zh/xshell/"],
+        ],
     },
 ];
 
