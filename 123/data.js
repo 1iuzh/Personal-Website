@@ -498,19 +498,14 @@ const navData = [
         icon: "https://api.xinac.net/icon/?url=https://github.com/",
       },
       {
-        name: "Youtube",
-        url: "https://www.youtube.com/",
-        icon: "https://api.xinac.net/icon/?url=https://www.youtube.com/",
-      },
-      {
         name: "X",
         url: "https://x.com/",
         icon: "https://api.xinac.net/icon/?url=https://x.com/",
       },
       {
-        name: "梯子",
-        url: "https://www.xlinkworld.io/",
-        icon: "https://api.xinac.net/icon/?url=https://www.xlinkworld.io/",
+        name: "Youtube",
+        url: "https://www.youtube.com/",
+        icon: "https://api.xinac.net/icon/?url=https://www.youtube.com/",
       },
       {
         name: "Twitch",
