@@ -10,12 +10,14 @@
         "Hiragino Sans GB",
         "WenQuanYi Micro Hei",
         sans-serif;
+
     /* 等宽字体栈：用于版本号、校验值等代码感文字 */
     --font-mono:
         ui-monospace,
         "SF Mono",
-        "Cascadia Code","Consolas",
+        "Consolas",
         "JetBrains Mono",
+        "Cascadia Code",
         "Roboto Mono",
         "Sarasa Mono SC",
         "Microsoft YaHei","PingFang SC","Noto Sans SC",
