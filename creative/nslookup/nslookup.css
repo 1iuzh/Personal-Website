@@ -2,26 +2,42 @@
     /* 无衬线字体栈：系统字体优先，中文兜底到常见系统黑体 */
     --font-sans:
         system-ui,
-        -apple-system, BlinkMacSystemFont,
         "Microsoft YaHei",
         "PingFang SC",
-        "Source Han Sans SC","Noto Sans SC",
-        "HarmonyOS Sans",
+        "Source Han Sans SC",
+        "Noto Sans CJK SC",
+        "Noto Sans SC",
+        "HarmonyOS Sans SC",
         "Hiragino Sans GB",
         "WenQuanYi Micro Hei",
         sans-serif;
 
-    /* 等宽字体栈：用于版本号、校验值等代码感文字 */
+    /* 等宽字体栈 */
     --font-mono:
         ui-monospace,
-        "SF Mono",
-        "Consolas",
+        Menlo,
+        Monaco,
         "JetBrains Mono",
-        "Cascadia Code",
+        "Cascadia Mono",
+        Consolas,
         "Roboto Mono",
+        "DejaVu Sans Mono",
+        "Liberation Mono",
+        "Noto Sans Mono",
+
+        /* ===== 2. 中文等宽字体 ===== */
         "Sarasa Mono SC",
-        "Microsoft YaHei","PingFang SC","Noto Sans SC",
+
+        /* ===== 3. 中文无衬线字体 ===== */
+        "Microsoft YaHei",
+        "PingFang SC",
+        "Noto Sans CJK SC",
+        "Noto Sans SC",
+        "Source Han Sans SC",
+        "HarmonyOS Sans SC",
         "WenQuanYi Zen Hei Mono",
+
+        /* ===== 4. 通用兜底 ===== */
         monospace;
 
     /* 站点统一配色（与其余工具页共用同一套设计语言） */
