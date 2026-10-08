@@ -1,0 +1,488 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>二维码生成器 - Liuzhangbin</title>
+    <meta name="description" content="在线二维码生成工具，输入文字或网址即可生成二维码。">
+
+    <!-- QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f6f7f9;
+            color: #222;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "PingFang SC",
+                "Microsoft YaHei",
+                "Noto Sans SC",
+                sans-serif;
+        }
+
+        .container {
+            width: min(900px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 70px 0 40px;
+        }
+
+        header {
+            margin-bottom: 36px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #777;
+            font-size: 15px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-title {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            resize: vertical;
+
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.7;
+
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        textarea:focus {
+            border-color: #999;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 11px 18px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            transition:
+                transform 0.15s,
+                opacity 0.15s,
+                background 0.15s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .primary {
+            background: #222;
+            color: #fff;
+        }
+
+        .secondary {
+            background: #f0f1f3;
+            color: #333;
+        }
+
+        .result {
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .result-title {
+            margin-bottom: 18px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 260px;
+            padding: 20px;
+        }
+
+        #qrcode img,
+        #qrcode canvas {
+            display: block;
+            width: 240px;
+            height: 240px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        .download {
+            margin-top: 18px;
+        }
+
+        .hint {
+            margin-top: 14px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding-top: 40px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 20px;
+                border-radius: 14px;
+            }
+
+            textarea {
+                min-height: 130px;
+            }
+
+            #qrcode img,
+            #qrcode canvas {
+                width: 220px;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>二维码生成器</h1>
+        <p class="subtitle">
+            输入文字或网址，快速生成二维码
+        </p>
+    </header>
+
+    <main class="card">
+
+        <label class="input-title" for="content">
+            内容
+        </label>
+
+        <textarea
+            id="content"
+            placeholder="请输入文字、网址或其他内容……"
+            autofocus
+        ></textarea>
+
+        <div class="toolbar">
+            <button class="primary" id="generateBtn">
+                生成二维码
+            </button>
+
+            <button class="secondary" id="clearBtn">
+                清空
+            </button>
+
+            <button class="secondary" id="copyBtn">
+                复制内容
+            </button>
+        </div>
+
+        <section class="result">
+
+            <div class="result-title">
+                二维码预览
+            </div>
+
+            <div id="qrcode"></div>
+
+            <button
+                class="primary download"
+                id="downloadBtn"
+                style="display: none;"
+            >
+                下载二维码
+            </button>
+
+            <div class="hint">
+                二维码在浏览器本地生成，不会上传你的内容。
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        Made with curiosity · Built with care · Just for myself
+    </footer>
+
+</div>
+
+
+<script>
+
+    const contentInput = document.getElementById("content");
+    const qrcodeContainer = document.getElementById("qrcode");
+
+    const generateBtn = document.getElementById("generateBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    let currentQRCode = null;
+
+
+    // 生成二维码
+    function generateQRCode() {
+
+        const content = contentInput.value.trim();
+
+        // 清空旧二维码
+        qrcodeContainer.innerHTML = "";
+        downloadBtn.style.display = "none";
+
+        if (!content) {
+            qrcodeContainer.innerHTML = `
+                <div style="
+                    color:#aaa;
+                    font-size:14px;
+                ">
+                    请输入内容
+                </div>
+            `;
+
+            return;
+        }
+
+        currentQRCode = new QRCode(qrcodeContainer, {
+            text: content,
+
+            width: 240,
+            height: 240,
+
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        downloadBtn.style.display = "inline-block";
+    }
+
+
+    // 点击生成
+    generateBtn.addEventListener(
+        "click",
+        generateQRCode
+    );
+
+
+    // 输入时实时生成
+    let inputTimer;
+
+    contentInput.addEventListener(
+        "input",
+        () => {
+
+            clearTimeout(inputTimer);
+
+            inputTimer = setTimeout(
+                generateQRCode,
+                300
+            );
+
+        }
+    );
+
+
+    // Ctrl / Command + Enter 生成
+    contentInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                event.key === "Enter"
+            ) {
+                generateQRCode();
+            }
+
+        }
+    );
+
+
+    // 清空
+    clearBtn.addEventListener(
+        "click",
+        () => {
+
+            contentInput.value = "";
+
+            qrcodeContainer.innerHTML = `
+                <div style="
+                    color:#aaa;
+                    font-size:14px;
+                ">
+                    输入内容后生成二维码
+                </div>
+            `;
+
+            downloadBtn.style.display = "none";
+
+            contentInput.focus();
+        }
+    );
+
+
+    // 复制内容
+    copyBtn.addEventListener(
+        "click",
+        async () => {
+
+            const content = contentInput.value;
+
+            if (!content) {
+                alert("当前没有可复制的内容");
+                return;
+            }
+
+            try {
+
+                await navigator.clipboard.writeText(content);
+
+                const originalText = copyBtn.textContent;
+
+                copyBtn.textContent = "已复制";
+
+                setTimeout(
+                    () => {
+                        copyBtn.textContent = originalText;
+                    },
+                    1200
+                );
+
+            } catch (error) {
+
+                alert("复制失败，请手动复制");
+
+            }
+
+        }
+    );
+
+
+    // 下载二维码
+    downloadBtn.addEventListener(
+        "click",
+        () => {
+
+            const canvas =
+                qrcodeContainer.querySelector("canvas");
+
+            const image =
+                qrcodeContainer.querySelector("img");
+
+            let url;
+
+            if (canvas) {
+
+                url = canvas.toDataURL(
+                    "image/png"
+                );
+
+            } else if (image) {
+
+                url = image.src;
+
+            } else {
+
+                return;
+
+            }
+
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+
+            link.download =
+                "qrcode.png";
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+
+        }
+    );
+
+
+    // 页面加载时显示提示
+    qrcodeContainer.innerHTML = `
+        <div style="
+            color:#aaa;
+            font-size:14px;
+        ">
+            输入内容后生成二维码
+        </div>
+    `;
+
+</script>
+
+</body>
+</html>
+```
