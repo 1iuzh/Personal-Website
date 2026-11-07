@@ -13,14 +13,14 @@ const navData = [
         icon: "https://api.xinac.net/icon/?url=https://claude.ai/",
       },
       {
-        name: "Gemini",
-        url: "https://gemini.google.com/",
-        icon: "https://api.xinac.net/icon/?url=https://gemini.google.com/",
-      },
-      {
         name: "Grok",
         url: "https://grok.com/",
         icon: "https://api.xinac.net/icon/?url=https://grok.com/",
+      },
+      {
+        name: "Gemini",
+        url: "https://gemini.google.com/",
+        icon: "https://api.xinac.net/icon/?url=https://gemini.google.com/",
       },
       {
         name: "Kimi",
@@ -56,6 +56,11 @@ const navData = [
         name: "腾讯元宝",
         url: "https://yuanbao.tencent.com/chat/",
         icon: "https://api.xinac.net/icon/?url=https://yuanbao.tencent.com/chat/",
+      },
+      {
+        name: "蚂蚁阿福",
+        url: "https://chat.antafu.com/",
+        icon: "https://api.xinac.net/icon/?url=https://chat.antafu.com/",
       },
       {
         name: "全球AI简报",
